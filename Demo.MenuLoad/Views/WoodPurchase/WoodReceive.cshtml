@@ -1,0 +1,143 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Wood Receive";
+}
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-tag"></i> Wood Receive</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+        <!-- /.box-tools -->
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>Enrol</label>
+                    <input type="text" class="form-control" placeholder="Enter Enroll">
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">WareHouse</label>
+                    <select class="form-control">
+                        <option>DTI HO</option>
+                        <option>AFBL WH</option>
+                        <option>ATML HW</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Unit</label>
+                    <select class="form-control">
+                        <option>AFBL</option>
+                        <option>ATML</option>
+                        <option>ACL</option>
+                        <option>ACRL</option>
+                        <option>AML</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Job Station</label>
+                    <select class="form-control">
+                        <option>ATML Corporate</option>
+                        <option>ATML Factory</option>
+                        <option>ATML Others</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>From Date</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="FromDatepicker">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>To Date</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control pull-right" id="ToDatepicker">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>IP mask</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-laptop"></i>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask="'alias': 'ip'" data-mask>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="form-group">
+                    <label>Time picker</label>
+
+                    <div class="input-group">
+                        <input type="text" class="form-control timepicker">
+
+                        <div class="input-group-addon">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+<!-- /.box -->
+@section scripts {
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap-timepicker.js"></script>
+    <script src="~/Scripts/jquery.inputmask.js"></script>
+    <script src="~/Scripts/jquery.inputmask.date.extensions.js"></script>
+    <script src="~/Scripts/jquery.inputmask.extensions.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#FromDatepicker').datepicker({
+                autoclose: true
+            });
+            $('#ToDatepicker').datepicker({
+                autoclose: true
+            });
+            $('[data-mask]').inputmask();
+
+            $('.timepicker').timepicker({
+                showInputs: true
+            });
+
+        });
+    </script>
+
+}
+

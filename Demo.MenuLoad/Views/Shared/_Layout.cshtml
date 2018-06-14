@@ -1,0 +1,304 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ERP Akij Group</title>
+    <link rel=icon href=~/Image/favicon.ico sizes="16x16" type="image/png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Content/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/Content/ionicons.min.css">
+    <!-- Ionicons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+
+    <link href="~/Content/iCommonstyle.css" rel="stylesheet" />
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Content/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="~/Content/_all-skins.min.css">
+    <link rel="stylesheet" href="~/Content/toastr.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        @Html.Partial("~/Views/Shared/_Header.cshtml")
+        <!-- =============================================== -->
+        <!-- Left side column. contains the sidebar -->
+        @Html.Partial("~/Views/Shared/_LeftSideBar.cshtml")
+        <!-- =============================================== -->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Main content -->
+            <div class="content">
+                @RenderBody()
+            </div>
+
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.4.0
+            </div>
+            <strong>Copyright &copy; 2011-2018 <a href="https://erp.akij.net">ERP Akij Group</a>.</strong> All rights
+            reserved.
+        </footer>
+        <!-- Control Sidebar -->
+        @Html.Partial("~/Views/Shared/_RightSideBar.cshtml")
+        <!-- /.control-sidebar -->
+        <!-- Add the sidebar's background. This div must be placed
+        immediately after the control sidebar -->
+        <div class="control-sidebar-bg"></div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery 3 -->
+    <script src="~/Scripts/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!-- SlimScroll -->
+    <script src="~/Scripts/jquery.slimscroll.min.js"></script>
+    <!-- FastClick -->
+    <script src="~/Scripts/fastclick.js"></script>
+    <!-- Toaster -->
+    <script src="~/Scripts/toastr.min.js"></script>
+    <!-- Ui - Toaster -->
+    <script src="~/Scripts/ui-toastr.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Scripts/adminlte.min.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/Scripts/demo.js"></script>
+
+
+
+    <script type="text/javascript">
+
+        var token = getParameterByName('token');
+        console.log(token);
+        var apiUrlPrefix = "https://localhost:44386/api/";
+
+        var counter = 0;
+
+        setInterval(function () {
+            counter++;
+        },
+            1000
+        );
+
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
+
+        function tokenRefresh() {
+            console.log("Calling Refresh Token");
+
+            jQuery.ajax(
+                {
+                    type: "POST",
+                    url: apiUrlPrefix + "token/refresh",
+
+                    data: JSON.stringify({
+                        // token parameter starts
+                        'TokenContent': token
+                        // token parameter ends
+                    }),
+
+                    contentType: 'application/json; charset = utf-8',
+                    dataType: 'json',
+
+                    /*
+                    beforeSend: function (xhr)
+                    {
+                        xhr.setRequestHeader("Authorization", "Bearer " + token);
+                    },
+                    */
+
+                    success: function (tokenStatus) {
+                        console.log("Token Status=");
+
+                        console.log(tokenStatus);
+
+                        if (tokenStatus == "refreshed") {
+                            console.log("token refreshed");
+                        }
+                        else if (tokenStatus == "expired") {
+                            console.log("token expired");
+
+                            toastr.options =
+                                {
+                                    "closeButton": true,
+                                    "debug": false,
+                                    "positionClass": "toast-bottom-right",
+                                    "onclick": null,
+                                    "showDuration": "1000",
+                                    "hideDuration": "1000",
+                                    "timeOut": "5000",
+                                    "extendedTimeOut": "1000",
+                                    "showEasing": "swing",
+                                    "hideEasing": "linear",
+                                    "showMethod": "fadeIn",
+                                    "hideMethod": "fadeOut"
+                                };
+
+                            toastr.warning('Sorry, session expired, you\'ve to sign in again', 'Session Notification');
+
+                            setTimeout(function () {
+                                window.location = "../home/SignIn";
+                            }, 5000
+                            );
+
+
+                        }
+                        else {
+
+                        }
+                    },
+
+                    failure: function () {
+                        toastr.options =
+                            {
+                                "closeButton": true,
+                                "debug": false,
+                                "positionClass": "toast-bottom-right",
+                                "onclick": null,
+                                "showDuration": "1000",
+                                "hideDuration": "1000",
+                                "timeOut": "5000",
+                                "extendedTimeOut": "1000",
+                                "showEasing": "swing",
+                                "hideEasing": "linear",
+                                "showMethod": "fadeIn",
+                                "hideMethod": "fadeOut"
+                            };
+
+                        toastr.error('Leave Submission Failed!', 'Leave Notification');
+                    }
+                }
+            );
+            // end of jQuery ajax
+        }
+
+
+        function PupulateLeftNavItemsWithRoles() {
+            var token = getParameterByName('token');
+            apiUrlPrefix = "https://localhost:44386/api/";
+            console.log("Start Populate");
+
+            jQuery.ajax({
+                type: "GET",
+                url: apiUrlPrefix + "token/roles",
+
+                /*
+                data: JSON.stringify({
+                    // parameter starts
+                    'TokenContent': token
+                    // parameter ends
+                }),
+                */
+
+                data: {
+                    'TokenContent': token
+                },
+
+                contentType: 'application/json; charset = utf-8',
+                dataType: 'json',
+                
+                success: function (data) {
+                    console.log("Data: " + data);
+
+                    //var allHtmlNavItems = "";
+
+                    for (var i = 0; i < data.length; i++) {
+                        var htmlNavItem =
+                            "<li>"
+                            + "<a href='../" + data[i]["controller"] + "/" + data[i]["action"] + "?token=" + token + "'>"
+                            + "<i class='"+data[i]["icon"]+"'>"
+                            + "</i>"
+                            + data[i]["displayName"]
+                            + "</a></li>";
+
+                        //allHtmlNavItems += htmlNavItem;
+                        jQuery('#sidebarSubMenu').append(htmlNavItem);
+                    }
+
+                    console.log(htmlNavItem);
+
+                    // adding the Log Out menu at the end
+                    var htmlLogoutItem =
+                        "<li class='custom-navitem'>"
+                        + "<a href='" + "SignIn" + ".aspx?token=" + token + "'>"
+                        + "<span class='fa-stack fa-lg pull-left'>"
+                        + "</span>"
+                        + "Log Out"
+                        + "</a></li>";
+
+                    jQuery('#leftnavmenu').append(htmlLogoutItem);
+                    
+                },
+
+                failure: function () {
+                    console.log("Users Get Failed!");
+                }
+            }
+            );
+            console.log("End Populate");
+        }
+
+        jQuery(document).ready(function (e) {
+            
+            PupulateLeftNavItemsWithRoles(token);
+
+            // var apiUrlPrefix = "http://localhost:30278/api/";
+            // start of mousemove
+            tokenRefresh();
+
+
+            jQuery("body").on('mousemove keypress click', function (event) {
+                if (counter > 100) {
+                    console.log("Calling Refresh Token");
+                    tokenRefresh();
+                    counter = 0;
+                }
+                else {
+                    counter = 0;
+                    console.log("Not Calling Refresh Token, it's too early!");
+                }
+            });
+            // end of mousemove
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().parent().addClass("menu-open");
+            $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().css("display", "block");
+
+            $('.sidebar-menu').tree();
+            $(window).resize();
+
+        })
+    </script>
+    @RenderSection("scripts", false)
+</body>
+</html>
