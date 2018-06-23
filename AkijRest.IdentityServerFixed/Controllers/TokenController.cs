@@ -1,6 +1,7 @@
 ﻿using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using AkijRest.SolutionConstant;
+using LogService;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System;
@@ -20,7 +21,7 @@ namespace AkijRest.IdentityServerFixed.Controllers
             try
             {
                 // Getting the token from the identity server
-
+                Log.Write("App Start",LogUtility.MessageType.UserMessage);
                 var client = new RestClient(UrlConstant.IdentityServer);
 
                 var request = new RestRequest("oauth/token", Method.POST);
@@ -32,6 +33,8 @@ namespace AkijRest.IdentityServerFixed.Controllers
 
                 IRestResponse response = client.Execute(request);
                 var content = response.Content;
+
+                Log.Write(content, LogUtility.MessageType.UserMessage);
                 // token fetch ends
 
                 if (content.Contains("invalid_grant"))
@@ -51,6 +54,7 @@ namespace AkijRest.IdentityServerFixed.Controllers
 
                 tokenRepository.InsertToken(userDto.UserName, tokenContent);
 
+                Log.Write("End", LogUtility.MessageType.UserMessage);
                 // the task ends
 
                 return Ok(content);

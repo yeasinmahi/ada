@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.SolutionConstant",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.IdentityServerFixed", "AkijRest.IdentityServerFixed\AkijRest.IdentityServerFixed.csproj", "{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogService", "LogService\LogService.csproj", "{C6D83867-3753-4440-AB90-0B218FFF3F6F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6D83867-3753-4440-AB90-0B218FFF3F6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6D83867-3753-4440-AB90-0B218FFF3F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6D83867-3753-4440-AB90-0B218FFF3F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6D83867-3753-4440-AB90-0B218FFF3F6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

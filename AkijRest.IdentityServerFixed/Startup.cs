@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
+using System.Web.Http.Routing;
 using AkijRest.IdentityServerFixed.Formats;
 using AkijRest.IdentityServerFixed.Providers;
 using AkijRest.SolutionConstant;
@@ -21,18 +24,24 @@ namespace AkijRest.IdentityServerFixed
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            ConfigureWebApi(config);
+            // ConfigureWebApi(config);
 
             // 
             ConfigureOAuthTokenGeneration(app);
-            app.UseWebApi(config);
+            //app.UseWebApi(config);
         }
 
         private void ConfigureWebApi(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
 
-            config.EnableCors();
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+            var constraints = new { httpMethod = new HttpMethodConstraint(HttpMethod.Options) };
+            config.Routes.IgnoreRoute("OPTIONS", "*pathInfo", constraints);
+
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",

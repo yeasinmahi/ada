@@ -2,7 +2,7 @@
 var clientId = "099153c2625149bc8ecb3e85e03f0022";
 
 jQuery(document).ready(function (e) {
-    var identityConnecTokenUrl = "https://localhost:44347/api/token";
+    var identityConnecTokenUrl = "https://localhost:44321/api/token";
 
 
     function signIn(username, password) {

@@ -30,7 +30,7 @@ namespace AkijRest.IdentityServerFixed
             );
             */
 
-            //ConfigureWebApi(config);
+            ConfigureWebApi(config);
             //ConfigureOAuthTokenGeneration(app);
             //app.UseWebApi(config);
 
