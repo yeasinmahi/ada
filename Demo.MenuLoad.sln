@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.IdentityServer.Rep
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.SolutionConstant", "AkijRest.SolutionConstant\AkijRest.SolutionConstant.csproj", "{DB1B09B1-8EBA-466C-9150-1C20C7DCEA78}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.IdentityServerFixed", "AkijRest.IdentityServerFixed\AkijRest.IdentityServerFixed.csproj", "{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{DB1B09B1-8EBA-466C-9150-1C20C7DCEA78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB1B09B1-8EBA-466C-9150-1C20C7DCEA78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB1B09B1-8EBA-466C-9150-1C20C7DCEA78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA2D59E8-8F9B-4AB1-9129-0AF4821E7746}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
