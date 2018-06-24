@@ -2,7 +2,7 @@
 var clientId = "099153c2625149bc8ecb3e85e03f0022";
 
 jQuery(document).ready(function (e) {
-    var identityConnecTokenUrl = "https://localhost:44321/api/token";
+    var identityConnecTokenUrl = "https://agvdi3.akij.net:44321/api/token";
 
 
     function signIn(username, password) {
@@ -22,7 +22,7 @@ jQuery(document).ready(function (e) {
             dataType: 'json',
 
             success: function (data) {
-                if (data == "invalid_grant") {
+                if (data === "invalid_grant") {
                     toastr.options =
                         {
                             "closeButton": true,
@@ -65,7 +65,7 @@ jQuery(document).ready(function (e) {
     }
 
     jQuery("#password").on('keyup', function (e) {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             var username = $('#userName').val();
             var password = $('#password').val();
 

@@ -137,7 +137,6 @@
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RoleGroupController.cs" />
     <Compile Include="Controllers\TestController.cs" />
-    <Compile Include="Controllers\TokenController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helpers\Roles\ClaimsPrincipalHelper.cs" />
     <Compile Include="Helpers\Roles\Helper.cs" />

@@ -1,17 +1,16 @@
-﻿using AkijRest.IdentityServerFixed.Formats;
-using AkijRest.IdentityServerFixed.Providers;
+﻿using System;
+using System.Linq;
+using System.Net.Http.Formatting;
+using System.Web.Http;
+using AkijRest.IdentityServer.Formats;
+using AkijRest.IdentityServer.Providers;
 using AkijRest.SolutionConstant;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Formatting;
-using System.Web.Http;
 
-namespace AkijRest.IdentityServerFixed
+namespace AkijRest.IdentityServer
 {
     public static class WebApiConfig
     {

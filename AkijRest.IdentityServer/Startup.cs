@@ -2,21 +2,21 @@
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Formatting;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Routing;
-using AkijRest.IdentityServerFixed.Formats;
-using AkijRest.IdentityServerFixed.Providers;
+using AkijRest.IdentityServer;
+using AkijRest.IdentityServer.Formats;
+using AkijRest.IdentityServer.Providers;
 using AkijRest.SolutionConstant;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
-[assembly: OwinStartup(typeof(AkijRest.IdentityServerFixed.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
-namespace AkijRest.IdentityServerFixed
+namespace AkijRest.IdentityServer
 {
     public class Startup
     {

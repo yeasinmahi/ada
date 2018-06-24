@@ -96,17 +96,17 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
     (
         {
             type: "GET",
-            url: "https://localhost:44386/api/users/facebook/" + facebookUserName,
+                url: "https://agvdi3.akij.net:44321/api/userAuth/facebook/" + facebookUserName,
 
             contentType: 'application/json; charset = utf-8',
             dataType: 'json',
 
             success: function(data) {
                 console.log("test "+data);
-                if (data != null) {
+                if (data !== null) {
                     ExternalSignIn(data, accessToken);
                 } else {
-
+                    //todo
                 }
             },
 
@@ -120,7 +120,7 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
 
 function ExternalSignIn(username, accessToken)
 {
-    var identityConnecTokenUrl = "https://localhost:44347/api/token/external";
+    var identityConnecTokenUrl = "https://agvdi3.akij.net:44321/api/token/external";
 
     console.log("External Sign Called");
     jQuery.ajax({
@@ -139,7 +139,7 @@ function ExternalSignIn(username, accessToken)
 
         success: function (data) {
             console.log(data);
-            if (data == "invalid_grant") {
+            if (data === "invalid_grant") {
                 toastr.options =
                 {
                     "closeButton": true,
@@ -192,7 +192,7 @@ function Login() {
 
 function Logout() {
     FB.api('/me/permissions', 'DELETE', function (response) {
-        if (response.success == true) {
+        if (response.success === true) {
             console.log("Logout success!");
         }
         else {

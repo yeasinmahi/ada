@@ -1,6 +1,7 @@
 ﻿using AkijRest.IdentityServer.Repository.Dtos;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using AkijRest.IdentityServer.Repository.Helpers.DbHelpers;

@@ -1,14 +1,9 @@
-﻿using AkijRest.IdentityServer.Repository.Dtos;
-using AkijRest.IdentityServer.Repository.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Security.Claims;
+﻿using System;
 using System.Web.Http;
+using AkijRest.IdentityServer.Repository.Dtos;
+using AkijRest.IdentityServer.Repository.Repositories;
 
-namespace AkijRest.IdentityServer.Api.Controllers
+namespace AkijRest.IdentityServer.ApiFixed.Controllers
 {
     [RoutePrefix("api/token")]
     public class TokenController : ApiController

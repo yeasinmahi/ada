@@ -1,14 +1,11 @@
-﻿using AkijRest.IdentityServerFixed.Models;
+﻿using System;
+using System.Collections.Concurrent;
+using System.Security.Cryptography;
+using AkijRest.IdentityServer.Models;
 using AkijRest.SolutionConstant;
 using Microsoft.Owin.Security.DataHandler.Encoder;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Web;
 
-namespace AkijRest.IdentityServerFixed.Helpers
+namespace AkijRest.IdentityServer.Helpers
 {
     public static class AudienceStore
     {

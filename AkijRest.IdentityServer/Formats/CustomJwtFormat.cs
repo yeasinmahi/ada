@@ -1,15 +1,12 @@
-﻿using AkijRest.IdentityServerFixed.Helpers;
-using AkijRest.IdentityServerFixed.Models;
+﻿using System;
+using System.IdentityModel.Tokens;
+using AkijRest.IdentityServer.Helpers;
+using AkijRest.IdentityServer.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens;
-using System.Linq;
-using System.Web;
 using Thinktecture.IdentityModel.Tokens;
 
-namespace AkijRest.IdentityServerFixed.Formats
+namespace AkijRest.IdentityServer.Formats
 {
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {

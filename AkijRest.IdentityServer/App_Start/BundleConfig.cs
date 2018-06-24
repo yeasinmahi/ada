@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace AkijRest.IdentityServerFixed
+namespace AkijRest.IdentityServer
 {
     public class BundleConfig
     {

@@ -9,7 +9,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 {
     public class TokenRepository
     {
-        private IdentityServerDbContext context;
+        private readonly IdentityServerDbContext context;
         private const int ExpireTime = 2; // in minutes
 
         public TokenRepository()

@@ -109,17 +109,17 @@ function checkUserExistsByEmai(gmail, accessToken) {
     (
         {
             type: "GET",
-                url: "https://localhost:44386/api/users/gmail/" + gmailkUserName,
+                url: "https://agvdi3.akij.net:44321/api/userAuth/gmail/" + gmailkUserName,
 
             contentType: 'application/json; charset = utf-8',
             dataType: 'json',
 
             success: function (data) {
 
-                if (data != null) {
+                if (data !== null) {
                     extarnalGmailSignIn(data, accessToken);
                 } else {
-
+                    //ToDo
                 }
             },
 
@@ -130,7 +130,7 @@ function checkUserExistsByEmai(gmail, accessToken) {
     );
 }
 function extarnalGmailSignIn(username, accessToken) {
-    var identityConnecTokenUrl = "https://localhost:44347/api/token/external";
+    var identityConnecTokenUrl = "https://agvdi3.akij.net:44321/api/token/external";
 
     console.log("External Sign Called");
     jQuery.ajax({
@@ -149,7 +149,7 @@ function extarnalGmailSignIn(username, accessToken) {
 
         success: function (data) {
             console.log(data);
-            if (data == "invalid_grant") {
+            if (data === "invalid_grant") {
                 toastr.options =
                 {
                     "closeButton": true,

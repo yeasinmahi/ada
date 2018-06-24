@@ -1,16 +1,13 @@
-﻿using AkijRest.IdentityServer.Repository.Models;
-using AkijRest.IdentityServer.Repository.Repositories;
-using AkijRest.IdentityServerFixed.Helpers;
-using Microsoft.Owin.Security;
-using Microsoft.Owin.Security.OAuth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
+using AkijRest.IdentityServer.Helpers;
+using AkijRest.IdentityServer.Repository.Models;
+using AkijRest.IdentityServer.Repository.Repositories;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 
-namespace AkijRest.IdentityServerFixed.Providers
+namespace AkijRest.IdentityServer.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {

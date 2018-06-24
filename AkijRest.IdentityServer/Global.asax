@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="AkijRest.IdentityServerFixed.WebApiApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="AkijRest.IdentityServer.WebApiApplication" Language="C#" %>
