@@ -1,5 +1,5 @@
-﻿using AkijRest.IdentityServer.Entitites;
-using AkijRest.IdentityServer.Helpers;
+﻿using AkijRest.IdentityServerFixed.Helpers;
+using AkijRest.IdentityServerFixed.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Web;
 using Thinktecture.IdentityModel.Tokens;
 
-namespace AkijRest.IdentityServer.Formats
+namespace AkijRest.IdentityServerFixed.Formats
 {
     public class CustomJwtFormat : ISecureDataFormat<AuthenticationTicket>
     {
@@ -29,9 +29,9 @@ namespace AkijRest.IdentityServer.Formats
                 throw new ArgumentNullException("data");
             }
 
-            string audienceId = 
-                data.Properties.Dictionary.ContainsKey(AudiencePropertyKey) 
-                    ? data.Properties.Dictionary[AudiencePropertyKey] 
+            string audienceId =
+                data.Properties.Dictionary.ContainsKey(AudiencePropertyKey)
+                    ? data.Properties.Dictionary[AudiencePropertyKey]
                     : null;
 
             if (string.IsNullOrWhiteSpace(audienceId))
@@ -40,7 +40,7 @@ namespace AkijRest.IdentityServer.Formats
                 (
                     "AuthenticationTicket.Properties does not include audience"
                 );
-            }                
+            }
 
             Audience audience = AudienceStore.FindAudience(audienceId);
 
@@ -55,7 +55,7 @@ namespace AkijRest.IdentityServer.Formats
 
             var token = new JwtSecurityToken
             (
-                _issuer, audienceId, data.Identity.Claims, 
+                _issuer, audienceId, data.Identity.Claims,
                 issued.Value.UtcDateTime, expires.Value.UtcDateTime, signingKey
             );
 

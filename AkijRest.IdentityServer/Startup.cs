@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Threading.Tasks;
 using System.Web.Http;
-using AkijRest.IdentityServer.Formats;
-using AkijRest.IdentityServer.Providers;
+using System.Web.Http.Cors;
+using System.Web.Http.Routing;
+using AkijRest.IdentityServerFixed.Formats;
+using AkijRest.IdentityServerFixed.Providers;
 using AkijRest.SolutionConstant;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Serialization;
 using Owin;
 
-[assembly: OwinStartup(typeof(AkijRest.IdentityServer.Startup))]
+[assembly: OwinStartup(typeof(AkijRest.IdentityServerFixed.Startup))]
 
-namespace AkijRest.IdentityServer
+namespace AkijRest.IdentityServerFixed
 {
     public class Startup
     {
@@ -21,28 +24,34 @@ namespace AkijRest.IdentityServer
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            ConfigureWebApi(config);            
+            // ConfigureWebApi(config);
 
             // 
             ConfigureOAuthTokenGeneration(app);
-            app.UseWebApi(config);
+            //app.UseWebApi(config);
         }
 
         private void ConfigureWebApi(HttpConfiguration config)
         {
             config.MapHttpAttributeRoutes();
 
-            config.EnableCors();
+            var cors = new EnableCorsAttribute("*", "*", "*");
+            config.EnableCors(cors);
+
+            var constraints = new { httpMethod = new HttpMethodConstraint(HttpMethod.Options) };
+            config.Routes.IgnoreRoute("OPTIONS", "*pathInfo", constraints);
+
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            var jsonFormatter = 
+            var jsonFormatter =
                 config.Formatters.OfType<JsonMediaTypeFormatter>().First();
 
-            jsonFormatter.SerializerSettings.ContractResolver 
+            jsonFormatter.SerializerSettings.ContractResolver
                 = new CamelCasePropertyNamesContractResolver();
         }
 

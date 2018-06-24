@@ -1,4 +1,4 @@
-﻿using AkijRest.IdentityServer.Entitites;
+﻿using AkijRest.IdentityServerFixed.Models;
 using AkijRest.SolutionConstant;
 using Microsoft.Owin.Security.DataHandler.Encoder;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web;
 
-namespace AkijRest.IdentityServer.Helpers
+namespace AkijRest.IdentityServerFixed.Helpers
 {
     public static class AudienceStore
     {

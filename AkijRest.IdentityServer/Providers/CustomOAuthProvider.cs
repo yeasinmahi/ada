@@ -1,6 +1,6 @@
-﻿using AkijRest.IdentityServer.Helpers;
-using AkijRest.IdentityServer.Repository.Models;
+﻿using AkijRest.IdentityServer.Repository.Models;
 using AkijRest.IdentityServer.Repository.Repositories;
+using AkijRest.IdentityServerFixed.Helpers;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System;
@@ -10,9 +10,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace AkijRest.IdentityServer.Providers
+namespace AkijRest.IdentityServerFixed.Providers
 {
-    public class CustomOAuthProvider: OAuthAuthorizationServerProvider
+    public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
         private UserRepository repository;
 
@@ -50,14 +50,14 @@ namespace AkijRest.IdentityServer.Providers
             return Task.FromResult<object>(null);
         }
 
-        public override  Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var allowedOrigin = "*";
 
             context.OwinContext.Response.Headers.Add
             (
-                "Access-Control-Allow-Origin", 
-                new[] 
+                "Access-Control-Allow-Origin",
+                new[]
                 {
                     allowedOrigin
                 }
@@ -144,6 +144,11 @@ namespace AkijRest.IdentityServer.Providers
             return Task.FromResult<object>(null);
             */
 
+        }
+
+        public override Task ValidateClientRedirectUri(OAuthValidateClientRedirectUriContext context)
+        {
+            return base.ValidateClientRedirectUri(context);
         }
     }
 }
