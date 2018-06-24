@@ -96,7 +96,7 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
     (
         {
             type: "GET",
-                url: "https://agvdi3.akij.net:44321/api/userAuth/facebook/" + facebookUserName,
+                url: facebookAuth + facebookUserName,
 
             contentType: 'application/json; charset = utf-8',
             dataType: 'json',
@@ -120,12 +120,10 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
 
 function ExternalSignIn(username, accessToken)
 {
-    var identityConnecTokenUrl = "https://agvdi3.akij.net:44321/api/token/external";
-
     console.log("External Sign Called");
     jQuery.ajax({
         type: "POST",
-        url: identityConnecTokenUrl,
+        url: externalAuthSignIn,
 
         data: JSON.stringify({
             // user signin parameter starts

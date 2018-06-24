@@ -82,14 +82,13 @@
     <script src="~/Scripts/adminlte.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="~/Scripts/demo.js"></script>
-
-
+    <!-- Static URL for whole project -->
+    <script src="~/Controllers/Scripts/staticContent.js"></script>
 
     <script type="text/javascript">
 
         var token = getParameterByName('token');
         console.log(token);
-        var apiUrlPrefix = "https://agvdi3.akij.net:44321/api/";
 
         var counter = 0;
 
@@ -115,7 +114,7 @@
             jQuery.ajax(
                 {
                     type: "POST",
-                    url: apiUrlPrefix + "token/refresh",
+                    url: refreshUrl,
 
                     data: JSON.stringify({
                         // token parameter starts
@@ -138,7 +137,7 @@
 
                         console.log(tokenStatus);
 
-                        if (tokenStatus == "refreshed") {
+                        if (tokenStatus === "refreshed") {
                             console.log("token refreshed");
                         }
                         else if (tokenStatus == "expired") {
@@ -201,12 +200,11 @@
 
         function PupulateLeftNavItemsWithRoles() {
             var token = getParameterByName('token');
-            apiUrlPrefix = "https://agvdi3.akij.net:44321/api/";
             console.log("Start Populate");
 
             jQuery.ajax({
                 type: "GET",
-                url: apiUrlPrefix + "token/roles",
+                url: rolesUrl,
 
                 /*
                 data: JSON.stringify({
@@ -265,10 +263,7 @@
         }
 
         jQuery(document).ready(function (e) {
-            
             PupulateLeftNavItemsWithRoles(token);
-
-            // var apiUrlPrefix = "http://localhost:30278/api/";
             // start of mousemove
             tokenRefresh();
 

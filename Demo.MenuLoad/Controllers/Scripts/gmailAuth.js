@@ -109,7 +109,7 @@ function checkUserExistsByEmai(gmail, accessToken) {
     (
         {
             type: "GET",
-                url: "https://agvdi3.akij.net:44321/api/userAuth/gmail/" + gmailkUserName,
+                url: gmailAuth + gmailkUserName,
 
             contentType: 'application/json; charset = utf-8',
             dataType: 'json',
@@ -130,12 +130,11 @@ function checkUserExistsByEmai(gmail, accessToken) {
     );
 }
 function extarnalGmailSignIn(username, accessToken) {
-    var identityConnecTokenUrl = "https://agvdi3.akij.net:44321/api/token/external";
 
     console.log("External Sign Called");
     jQuery.ajax({
         type: "POST",
-        url: identityConnecTokenUrl,
+        url: externalAuthSignIn,
 
         data: JSON.stringify({
             // user signin parameter starts

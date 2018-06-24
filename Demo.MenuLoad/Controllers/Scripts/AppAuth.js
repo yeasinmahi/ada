@@ -2,14 +2,13 @@
 var clientId = "099153c2625149bc8ecb3e85e03f0022";
 
 jQuery(document).ready(function (e) {
-    var identityConnecTokenUrl = "https://agvdi3.akij.net:44321/api/token";
 
 
     function signIn(username, password) {
         jQuery.ajax({
 
             type: "POST",
-            url: identityConnecTokenUrl,
+            url: tokenUrl,
 
             data: JSON.stringify({
                 // user signin parameter starts
@@ -72,9 +71,6 @@ jQuery(document).ready(function (e) {
             signIn(username, password);
         }
     });
-
-
-
 
     $('#buttonSignIn').on('click', function (e) {
 

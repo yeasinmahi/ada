@@ -109,15 +109,22 @@ namespace AkijRest.IdentityServer.Controllers
         {
             try
             {
+                Log.Write(logFilePath, "Refresh", LogUtility.MessageType.MethodeStart);
                 var tokenContent = dto.TokenContent;
+                Log.Write(logFilePath, "tokenContent : "+ tokenContent, LogUtility.MessageType.UserMessage);
                 TokenRepository tokenRepository = new TokenRepository();
                 // this status gets the value whether the token is expired or refreshed
+                Log.Write(logFilePath, "UpdateTolen", LogUtility.MessageType.MethodeStart);
                 string tokenRefeshStatus = tokenRepository.UpdateToken(tokenContent);
+                Log.Write(logFilePath, "UpdateTolen", LogUtility.MessageType.MethodeEnd);
                 if (tokenRefeshStatus.Equals("expired"))
                 {
                     // initializing logout functinality
+                    Log.Write(logFilePath, "DeleteTolen", LogUtility.MessageType.MethodeStart);
                     tokenRepository.DeleteToken(tokenContent);
+                    Log.Write(logFilePath, "DeleteTolen", LogUtility.MessageType.MethodeEnd);
                 }
+                Log.Write(logFilePath, "Refresh", LogUtility.MessageType.MethodeEnd);
                 return Ok(tokenRefeshStatus);
 
             }
@@ -134,10 +141,13 @@ namespace AkijRest.IdentityServer.Controllers
         {
             try
             {
+                Log.Write(logFilePath, "roles", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath, "tokenContent: "+ tokenContent, LogUtility.MessageType.UserMessage);
                 TokenRepository tokenRepository = new TokenRepository();
                 string userName = tokenRepository.GetUsernameByToken(tokenContent);
                 RoleRepository roleRepository = new RoleRepository();
                 var roles = roleRepository.GetRolesByUserName(userName);
+                Log.Write(logFilePath, "roles", LogUtility.MessageType.MethodeEnd);
                 return Ok(roles);
             }
             catch (Exception ex)
