@@ -15,8 +15,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogService", "LogService\Lo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.IdentityServer.ApiFixed", "AkijRest.IdentityServer.ApiFixed\AkijRest.IdentityServer.ApiFixed.csproj", "{EEA4E8AC-FAF9-43FA-A0E5-8BF36DFD5612}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.IdentityServer.Api", "AkijRest.IdentityServer.Api\AkijRest.IdentityServer.Api.csproj", "{1A1E3532-38FB-466A-BC85-E65B8DC20BF0}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{EEA4E8AC-FAF9-43FA-A0E5-8BF36DFD5612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEA4E8AC-FAF9-43FA-A0E5-8BF36DFD5612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEA4E8AC-FAF9-43FA-A0E5-8BF36DFD5612}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A1E3532-38FB-466A-BC85-E65B8DC20BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A1E3532-38FB-466A-BC85-E65B8DC20BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A1E3532-38FB-466A-BC85-E65B8DC20BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A1E3532-38FB-466A-BC85-E65B8DC20BF0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
