@@ -27,7 +27,6 @@ function signOutFacebook() {
     window.location.href = window.GetLoginUrl();
 }
 function signOutgGmail() {
-    handleClientLoadOut();
-    
+    signoutGoogle();
     window.location.href = window.GetLoginUrl();
 }

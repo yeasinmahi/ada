@@ -283,17 +283,23 @@
 
         });
     </script>
-    <script>
-        $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
-            $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().parent().addClass("menu-open");
-            $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().css("display", "block");
+        $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().parent().addClass("menu-open");
+        $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().css("display", "block");
 
-            $('.sidebar-menu').tree();
-            $(window).resize();
+        $('.sidebar-menu').tree();
+        $(window).resize();
 
-        })
-    </script>
+    })
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+<script>
+    window.onLoadCallback = function(){
+        gapi.load('client:auth2', initClient);
+    }
+</script>
     @RenderSection("scripts", false)
 </body>
 </html>

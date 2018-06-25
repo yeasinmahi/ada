@@ -5,55 +5,10 @@ var SCOPE = 'https://www.googleapis.com/auth/plus.profile.emails.read';
 function googlesignin()
 {
     console.log("button clicked!");
-
-    handleClientLoad();
     GoogleAuth.signIn();
-
-    //handleAuthClick();
+    GoogleAuth.isSignedIn.listen(signinGoogle);
+    signinGoogle();
 }
-
-
-
-function handleClientLoad()
-{
-    // Load the API's client and auth2 modules.
-    // Call the initClient function after the modules load.
-    gapi.load('client:auth2', initClient);
-}
-function handleClientLoadOut() {
-    // Load the API's client and auth2 modules.
-    // Call the initClient function after the modules load.
-    gapi.load('client:auth2', initClientOut);
-}
-function initClientOut() {
-    // Retrieve the discovery document for version 3 of Google Drive API.
-    // In practice, your app can retrieve one or more discovery documents.
-    var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/plus/v1/rest';
-
-    // Initialize the gapi.client object, which app uses to make API requests.
-    // Get API key and client ID from API Console.
-    // 'scope' field specifies space-delimited list of access scopes.
-    gapi.client.init({
-        'apiKey': 'AIzaSyA-GvpC1MUDnXfTrLyK7PF1jrCEbOYWSII',
-        'discoveryDocs': [discoveryUrl],
-        'clientId': '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
-        'scope': SCOPE
-    }).then(function () {
-        console.log("google Init");
-        GoogleAuth = gapi.auth2.getAuthInstance();
-        GoogleAuth.signOut();
-        GoogleAuth.disconnect();
-        console.log("google signout");
-        // Listen for sign-in state changes.
-        //GoogleAuth.isSignedIn.listen(updateSigninStatus);
-
-        // Handle initial sign-in state. (Determine if user is already signed in.)
-        //var user = GoogleAuth.currentUser.get();
-        
-        
-    });
-}
-
 function initClient()
 {
     // Retrieve the discovery document for version 3 of Google Drive API.
@@ -70,66 +25,26 @@ function initClient()
         'scope': SCOPE
     }).then(function () {
         GoogleAuth = gapi.auth2.getAuthInstance();
-
-        // Listen for sign-in state changes.
-        GoogleAuth.isSignedIn.listen(updateSigninStatus);
-
-        // Handle initial sign-in state. (Determine if user is already signed in.)
-        var user = GoogleAuth.currentUser.get();
-
-        setSigninStatus();
-
-        // Call handleAuthClick function when user clicks on
-        //      "Sign In/Authorize" button.
-        $('#sign-in-or-out-button').click(function () {
-
-        });
-        /*
-        $('#revoke-access-button').click(function() {
-        revokeAccess();
-    });
-        */
     });
 }
 
-function handleAuthClick()
-{
-    if (GoogleAuth.isSignedIn.get()) {
-        // User is authorized and has clicked 'Sign out' button.
-        GoogleAuth.signOut();
-        GoogleAuth.disconnect();
-    } else {
-        // User is not signed in. Start Google auth flow.
-        GoogleAuth.signIn();
-    }
+function signoutGoogle() {
+    GoogleAuth.signOut();
+    GoogleAuth.disconnect();
 }
 
-
-
-function setSigninStatus(isSignedIn)
+function signinGoogle()
 {
+    console.log("signin google called");
     var user = GoogleAuth.currentUser.get();
     var isAuthorized = user.hasGrantedScopes(SCOPE);
     if (isAuthorized) {
-        $('#sign-in-or-out-button').html('Sign out');
-        $('#revoke-access-button').css('display', 'inline-block');
-        $('#auth-status').html('You are currently signed in and have granted ' +
-            'access to this app.');
-        console.log(user);
-        console.log(user["w3"]["U3"]);
         checkUserExistsByEmai(user["w3"]["U3"], user["Zi"]["access_token"]);
     } else {
-        $('#sign-in-or-out-button').html('Sign In/Authorize');
-        $('#revoke-access-button').css('display', 'none');
-        $('#auth-status').html('You have not authorized this app or you are ' +
-            'signed out.');
+        //User not Exist
     }
 }
 
-function updateSigninStatus(isSignedIn)
-{
-    setSigninStatus();
-}
 
 function checkUserExistsByEmai(gmail, accessToken) {
     var gmailkUserName = gmail.split('@')[0];
