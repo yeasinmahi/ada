@@ -50,15 +50,22 @@
     <!-- Static URL for whole project -->
     <script src="~/Controllers/Scripts/staticContent.js"></script>
 
-    <script>
-        $(document).ready(function () {
-            $('input').iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                radioClass: 'iradio_square-blue',
-                increaseArea: '20%' /* optional */
-            });
-        })
-    </script>
+<script>
+    $(document).ready(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' /* optional */
+        });
+    })
+</script>
+
     @RenderSection("scripts", false)
+<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+<script>
+    window.onLoadCallback = function(){
+        gapi.load('client:auth2', initClientOut);
+    }
+</script>
 </body>
 </html>

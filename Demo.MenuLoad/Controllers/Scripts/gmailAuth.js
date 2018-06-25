@@ -7,7 +7,9 @@ function googlesignin()
     console.log("button clicked!");
 
     handleClientLoad();
-    handleAuthClick();
+    GoogleAuth.signIn();
+
+    //handleAuthClick();
 }
 
 
@@ -17,6 +19,39 @@ function handleClientLoad()
     // Load the API's client and auth2 modules.
     // Call the initClient function after the modules load.
     gapi.load('client:auth2', initClient);
+}
+function handleClientLoadOut() {
+    // Load the API's client and auth2 modules.
+    // Call the initClient function after the modules load.
+    gapi.load('client:auth2', initClientOut);
+}
+function initClientOut() {
+    // Retrieve the discovery document for version 3 of Google Drive API.
+    // In practice, your app can retrieve one or more discovery documents.
+    var discoveryUrl = 'https://www.googleapis.com/discovery/v1/apis/plus/v1/rest';
+
+    // Initialize the gapi.client object, which app uses to make API requests.
+    // Get API key and client ID from API Console.
+    // 'scope' field specifies space-delimited list of access scopes.
+    gapi.client.init({
+        'apiKey': 'AIzaSyA-GvpC1MUDnXfTrLyK7PF1jrCEbOYWSII',
+        'discoveryDocs': [discoveryUrl],
+        'clientId': '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
+        'scope': SCOPE
+    }).then(function () {
+        console.log("google Init");
+        GoogleAuth = gapi.auth2.getAuthInstance();
+        GoogleAuth.signOut();
+        GoogleAuth.disconnect();
+        console.log("google signout");
+        // Listen for sign-in state changes.
+        //GoogleAuth.isSignedIn.listen(updateSigninStatus);
+
+        // Handle initial sign-in state. (Determine if user is already signed in.)
+        //var user = GoogleAuth.currentUser.get();
+        
+        
+    });
 }
 
 function initClient()
@@ -62,17 +97,14 @@ function handleAuthClick()
     if (GoogleAuth.isSignedIn.get()) {
         // User is authorized and has clicked 'Sign out' button.
         GoogleAuth.signOut();
-        revokeAccess();
+        GoogleAuth.disconnect();
     } else {
         // User is not signed in. Start Google auth flow.
         GoogleAuth.signIn();
     }
 }
 
-function revokeAccess()
-{
-    GoogleAuth.disconnect();
-}
+
 
 function setSigninStatus(isSignedIn)
 {
