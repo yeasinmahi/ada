@@ -104,7 +104,7 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
             success: function(data) {
                 console.log("test "+data);
                 if (data !== null) {
-                    ExternalSignIn(data, accessToken);
+                    getAccessTokenFacebook(data);
                 } else {
                     //todo
                 }
@@ -117,7 +117,33 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
     );
 }
 
+function getAccessTokenFacebook(username) {
+    jQuery.ajax
+    (
+        {
+            type: "GET",
+            url: externaltoken,
+            data: {
+                'UserName': username
+            },
+            contentType: 'application/json; charset = utf-8',
+            dataType: 'json',
 
+            success: function (data) {
+                console.log("test " + data);
+                if (data !== null) {
+                    ExternalSignIn(username, data);
+                } else {
+                    //todo
+                }
+            },
+
+            failure: function () {
+                console.log("User Sign In Failed!");
+            }
+        }
+    );
+ }
 function ExternalSignIn(username, accessToken)
 {
     console.log("External Sign Called");

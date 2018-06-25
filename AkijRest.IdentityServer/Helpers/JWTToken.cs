@@ -13,8 +13,9 @@ namespace AkijRest.IdentityServer.Helpers
 {
     public class JWTToken
     {
-        public static string GenerateToken(string userName, string audienceId)
+        public static string GenerateToken(string userName)
         {
+            string audienceId = AudienceConstant.ClientId;
             var identity = new ClaimsIdentity("JWT");
 
             /*
@@ -28,7 +29,7 @@ namespace AkijRest.IdentityServer.Helpers
             identity.AddClaim(new Claim(ClaimTypes.Name, userName));
             identity.AddClaim(new Claim("sub", userName));
 
-            Audience audience = AudienceStore.FindAudience(audienceId);
+            Audience audience = AudienceStore.FindAudience(AudienceConstant.ClientId);
 
             string symmetricKeyAsBase64 = audience.Base64Secret;
 

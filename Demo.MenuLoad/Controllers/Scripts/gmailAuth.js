@@ -117,9 +117,36 @@ function checkUserExistsByEmai(gmail, accessToken) {
             success: function (data) {
 
                 if (data !== null) {
-                    extarnalGmailSignIn(data, accessToken);
+                    getAccessTokenGmail(data);
                 } else {
                     //ToDo
+                }
+            },
+
+            failure: function () {
+                console.log("User Sign In Failed!");
+            }
+        }
+    );
+}
+function getAccessTokenGmail(username) {
+    jQuery.ajax
+    (
+        {
+            type: "GET",
+            url: externaltoken,
+            data: {
+                'UserName': username
+            },
+            contentType: 'application/json; charset = utf-8',
+            dataType: 'json',
+
+            success: function (data) {
+                console.log("test " + data);
+                if (data !== null) {
+                    extarnalGmailSignIn(username, data);
+                } else {
+                    //todo
                 }
             },
 

@@ -62,7 +62,7 @@ namespace AkijRest.IdentityServer.Controllers
                 // the task ends
 
                 // fake test
-                //var jwtToken = JWTToken.GenerateToken(userDto.UserName, AudienceConstant.ClientId);
+                //var jwtToken = JWTToken.GenerateToken(userDto.UserName);
                 //
 
                 return Ok(content);
@@ -80,6 +80,7 @@ namespace AkijRest.IdentityServer.Controllers
             Log.Write(logFilePath, "ExternalToken", LogUtility.MessageType.MethodeStart);
             try
             {
+                //externalUserDto.AccessToken = JWTToken.GenerateToken(externalUserDto.UserName);
                 InsertToken(externalUserDto);
                 Log.Write(logFilePath, "ExternalToken", LogUtility.MessageType.MethodeEnd);
                 return Ok("success");
@@ -159,6 +160,22 @@ namespace AkijRest.IdentityServer.Controllers
             {
                 Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
+            }
+        }
+
+        [HttpGet]
+        [Route("externalToken")]
+        public IHttpActionResult GetExternalToken(string userName)
+        {
+            try
+            {
+                string token = JWTToken.GenerateToken(userName);
+                return Ok(token);
+            }
+            catch (Exception e)
+            {
+
+                return InternalServerError(e);
             }
         }
     }
