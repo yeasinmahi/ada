@@ -152,6 +152,10 @@
       <Project>{db1b09b1-8eba-466c-9150-1c20c7dcea78}</Project>
       <Name>AkijRest.SolutionConstant</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LogService\LogService.csproj">
+      <Project>{C6D83867-3753-4440-AB90-0B218FFF3F6F}</Project>
+      <Name>LogService</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

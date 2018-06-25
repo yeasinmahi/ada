@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using AkijRest.IdentityServer.Helpers;
 using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using AkijRest.SolutionConstant;
@@ -59,6 +60,10 @@ namespace AkijRest.IdentityServer.Controllers
 
                 Log.Write(logFilePath, "CustomToken", LogUtility.MessageType.MethodeEnd);
                 // the task ends
+
+                // fake test
+                //var jwtToken = JWTToken.GenerateToken(userDto.UserName, AudienceConstant.ClientId);
+                //
 
                 return Ok(content);
 

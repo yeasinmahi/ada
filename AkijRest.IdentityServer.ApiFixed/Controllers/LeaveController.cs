@@ -8,6 +8,7 @@ using AkijRest.IdentityServer.ApiFixed.Helpers.Roles;
 using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using AkijRest.SolutionConstant;
+using LogService;
 
 namespace AkijRest.IdentityServer.ApiFixed.Controllers
 {
@@ -16,26 +17,31 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
     [RoutePrefix("api/leaves")]
     public class LeaveController : ApiController
     {
+        string logFilePath = "C:/YeasinPublished/ada.txt";
         [HttpPost]
         [Route("own")]
         public IHttpActionResult PostOwn([FromBody] LeaveDto dto)
         {
+            Log.Write(logFilePath, "LeaveOwn", LogUtility.MessageType.MethodeStart);
             var claimsPrincipal = this.User as ClaimsPrincipal;
 
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
 
+            Log.Write(logFilePath, "UserName: " +userName, LogUtility.MessageType.UserMessage);
+
             TokenRepository tokenRepository = new TokenRepository();
 
             var tokenContent = tokenRepository.GetToken(userName);
-
+            Log.Write(logFilePath, "tokenContent: " + tokenContent, LogUtility.MessageType.UserMessage);
             // this status gets the value whether the token is expired or refreshed
             string tokenRefeshStatus = tokenRepository.UpdateToken(tokenContent);
-
+            Log.Write(logFilePath, "tokenRefeshStatus: " + tokenRefeshStatus, LogUtility.MessageType.UserMessage);
             if (tokenRefeshStatus.Equals("expired"))
             {
                 // initializing logout functinality
                 tokenRepository.DeleteToken(tokenContent);
                 //
+                Log.Write(logFilePath, "deleted token content: ", LogUtility.MessageType.UserMessage);
                 return Ok("expired");
             }
 
@@ -43,8 +49,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
 
             var userRoles = roleRepository.GetRoleNamesByUserName(userName);
 
+            string a = "";
 
-            if(!userRoles.Contains("UpdateOwnLeave"))
+            foreach (var userRole in userRoles)
+            {
+                a += userRole + "|";
+            }
+
+            Log.Write(logFilePath, a, LogUtility.MessageType.UserMessage);
+
+            if (!userRoles.Contains("UpdateOwnLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
             }
@@ -59,10 +73,10 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
 
                 dto.UserName = userName;
                 LeaveDto leaveDto = repository.Create(dto);
-
+                Log.Write(logFilePath, "leaveDto: " + leaveDto, LogUtility.MessageType.UserMessage);
                 var result = Created<LeaveDto>(Request.RequestUri
                     , dto);
-
+                Log.Write(logFilePath, "result: " + result, LogUtility.MessageType.UserMessage);
                 return result;
 
             }

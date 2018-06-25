@@ -7,12 +7,11 @@
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-var apiUrlPrefix = "http://localhost:30278/api/";
 var token = getParameterByName('token');
 $(document).ready(function () {
     jQuery.ajax({
         type: "GET",
-        url: apiUrlPrefix + "leavetype",
+        url: apiUrlPrefix + "/leavetype",
         contentType: 'application/json; charset = utf-8',
         dataType: 'json',
         success: function (data) {
@@ -52,6 +51,9 @@ $(document).ready(function () {
         todayHighlight: true,
         calendarWeeks: true
     });
+
+    console.log("Token: " + token);
+
     jQuery('#submitButton').on('click', function (e) {
 
         // No token is in url, so access forbidden
@@ -84,7 +86,7 @@ $(document).ready(function () {
         // start of jQuery.ajax
         jQuery.ajax({
             type: "POST",
-            url: apiUrlPrefix + "leaves/own",
+            url: apiUrlPrefix + "/leaves/own",
 
             data: JSON.stringify({
                 // leave parameter starts
