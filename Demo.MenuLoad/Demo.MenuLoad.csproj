@@ -178,6 +178,7 @@
     <Content Include="Controllers\Scripts\facebookAuth.js" />
     <Content Include="Controllers\Scripts\gmailAuth.js" />
     <Content Include="Controllers\Scripts\leaveController.js" />
+    <Content Include="Controllers\Scripts\mealController.js" />
     <Content Include="Controllers\Scripts\signOut.js" />
     <Content Include="Controllers\Scripts\staticContent.js" />
     <Content Include="dataTables.bootstrap.min.css" />

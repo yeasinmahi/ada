@@ -13,4 +13,6 @@ var rolesUrl = tokenUrl + "/roles";
 //var apiUrlPrefix = "https://agvdi3.akij.net:44386/api";
 var apiUrlPrefix = "https://localhost:44386/api";
 var userUrl = apiUrlPrefix + "/user";
+var leavetypeUrl = apiUrlPrefix + "/leavetype";
+var mealUrl = apiUrlPrefix + "/meal";
 

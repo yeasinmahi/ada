@@ -219,6 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveTypeController.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
     <Compile Include="Controllers\RoleGroupController.cs" />
     <Compile Include="Controllers\TestController.cs" />

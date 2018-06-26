@@ -58,7 +58,10 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Activities" />
     <Reference Include="System.Deployment" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -97,6 +100,7 @@
     <Compile Include="Dtos\LeaveDto.cs" />
     <Compile Include="Dtos\LeaveEveryDayDto.cs" />
     <Compile Include="Dtos\LeaveTypeDto.cs" />
+    <Compile Include="Dtos\MealDto.cs" />
     <Compile Include="Dtos\RoleAssignedDto.cs" />
     <Compile Include="Dtos\RoleDto.cs" />
     <Compile Include="Dtos\RoleGroupDto.cs" />
@@ -105,44 +109,22 @@
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Helpers\DbHelpers\IdentityServerDbContext.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
-    <Compile Include="Migrations\201805170952172_InitialModel.cs" />
-    <Compile Include="Migrations\201805170952172_InitialModel.Designer.cs">
-      <DependentUpon>201805170952172_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\HrDbContext\201806261043130_Init.cs" />
+    <Compile Include="Migrations\HrDbContext\201806261043130_Init.Designer.cs">
+      <DependentUpon>201806261043130_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805230442547_AddLeaveTypeTable.cs" />
-    <Compile Include="Migrations\201805230442547_AddLeaveTypeTable.Designer.cs">
-      <DependentUpon>201805230442547_AddLeaveTypeTable.cs</DependentUpon>
+    <Compile Include="Migrations\HrDbContext\ConfigurationHr.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201806261054377_Init.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201806261054377_Init.Designer.cs">
+      <DependentUpon>201806261054377_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201805230454593_PopulateLeaveTypeTable.cs" />
-    <Compile Include="Migrations\201805230454593_PopulateLeaveTypeTable.Designer.cs">
-      <DependentUpon>201805230454593_PopulateLeaveTypeTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805230634139_AddLeaveTable.cs" />
-    <Compile Include="Migrations\201805230634139_AddLeaveTable.Designer.cs">
-      <DependentUpon>201805230634139_AddLeaveTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805270900394_AddTokenTable.cs" />
-    <Compile Include="Migrations\201805270900394_AddTokenTable.Designer.cs">
-      <DependentUpon>201805270900394_AddTokenTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805280910110_AddDisplayColumnInRole.cs" />
-    <Compile Include="Migrations\201805280910110_AddDisplayColumnInRole.Designer.cs">
-      <DependentUpon>201805280910110_AddDisplayColumnInRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805310632559_Add Contoller, Action And Icon.cs" />
-    <Compile Include="Migrations\201805310632559_Add Contoller, Action And Icon.Designer.cs">
-      <DependentUpon>201805310632559_Add Contoller, Action And Icon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806040754087_changed.cs" />
-    <Compile Include="Migrations\201806040754087_changed.Designer.cs">
-      <DependentUpon>201806040754087_changed.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806070434295_AddExternalLoginEmailTable.cs" />
-    <Compile Include="Migrations\201806070434295_AddExternalLoginEmailTable.Designer.cs">
-      <DependentUpon>201806070434295_AddExternalLoginEmailTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\ConfigurationIdentity.cs" />
     <Compile Include="Models\ExternalLoginEmail.cs" />
+    <Compile Include="Helpers\DbHelpers\HrDbContext.cs" />
+    <Compile Include="Models\Hr\tblCafeteria.cs" />
+    <Compile Include="Models\Hr\tblCafeteriaDetail.cs" />
+    <Compile Include="Models\Hr\tblCafeteriaRate.cs" />
+    <Compile Include="Models\Hr\tblDay.cs" />
     <Compile Include="Models\Leave.cs" />
     <Compile Include="Models\LeaveType.cs" />
     <Compile Include="Models\Role.cs" />
@@ -153,43 +135,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Interfaces\ILeaveRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILeaveTypeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMealRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleGroupRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\LeaveRepository.cs" />
     <Compile Include="Repositories\LeaveTypeRepository.cs" />
+    <Compile Include="Repositories\MealRepository.cs" />
     <Compile Include="Repositories\RoleGroupRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\TokenRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805170952172_InitialModel.resx">
-      <DependentUpon>201805170952172_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\HrDbContext\201806261043130_Init.resx">
+      <DependentUpon>201806261043130_Init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805230442547_AddLeaveTypeTable.resx">
-      <DependentUpon>201805230442547_AddLeaveTypeTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805230454593_PopulateLeaveTypeTable.resx">
-      <DependentUpon>201805230454593_PopulateLeaveTypeTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805230634139_AddLeaveTable.resx">
-      <DependentUpon>201805230634139_AddLeaveTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805270900394_AddTokenTable.resx">
-      <DependentUpon>201805270900394_AddTokenTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805280910110_AddDisplayColumnInRole.resx">
-      <DependentUpon>201805280910110_AddDisplayColumnInRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805310632559_Add Contoller, Action And Icon.resx">
-      <DependentUpon>201805310632559_Add Contoller, Action And Icon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806040754087_changed.resx">
-      <DependentUpon>201806040754087_changed.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806070434295_AddExternalLoginEmailTable.resx">
-      <DependentUpon>201806070434295_AddExternalLoginEmailTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201806261054377_Init.resx">
+      <DependentUpon>201806261054377_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

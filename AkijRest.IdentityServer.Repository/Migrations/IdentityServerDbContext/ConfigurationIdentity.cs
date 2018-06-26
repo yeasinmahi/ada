@@ -1,15 +1,16 @@
-namespace AkijRest.IdentityServer.Repository.Migrations
+namespace AkijRest.IdentityServer.Repository.Migrations.IdentityServerDbContext
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<AkijRest.IdentityServer.Repository.Helpers.DbHelpers.IdentityServerDbContext>
+    internal sealed class ConfigurationIdentity : DbMigrationsConfiguration<AkijRest.IdentityServer.Repository.Helpers.DbHelpers.IdentityServerDbContext>
     {
-        public Configuration()
+        public ConfigurationIdentity()
         {
             AutomaticMigrationsEnabled = false;
+            MigrationsDirectory = @"Migrations\IdentityServerDbContext";
         }
 
         protected override void Seed(AkijRest.IdentityServer.Repository.Helpers.DbHelpers.IdentityServerDbContext context)
