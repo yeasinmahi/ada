@@ -8,6 +8,7 @@ using AkijRest.IdentityServer.ApiFixed.Helpers.Roles;
 using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using AkijRest.SolutionConstant;
+using EmailService;
 using LogService;
 
 namespace AkijRest.IdentityServer.ApiFixed.Controllers
@@ -73,6 +74,17 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
 
                 dto.UserName = userName;
                 LeaveDto leaveDto = repository.Create(dto);
+                if (leaveDto!=null)
+                {
+                    EmailOptions emailOptions = new EmailOptions
+                    {
+                        ToAddressDisplayName = "Yeasin",
+                        ToAddress = "yeasinmahi72@gmail.com",
+                        Body = "Test Body",
+                        Subject = "Test"
+                    };
+                    Email.Send(emailOptions);
+                }
                 Log.Write(logFilePath, "leaveDto: " + leaveDto, LogUtility.MessageType.UserMessage);
                 var result = Created<LeaveDto>(Request.RequestUri
                     , dto);

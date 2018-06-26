@@ -313,6 +313,10 @@
       <Project>{DB1B09B1-8EBA-466C-9150-1C20C7DCEA78}</Project>
       <Name>AkijRest.SolutionConstant</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EmailService\EmailService.csproj">
+      <Project>{019e8b20-0e8c-47ab-886d-4e98bee882e8}</Project>
+      <Name>EmailService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LogService\LogService.csproj">
       <Project>{C6D83867-3753-4440-AB90-0B218FFF3F6F}</Project>
       <Name>LogService</Name>
