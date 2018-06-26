@@ -102,6 +102,5 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             return (leaveDto);
         }
-
     }
 }

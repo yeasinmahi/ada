@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using System.Xml;
@@ -10,8 +9,6 @@ namespace Demo.MenuLoad.Controllers
 {
     public class HomeController : Controller
     {
-
-
         public ActionResult Index()
         {
             return View();
@@ -31,9 +28,9 @@ namespace Demo.MenuLoad.Controllers
             return View();
         }
 
-        public ActionResult Menu()
+        public ActionResult Leave()
         {
-            ViewBag.Message = "This Menu Demo Page";
+            ViewBag.Message = "This is Leave Demo Page";
             return View();
         }
         public ActionResult SignIn()

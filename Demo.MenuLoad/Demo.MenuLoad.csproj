@@ -233,7 +233,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\WoodPurchase\WoodReceive.cshtml" />
     <Content Include="Views\WoodPurchase\WoodMRRAMFL.cshtml" />
     <Content Include="Views\WoodPurchase\POEntry.cshtml" />
@@ -273,6 +272,7 @@
     <Content Include="Views\Shared\_Header.cshtml" />
     <Content Include="Views\Shared\_RightSideBar.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Views\Home\Leave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

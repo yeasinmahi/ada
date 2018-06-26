@@ -20,5 +20,8 @@
 
         //******WebClient Address for Development. Comment out to active link*******
         public const string WebClient = "https://localhost:44328";
+
+        //******Api Address for Development. Comment out to active link*******
+        public const string IdentityServerApi = "https://localhost:44386";
     }
 }

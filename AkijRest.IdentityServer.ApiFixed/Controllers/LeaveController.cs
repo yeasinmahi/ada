@@ -76,14 +76,24 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 LeaveDto leaveDto = repository.Create(dto);
                 if (leaveDto!=null)
                 {
-                    EmailOptions emailOptions = new EmailOptions
+                    UserRepository userRepository = new UserRepository();
+                    UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
+                    if (userDto !=null)
                     {
-                        ToAddressDisplayName = "Yeasin",
-                        ToAddress = "yeasinmahi72@gmail.com",
-                        Body = "Test Body",
-                        Subject = "Test"
-                    };
-                    Email.Send(emailOptions);
+                        EmailOptions emailOptions = new EmailOptions
+                        {
+                            ToAddressDisplayName = "Yeasin",
+                            ToAddress = userDto.Email,
+                            Body = "Click The Link: " + UrlConstant.WebClient + "/Home/Test/",
+                            Subject = "Test"
+                        };
+                        Email.Send(emailOptions);
+                    }
+                    else
+                    {
+                        //todo: UserDto null
+                    }
+                    
                 }
                 Log.Write(logFilePath, "leaveDto: " + leaveDto, LogUtility.MessageType.UserMessage);
                 var result = Created<LeaveDto>(Request.RequestUri

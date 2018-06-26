@@ -13,6 +13,7 @@ namespace AkijRest.IdentityServer.Repository.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public List<Role> Roles { get; set; }
+        public int SuperVisorId { get; set; }
         public bool Approved { get; set; }
         public ExternalLoginEmail ExternalLoginEmail { get; set; }
 

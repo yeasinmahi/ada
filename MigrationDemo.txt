@@ -1,0 +1,19 @@
+Enable-Migrations -EnableAutomaticMigrations -ContextTypeName NamespaceOfContext.ContextA -ProjectName ProjectContextIsInIfNotMainOne -StartupProjectName NameOfMainProject  -ConnectionStringName ContextA
+
+add-migration InitialBSchema -IgnoreChanges -ConfigurationTypeName ConfigurationB
+
+Enable-Migrations -EnableAutomaticMigrations -ContextTypeName AkijRest.IdentityServer.Repository.Helpers.DbHelpers.HrDbContext
+
+add-migration InitialBSchema -IgnoreChanges -ConfigurationTypeName ConfigurationHr
+Update-Database -ConfigurationTypeName ConfigurationHr
+
+
+Enable-Migrations -MigrationsDirectory "Migrations\HrDbContext" -ContextTypeName AkijRest.IdentityServer.Repository.Helpers.DbHelpers.HrDbContext
+
+Enable-Migrations -MigrationsDirectory "Migrations\IdentityServerDbContext" -ContextTypeName AkijRest.IdentityServer.Repository.Helpers.DbHelpers.IdentityServerDbContext
+
+Add-Migration -ConfigurationTypeName ConfigurationHr
+Update-Database -ConfigurationTypeName ConfigurationHr
+
+Add-Migration -ConfigurationTypeName ConfigurationIdentity
+Update-Database -ConfigurationTypeName ConfigurationIdentity

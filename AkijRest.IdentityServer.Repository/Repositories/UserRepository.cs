@@ -12,7 +12,7 @@ using System.Web;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
-    public class UserRepository: IUserRepository
+    public class UserRepository : IUserRepository
     {
         private IdentityServerDbContext context;
 
@@ -135,6 +135,26 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             }
             return null;
 
+        }
+
+        public UserDto GetSuppervisorEmailByUserName(string userName)
+        {
+            var user = context.Users.FirstOrDefault(x => x.UserName.Equals(userName));
+            if (user != null)
+            {
+                var supervisor = context.Users.FirstOrDefault(x => x.Id.Equals(user.SuperVisorId));
+                if (supervisor != null)
+                {
+                    UserDto dto = new UserDto
+                    {
+                        UserName = supervisor.UserName,
+                        Email = supervisor.Email,
+                        FullName = supervisor.FullName
+                    };
+                    return dto;
+                }
+            }
+            return null;
         }
 
     }

@@ -118,6 +118,10 @@
     <Compile Include="Migrations\IdentityServerDbContext\201806261054377_Init.Designer.cs">
       <DependentUpon>201806261054377_Init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\IdentityServerDbContext\201806261500204_Add supervisorId at user.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201806261500204_Add supervisorId at user.Designer.cs">
+      <DependentUpon>201806261500204_Add supervisorId at user.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\IdentityServerDbContext\ConfigurationIdentity.cs" />
     <Compile Include="Models\ExternalLoginEmail.cs" />
     <Compile Include="Helpers\DbHelpers\HrDbContext.cs" />
@@ -153,6 +157,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\IdentityServerDbContext\201806261054377_Init.resx">
       <DependentUpon>201806261054377_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201806261500204_Add supervisorId at user.resx">
+      <DependentUpon>201806261500204_Add supervisorId at user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
