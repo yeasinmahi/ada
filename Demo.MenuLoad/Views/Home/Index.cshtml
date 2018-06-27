@@ -336,22 +336,4 @@
 
     <script src="~/Controllers/Scripts/mealController.js"></script>
 
-    <script>
-        function GetLoginUrl() {
-            var url = '@Url.Action("SignIn", "Home")';
-            return url;
-        }
-    </script>
-
-    @*gmail Auth*@
-    <script async defer src="https://apis.google.com/js/api.js"></script>
-    @*<script async defer src="https://apis.google.com/js/api.js"
-                onload="this.onload=function(){};handleClientLoad()"
-                onreadystatechange="if (this.readyState === 'complete') this.onload()">
-        </script>*@
-    <script src="~/Controllers/Scripts/gmailAuth.js"></script>
-
-    @*facebook Auth*@
-    <script src="~/Controllers/Scripts/facebookAuth.js"></script>
-    <script src="~/Controllers/Scripts/signOut.js"></script>
 }

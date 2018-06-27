@@ -84,8 +84,10 @@
     <script src="~/Scripts/demo.js"></script>
     <!-- Static URL for whole project -->
     <script src="~/Controllers/Scripts/staticContent.js"></script>
+    <!-- Static Function for whole project -->
+    <script src="~/Controllers/Scripts/StaticFunction.js"></script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
 
         var token = getParameterByName('token');
         console.log(token);
@@ -220,7 +222,7 @@
 
                 contentType: 'application/json; charset = utf-8',
                 dataType: 'json',
-                
+
                 success: function (data) {
                     console.log("Data: " + data);
 
@@ -230,7 +232,7 @@
                         var htmlNavItem =
                             "<li>"
                             + "<a href='../" + data[i]["controller"] + "/" + data[i]["action"] + "?token=" + token + "'>"
-                            + "<i class='"+data[i]["icon"]+"'>"
+                            + "<i class='" + data[i]["icon"] + "'>"
                             + "</i>"
                             + data[i]["displayName"]
                             + "</a></li>";
@@ -251,7 +253,7 @@
                         + "</a></li>";
 
                     jQuery('#leftnavmenu').append(htmlLogoutItem);
-                    
+
                 },
 
                 failure: function () {
@@ -283,23 +285,42 @@
 
         });
     </script>
+    <script>
+        $(document).ready(function () {
+
+            $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().parent().addClass("menu-open");
+            $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().css("display", "block");
+
+            $('.sidebar-menu').tree();
+            $(window).resize();
+
+        })
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
 <script>
-    $(document).ready(function () {
-
-        $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().parent().addClass("menu-open");
-        $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().css("display", "block");
-
-        $('.sidebar-menu').tree();
-        $(window).resize();
-
-    })
-</script>
-<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
-<script>
-    window.onLoadCallback = function(){
+    window.onLoadCallback = function () {
         gapi.load('client:auth2', initClient);
     }
 </script>
-    @RenderSection("scripts", false)
+@*gmail Auth*@
+<script async defer src="https://apis.google.com/js/api.js"></script>
+@*<script async defer src="https://apis.google.com/js/api.js"
+                onload="this.onload=function(){};handleClientLoad()"
+                onreadystatechange="if (this.readyState === 'complete') this.onload()">
+        </script>*@
+<script src="~/Controllers/Scripts/gmailAuth.js"></script>
+
+@*facebook Auth*@
+<script src="~/Controllers/Scripts/facebookAuth.js"></script>
+<script src="~/Controllers/Scripts/signOut.js"></script>
+    
+<script>
+    function GetLoginUrl() {
+        var url = '@Url.Action("SignIn", "Home")';
+        return url;
+    }
+</script>
+
+@RenderSection("scripts", false)
 </body>
 </html>

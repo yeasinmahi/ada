@@ -21,13 +21,19 @@ namespace Demo.MenuLoad.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Test()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Your Test page.";
 
             return View();
         }
 
+        public ActionResult Menu()
+        {
+            ViewBag.Message = "Your Test page.";
+
+            return View();
+        }
         public ActionResult Leave()
         {
             ViewBag.Message = "This is Leave Demo Page";

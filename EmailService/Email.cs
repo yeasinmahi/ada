@@ -1,32 +1,50 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Security;
 using System.Runtime.Remoting.Messaging;
+using System.Security.Cryptography.X509Certificates;
+using LogService;
 
 namespace EmailService
 {
     public class Email
     {
+        static string logFilePath = "C:/YeasinPublished/ada.txt";
         private static void SendEmail(EmailOptions emailOptions)
         {
             try
             {
+                Log.Write(logFilePath, "Email", LogUtility.MessageType.MethodeStart);
                 MailAddress fromAddress = new MailAddress(EmailConstant.EmailFromAddress, EmailConstant.EmailFromDisplayName);
                 MailAddress toAddress = new MailAddress(emailOptions.ToAddress, emailOptions.ToAddressDisplayName);
                 string fromPassword = EmailConstant.EmailFromAddressPassword;
                 string subject = emailOptions.Subject;
                 string body = emailOptions.Body;
 
-                SmtpClient smtpClient = GetSmtpClient(fromAddress.Address, fromPassword,Provider.Gmail);
+                SmtpClient smtpClient = GetSmtpClient(fromAddress.Address, fromPassword,Provider.Akij);
                 if (smtpClient != null)
                 {
                     using (var message = new MailMessage(fromAddress, toAddress)
                     {
                         Subject = subject,
-                        Body = body
+                        Body = body,
+                        IsBodyHtml = true
                     })
+
                     {
+                        Log.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeStart);
+                        ServicePointManager.ServerCertificateValidationCallback =
+                            delegate(object s, X509Certificate certificate,
+                                X509Chain chain, SslPolicyErrors sslPolicyErrors)
+                            {
+                                return true;
+                            };
+
+
+
                         smtpClient.Send(message);
+                        Log.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeEnd);
                     }
                 }
                 else
@@ -37,6 +55,13 @@ namespace EmailService
             }
             catch (Exception e)
             {
+                Log.Write(logFilePath,e.Message, LogUtility.MessageType.Exception);
+
+                if (e.InnerException != null)
+                {
+                    Log.Write(logFilePath, e.InnerException.ToString(), LogUtility.MessageType.Exception);
+                }
+
                 //todo
             }
         }
@@ -50,6 +75,8 @@ namespace EmailService
                     return GetSmtpForYahoo(email, password);
                 case Provider.HotMail:
                     return GetSmtpForHotmail(email, password);
+                case Provider.Akij:
+                    return GetSmtpForAkij(email, password);
                 default:
                     return null;
             }
@@ -78,11 +105,24 @@ namespace EmailService
             //Todo: Prepare For hotmail
             return null;
         }
+        private static SmtpClient GetSmtpForAkij(string email, string password)
+        {
+            return new SmtpClient
+            {
+                Host = "ex.akij.net",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(email, password)
+            };
+        }
         public enum Provider
         {
             Gmail,
             Yahoo,
-            HotMail
+            HotMail,
+            Akij
         }
         public static void Send(EmailOptions emailOptions)
         {

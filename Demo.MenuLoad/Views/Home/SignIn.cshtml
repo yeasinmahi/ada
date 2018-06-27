@@ -55,21 +55,32 @@
 
 @section scripts
 {
-    <script>
+    <script type="text/javascript">
         function GetDashboardUrl(token) {
             var url = '@Url.Action("Index", "Home")' + '?token=' + token;
             return url;
         }
+        function url_query(query) {
+            query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var expr = "[\\?&]" + query + "=([^&#]*)";
+            var regex = new RegExp(expr);
+            var results = regex.exec(window.location.href);
+            if (results !== null) {
+                return results[1];
+            } else {
+                return false;
+            }
+        }
+        function RedirectPage() {
+            var redirect = url_query('page');
+            if (redirect === 'LeaveApproval') {
+                console.log("Redirect Page:" + redirect);
+
+            } else {
+                console.log("Redirect Page:" + redirect);
+            }
+        }
+        
     </script>
-    @*App deafult Auth*@
-    <script src="~/Controllers/Scripts/AppAuth.js"></script>
-
-    @*gmail Auth*@
-    <script async defer src="https://apis.google.com/js/api.js"></script>
     
-    <script src="~/Controllers/Scripts/gmailAuth.js"></script>
-
-    @*facebook Auth*@
-    <script src="~/Controllers/Scripts/facebookAuth.js"></script>
-
 }

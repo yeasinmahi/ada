@@ -49,23 +49,36 @@
     <script src="~/Scripts/ui-toastr.min.js"></script>
     <!-- Static URL for whole project -->
     <script src="~/Controllers/Scripts/staticContent.js"></script>
+    <!-- Static Function for whole project -->
+    <script src="~/Controllers/Scripts/StaticFunction.js"></script>
 
-<script>
-    $(document).ready(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' /* optional */
-        });
-    })
-</script>
+    <script>
+        $(document).ready(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        })
+    </script>
 
     @RenderSection("scripts", false)
-<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
 <script>
-    window.onLoadCallback = function(){
+    window.onLoadCallback = function () {
         gapi.load('client:auth2', initClient);
     }
 </script>
+
+    @*App deafult Auth*@
+    <script src="~/Controllers/Scripts/AppAuth.js"></script>
+
+    @*gmail Auth*@
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+
+    <script src="~/Controllers/Scripts/gmailAuth.js"></script>
+
+    @*facebook Auth*@
+    <script src="~/Controllers/Scripts/facebookAuth.js"></script>
 </body>
 </html>

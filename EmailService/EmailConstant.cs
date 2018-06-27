@@ -8,8 +8,8 @@ namespace EmailService
 {
     public static class EmailConstant
     {
-        public static string EmailFromAddress = "nalucky72@gmail.com";
-        public static string EmailFromDisplayName = "Yeasin Arafat";
-        public static string EmailFromAddressPassword = "lucky7218";
+        public static string EmailFromAddress = "arafat.corp@akij.net";
+        public static string EmailFromDisplayName = "Akij Provider";
+        public static string EmailFromAddressPassword = "As369116";
     }
 }

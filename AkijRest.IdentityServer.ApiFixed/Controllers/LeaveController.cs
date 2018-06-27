@@ -74,20 +74,27 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
 
                 dto.UserName = userName;
                 LeaveDto leaveDto = repository.Create(dto);
+
                 if (leaveDto!=null)
                 {
+                    Log.Write(logFilePath, "leaveDto: object " + leaveDto, LogUtility.MessageType.UserMessage);
+                    string htmlInit = "<html><body><div>";
+                    string htmlEnd = "</div></body></html>";
                     UserRepository userRepository = new UserRepository();
                     UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
+
                     if (userDto !=null)
                     {
+                        Log.Write(logFilePath, "userDto: object " + leaveDto, LogUtility.MessageType.UserMessage);
                         EmailOptions emailOptions = new EmailOptions
                         {
                             ToAddressDisplayName = "Yeasin",
                             ToAddress = userDto.Email,
-                            Body = "Click The Link: " + UrlConstant.WebClient + "/Home/Test/",
+                            Body = htmlInit+ "Please Clik the link : <a href='"+ UrlConstant.WebClient + "/Home/signIn?redirectUrl="+ UrlConstant.WebClient + "/Home/Test'>Test Page</a></div>" + htmlEnd,
                             Subject = "Test"
                         };
                         Email.Send(emailOptions);
+                        Log.Write(logFilePath, "Mail sent in LeaveController " + leaveDto, LogUtility.MessageType.UserMessage);
                     }
                     else
                     {

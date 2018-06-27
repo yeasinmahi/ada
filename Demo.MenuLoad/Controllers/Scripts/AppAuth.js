@@ -53,7 +53,10 @@ jQuery(document).ready(function (e) {
                 //window.location = "Home/Index?token=" + token;
                 //window.location.href = '@Url.Action("Index", "Home")' + '?token=' + token;
                 localStorage.setItem("signInType", "app");
-                window.location.href = window.GetDashboardUrl(token);
+                var redirectUrl = url_query('redirectUrl');
+                //window.location.href = window.GetDashboardUrl(token);
+                window.location.href = window.GetSignedPage(token, redirectUrl);
+                //window.GetSignedPage(token, redirectUrl);
             },
 
             failure: function () {

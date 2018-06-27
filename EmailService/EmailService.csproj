@@ -45,5 +45,11 @@
     <Compile Include="EmailOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogService\LogService.csproj">
+      <Project>{c6d83867-3753-4440-ab90-0b218fff3f6f}</Project>
+      <Name>LogService</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

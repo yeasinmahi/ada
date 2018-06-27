@@ -181,6 +181,7 @@
     <Content Include="Controllers\Scripts\mealController.js" />
     <Content Include="Controllers\Scripts\signOut.js" />
     <Content Include="Controllers\Scripts\staticContent.js" />
+    <Content Include="Controllers\Scripts\StaticFunction.js" />
     <Content Include="dataTables.bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\fontawesome-webfont.svg" />
@@ -273,6 +274,8 @@
     <Content Include="Views\Shared\_RightSideBar.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Views\Home\Leave.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
