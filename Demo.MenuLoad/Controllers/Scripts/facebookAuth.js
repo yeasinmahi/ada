@@ -90,16 +90,20 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
     var facebookUserName = facebookMail.split('@')[0];
 
     console.log("username is " + facebookUserName);
-
+    console.log("url is " + facebookAuth);
 
     jQuery.ajax
     (
         {
             type: "GET",
-                url: facebookAuth + facebookUserName,
+            url: facebookAuth, // + facebookUserName,
 
             contentType: 'application/json; charset = utf-8',
             dataType: 'json',
+            data:
+                JSON.stringify({
+                    UserName: facebookUserName
+                }),
 
             success: function(data) {
                 console.log("test "+data);

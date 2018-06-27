@@ -50,16 +50,21 @@ function checkUserExistsByEmai(gmail, accessToken) {
     var gmailkUserName = gmail.split('@')[0];
 
     console.log("username is " + gmailkUserName);
-
+    console.log("url is " + gmailAuth);
 
     jQuery.ajax
     (
         {
-            type: "GET",
-                url: gmailAuth + gmailkUserName,
+            type: "POST",
+            url: gmailAuth, // + gmailkUserName,
 
             contentType: 'application/json; charset = utf-8',
             dataType: 'json',
+
+            data:
+                JSON.stringify({
+                    UserName: gmailkUserName
+                }),
 
             success: function (data) {
 

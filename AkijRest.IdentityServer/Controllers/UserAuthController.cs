@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using AkijRest.SolutionConstant;
 
@@ -10,9 +11,9 @@ namespace AkijRest.IdentityServer.Controllers
     [RoutePrefix("api/userAuth")]
     public class UserAuthController : ApiController
     {
-        [Route("gmail/{gmail}")]
-        [HttpGet]
-        public IHttpActionResult GetUserNameByGoogleEmail(string gmail)
+        [Route("gmail")]
+        [HttpPost]
+        public IHttpActionResult GetUserNameByGoogleEmail([FromBody] UserDto userDto)
         {
             //var claimsPrincipal = this.User as ClaimsPrincipal;
 
@@ -21,7 +22,7 @@ namespace AkijRest.IdentityServer.Controllers
             try
             {
                 UserRepository userRepository = new UserRepository();
-                var userName = userRepository.GetUserNameByGoogleEmail(gmail);
+                var userName = userRepository.GetUserNameByGoogleEmail(userDto.UserName);
                 return Ok(userName);
             }
             catch (Exception ex)
@@ -31,9 +32,9 @@ namespace AkijRest.IdentityServer.Controllers
         }
 
 
-        [Route("facebook/{facebookMail}")]
-        [HttpGet]
-        public IHttpActionResult GetUserNameByFacebookEmail(string facebookMail)
+        [Route("facebook")]
+        [HttpPost]
+        public IHttpActionResult GetUserNameByFacebookEmail([FromBody] UserDto userDto)
         {
             //var claimsPrincipal = this.User as ClaimsPrincipal;
 
@@ -42,7 +43,7 @@ namespace AkijRest.IdentityServer.Controllers
             try
             {
                 UserRepository userRepository = new UserRepository();
-                var userName = userRepository.GetUserNameByFacebookEmail(facebookMail);
+                var userName = userRepository.GetUserNameByFacebookEmail(userDto.UserName);
                 return Ok(userName);
             }
             catch (Exception ex)
