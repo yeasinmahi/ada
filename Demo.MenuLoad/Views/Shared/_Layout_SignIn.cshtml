@@ -71,14 +71,14 @@
 </script>
 
 @RenderSection("scripts", false)
-@*<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
 <meta name="google-signin-client_id" content="527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com">
 <script>
     window.onLoadCallback = function() {
         gapi.load('client:auth2', initClient);
     }
-</script>*@
-<script src="https://apis.google.com/js/client:platform.js?onload=startApp" async defer></script>
+</script>
+@*<script src="https://apis.google.com/js/client:platform.js?onload=startApp" async defer></script>
 <script>
     function startApp() {
         gapi.load('auth2', function () {
@@ -112,7 +112,7 @@
             });
         });
     }
-</script>
+</script>*@
 @*App deafult Auth*@
 <script src="~/Controllers/Scripts/AppAuth.js"></script>
 

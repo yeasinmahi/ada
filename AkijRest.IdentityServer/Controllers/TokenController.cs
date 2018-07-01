@@ -23,7 +23,14 @@ namespace AkijRest.IdentityServer.Controllers
             try
             {
                 // Getting the token from the identity server
-                Log.Write(logFilePath, "CustomToken", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken1", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken2", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken3", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken4", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken5", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken6", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken7", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath,"CustomToken8", LogUtility.MessageType.MethodeStart);
                 var client = new RestClient(UrlConstant.IdentityServer);
 
                 var request = new RestRequest("oauth/token", Method.POST);
@@ -38,7 +45,7 @@ namespace AkijRest.IdentityServer.Controllers
                 Log.Write(logFilePath, "Execute Client", LogUtility.MessageType.MethodeEnd);
                 var content = response.Content;
 
-                Log.Write(content, LogUtility.MessageType.UserMessage);
+                Log.Write(logFilePath, content, LogUtility.MessageType.UserMessage);
                 // token fetch ends
 
                 if (content.Contains("invalid_grant"))

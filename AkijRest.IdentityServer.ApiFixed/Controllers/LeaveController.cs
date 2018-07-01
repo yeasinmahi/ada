@@ -27,7 +27,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             var claimsPrincipal = this.User as ClaimsPrincipal;
 
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
-
+            
             Log.Write(logFilePath, "UserName: " +userName, LogUtility.MessageType.UserMessage);
 
             TokenRepository tokenRepository = new TokenRepository();

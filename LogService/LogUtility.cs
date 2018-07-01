@@ -34,5 +34,6 @@ namespace LogService
             }
             return String.Empty;
         }
+        public delegate void AsyncMethodCaller(string path, string message, LogUtility.MessageType prefix);
     }
 }

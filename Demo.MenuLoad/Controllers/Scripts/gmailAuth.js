@@ -53,31 +53,6 @@ function signinGoogle()
     }
 }
 
-function startApp() {
-    gapi.load('auth2', function () {
-        gapi.client.load('plus', 'v1').then(function () {
-            gapi.signin2.render('signin-button', {
-                scope: 'profile',
-                fetch_basic_profile: false
-            });
-            gapi.auth2.init({
-                fetch_basic_profile: false,
-                client_id: '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
-                scope: 'profile'
-            }).then(function () {
-                console.log('init');
-                auth2 = gapi.auth2.getAuthInstance();
-                auth2.isSignedIn.listen(function () {
-                    console.log(auth2.currentUser.get());
-                });
-                auth2.then(function (resp) {
-                    console.log(auth2.currentUser.get());
-                });
-            });
-        });
-    });
-}
-
 function checkUserExistsByEmai(gmail, accessToken) {
     var gmailkUserName = gmail.split('@')[0];
 
