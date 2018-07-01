@@ -1,0 +1,64 @@
+﻿@{
+    ViewBag.Title = "title";
+    Layout = null;
+}
+<html>
+<head>
+    <script src="https://apis.google.com/js/client:platform.js?onload=startApp" async defer></script>
+</head>
+<body>
+<!-- ... -->
+<div id="gConnect">
+    <div id="signin-button"></div>
+</div>
+<div>
+    <button onClick="gapi.auth2.getAuthInstance().signOut()">Sign out</button>
+    <button onClick="gapi.auth2.getAuthInstance().disconnect()">Disconnect</button>
+</div>
+<!-- ... -->
+</body>
+
+<script type="text/javascript">
+    /**
+   * Minimal implementation of Sign-in button rendered at load.
+   */
+    function startApp() {
+        gapi.load('auth2', function() {
+            gapi.client.load('plus','v1').then(function() {
+                gapi.signin2.render('signin-button', {
+                    scope: 'profile',
+                    fetch_basic_profile: false
+                });
+                gapi.auth2.init({
+                    fetch_basic_profile: false,
+                    client_id: '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
+                    scope:'profile'}).then(function (){
+                    console.log('init');
+                    auth2 = gapi.auth2.getAuthInstance();
+                    auth2.isSignedIn.listen(function() {
+                        console.log(auth2.currentUser.get());
+                    });
+                    auth2.then(function(resp){
+                        console.log(auth2.currentUser.get());
+                    });
+                });
+            });
+        });
+    }
+
+
+    /**
+     * Convenience methods for console debugging.
+     */
+    function signOut(){
+        auth2.signOut();
+    }
+    function disconnect(){
+        auth2.disconnect();
+    }
+    function authResponse(){
+        console.log(auth2.currentUser.get().getAuthResponse());
+    }
+</script>
+
+</html>
