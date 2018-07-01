@@ -278,6 +278,7 @@
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
     <Content Include="Views\Home\GoogleAuthTest.cshtml" />
+    <Content Include="Views\Home\GoogleAuthTest2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
