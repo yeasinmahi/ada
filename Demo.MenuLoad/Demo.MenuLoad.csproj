@@ -172,6 +172,7 @@
     <Content Include="Content\iCommonstyle.css" />
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Content\myCss.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\_all-skins.min.css" />
     <Content Include="Controllers\Scripts\AppAuth.js" />
@@ -276,6 +277,7 @@
     <Content Include="Views\Home\Leave.cshtml" />
     <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Menu.cshtml" />
+    <Content Include="Views\Home\GoogleAuthTest.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

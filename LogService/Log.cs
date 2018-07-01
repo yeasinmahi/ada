@@ -9,7 +9,7 @@ namespace LogService
 
         ///<summary>
         ///<para>It will write your message to A default location.</para>
-        ///<para>Default location may be on C:/ADA.txt</para>
+        ///<para>Default location may be on C:\\YeasinPublished\\ADA.txt</para>
         ///<para>Default prefix is Exception: </para>
         ///</summary>
         public static bool Write(string message)

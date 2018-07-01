@@ -45,6 +45,11 @@ namespace Demo.MenuLoad.Controllers
             return View();
         }
 
+        public ActionResult GoogleAuthTest()
+        {
+            return View();
+        }
+
         //public static AndroidService.AGWebServiceSoapClient service =
         //    new AndroidService.AGWebServiceSoapClient("AGWebServiceSoap");
 

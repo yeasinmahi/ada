@@ -33,9 +33,14 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="~/Content/myCss.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
+@*<div class="myModal">
+    <div class="loader centered">Boo</div>
+</div>*@
+<div class="loader centered"></div>
     <div class="wrapper">
         @Html.Partial("~/Views/Shared/_Header.cshtml")
         <!-- =============================================== -->
@@ -45,11 +50,12 @@
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Main content -->
-            <div class="content">
+            <div class="content" id="myContainer" style="display: none">
                 @RenderBody()
             </div>
 
         </div>
+
         <!-- /.content-wrapper -->
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
@@ -87,7 +93,7 @@
     <!-- Static Function for whole project -->
     <script src="~/Controllers/Scripts/StaticFunction.js"></script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
 
         var token = getParameterByName('token');
         console.log(token);
@@ -288,39 +294,41 @@
     <script>
         $(document).ready(function () {
 
+            $('.loader').fadeOut();
+            $('#myContainer').fadeIn();
+
             $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().parent().addClass("menu-open");
             $("ul.sidebar-menu ul.treeview-menu").find('.active').first().parent().css("display", "block");
 
             $('.sidebar-menu').tree();
             $(window).resize();
-
         })
     </script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
-<script>
-    window.onLoadCallback = function () {
-        gapi.load('client:auth2', initClient);
-    }
-</script>
-@*gmail Auth*@
-<script async defer src="https://apis.google.com/js/api.js"></script>
-@*<script async defer src="https://apis.google.com/js/api.js"
+    <script>
+        window.onLoadCallback = function () {
+            gapi.load('client:auth2', initClient);
+        }
+    </script>
+    @*gmail Auth*@
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    @*<script async defer src="https://apis.google.com/js/api.js"
                 onload="this.onload=function(){};handleClientLoad()"
                 onreadystatechange="if (this.readyState === 'complete') this.onload()">
         </script>*@
-<script src="~/Controllers/Scripts/gmailAuth.js"></script>
+    <script src="~/Controllers/Scripts/gmailAuth.js"></script>
 
-@*facebook Auth*@
-<script src="~/Controllers/Scripts/facebookAuth.js"></script>
-<script src="~/Controllers/Scripts/signOut.js"></script>
-    
-<script>
+    @*facebook Auth*@
+    <script src="~/Controllers/Scripts/facebookAuth.js"></script>
+    <script src="~/Controllers/Scripts/signOut.js"></script>
+
+    <script>
     function GetLoginUrl() {
         var url = '@Url.Action("SignIn", "Home")';
         return url;
     }
-</script>
+    </script>
 
-@RenderSection("scripts", false)
+    @RenderSection("scripts", false)
 </body>
 </html>
