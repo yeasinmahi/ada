@@ -31,5 +31,24 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return InternalServerError();
             }
         }
+        [Route("{id}")]
+        [HttpGet]
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                Log.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeStart);
+                LeaveTypeRepository repository = new LeaveTypeRepository();
+                var leaveTypeDtos = repository.Get(id);
+                Log.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeEnd);
+                return Ok(leaveTypeDtos);
+
+            }
+            catch (Exception ex)
+            {
+                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                return InternalServerError();
+            }
+        }
     }
 }

@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AkijRest.IdentityServer.Repository.Models
 {
-    [Table("LeaveType")]
     public class LeaveType
     {
         [Key]

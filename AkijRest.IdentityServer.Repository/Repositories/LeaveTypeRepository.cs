@@ -3,6 +3,7 @@ using AkijRest.IdentityServer.Repository.Helpers.DbHelpers;
 using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
 using AkijRest.IdentityServer.Repository.Models;
@@ -100,7 +101,25 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             return (leaveType.Id);
         }
-        
+        public int Update(LeaveTypeDto leaveTypeDto)
+        {
+            LeaveType leaveType = new LeaveType
+            {
+                ApplicationFor = leaveTypeDto.ApplicationFor,
+                CompanyPolicy = leaveTypeDto.CompanyPolicy,
+                IsBalanceChecked = leaveTypeDto.IsBalanceChecked,
+                IsHalfDayAllowed = leaveTypeDto.IsHalfDayAllowed,
+                IsOnlyOneTime = leaveTypeDto.IsOnlyOneTime,
+                IsRestricted = leaveTypeDto.IsRestricted,
+                MaxApplicationAtAMonth = leaveTypeDto.MaxApplicationAtAMonth,
+                MaximumAllowedAtATime = leaveTypeDto.MaximumAllowedAtATime,
+                Name = leaveTypeDto.Name
 
+            };
+            _context.LeaveTypes.AddOrUpdate(leaveType);
+            _context.SaveChanges();
+
+            return (leaveType.Id);
+        }
     }
 }
