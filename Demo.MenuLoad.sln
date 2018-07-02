@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.IdentityServer", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailService", "EmailService\EmailService.csproj", "{019E8B20-0E8C-47AB-886D-4E98BEE882E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.Global", "AkijRest.Global\AkijRest.Global.csproj", "{B3695148-DF00-4394-AD45-86DA5D078773}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{019E8B20-0E8C-47AB-886D-4E98BEE882E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{019E8B20-0E8C-47AB-886D-4E98BEE882E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{019E8B20-0E8C-47AB-886D-4E98BEE882E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3695148-DF00-4394-AD45-86DA5D078773}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3695148-DF00-4394-AD45-86DA5D078773}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3695148-DF00-4394-AD45-86DA5D078773}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3695148-DF00-4394-AD45-86DA5D078773}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

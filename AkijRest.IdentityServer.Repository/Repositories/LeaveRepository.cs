@@ -15,7 +15,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
         public LeaveRepository()
         {
-            this.context = new IdentityServerDbContext();
+            context = new IdentityServerDbContext();
         }
 
 
@@ -52,20 +52,10 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         public LeaveDto Create(LeaveDto leaveDto)
         {
             DateTime dateTime
-                = DateTime.ParseExact
-                    (
-                        leaveDto.DateStart,
-                        "dd/MM/yyyy",
-                        System.Globalization.CultureInfo.InvariantCulture
-                    );
+                = Global.Datetime.ToDateTime(leaveDto.DateStart);
 
             DateTime dateTimeEnd
-                = DateTime.ParseExact
-                    (
-                        leaveDto.DateEnd,
-                        "dd/MM/yyyy",
-                        System.Globalization.CultureInfo.InvariantCulture
-                    );
+                = Global.Datetime.ToDateTime(leaveDto.DateEnd);
 
 
             for (;;)

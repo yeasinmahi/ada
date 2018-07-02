@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using AkijRest.IdentityServer.Repository.Models;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
@@ -39,6 +40,49 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             throw new Exception();
         }
+        //public LeaveDto Create(LeaveDto leaveDto)
+        //{
+        //    DateTime dateTime
+        //        = Global.Datetime.ToDateTime(leaveDto.DateStart);
+
+        //    DateTime dateTimeEnd
+        //        = Global.Datetime.ToDateTime(leaveDto.DateEnd);
+
+
+        //    for (; ; )
+        //    {
+        //        var leave = new Leave
+        //        {
+        //            LeaveTypeId = leaveDto.LeaveTypeId,
+
+        //            UserId = context
+        //                .Users
+        //                .SingleOrDefault
+        //                (
+        //                    u =>
+        //                        u.UserName.Equals(leaveDto.UserName)
+        //                ).Id,
+
+        //            Date = dateTime,
+
+        //            LeaveCause = leaveDto.LeaveCause,
+        //            LeaveAddress = leaveDto.LeaveAddress
+        //        };
+
+        //        context.Leaves.Add(leave);
+
+        //        dateTime = dateTime.AddDays(1);
+
+        //        if (dateTime > dateTimeEnd)
+        //        {
+        //            break;
+        //        }
+        //    }
+
+        //    context.SaveChanges();
+
+        //    return (leaveDto);
+        //}
 
     }
 }

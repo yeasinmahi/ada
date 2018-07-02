@@ -122,6 +122,10 @@
     <Compile Include="Migrations\IdentityServerDbContext\201806261500204_Add supervisorId at user.Designer.cs">
       <DependentUpon>201806261500204_Add supervisorId at user.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\IdentityServerDbContext\201807020536328_modify leavetype model.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201807020536328_modify leavetype model.Designer.cs">
+      <DependentUpon>201807020536328_modify leavetype model.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\IdentityServerDbContext\ConfigurationIdentity.cs" />
     <Compile Include="Models\ExternalLoginEmail.cs" />
     <Compile Include="Helpers\DbHelpers\HrDbContext.cs" />
@@ -161,6 +165,15 @@
     <EmbeddedResource Include="Migrations\IdentityServerDbContext\201806261500204_Add supervisorId at user.resx">
       <DependentUpon>201806261500204_Add supervisorId at user.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201807020536328_modify leavetype model.resx">
+      <DependentUpon>201807020536328_modify leavetype model.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AkijRest.Global\AkijRest.Global.csproj">
+      <Project>{b3695148-df00-4394-ad45-86da5d078773}</Project>
+      <Name>AkijRest.Global</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
