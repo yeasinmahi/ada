@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using AkijRest.SolutionConstant;
 using LogService;
@@ -25,9 +27,9 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return Ok(leaveTypeDtos);
 
             }
-            catch(Exception ex)
+            catch(Exception e)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
             }
         }
@@ -47,6 +49,52 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             catch (Exception ex)
             {
                 Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                return InternalServerError();
+            }
+        }
+        [Route("insert")]
+        [HttpPost]
+        public IHttpActionResult Insert([FromBody] LeaveTypeDto leaveTypeDto)
+        {
+            try
+            {
+                LeaveTypeRepository repository = new LeaveTypeRepository();
+                int result = repository.Create(leaveTypeDto);
+                if (result>0)
+                {
+                    return Ok("Successfully Inserted");
+                }
+                else
+                {
+                    return Ok("Insert failed");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                return Content(HttpStatusCode.BadRequest, e.Message);
+            }
+        }
+        [Route("update")]
+        [HttpPost]
+        public IHttpActionResult Update([FromBody] LeaveTypeDto leaveTypeDto)
+        {
+            try
+            {
+                LeaveTypeRepository repository = new LeaveTypeRepository();
+                int result = repository.Update(leaveTypeDto);
+                if (result > 0)
+                {
+                    return Ok("Successfully Updated");
+                }
+                else
+                {
+                    return Ok("Update failed");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
             }
         }

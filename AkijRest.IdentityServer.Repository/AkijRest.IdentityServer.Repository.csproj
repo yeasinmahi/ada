@@ -126,6 +126,10 @@
     <Compile Include="Migrations\IdentityServerDbContext\201807020536328_modify leavetype model.Designer.cs">
       <DependentUpon>201807020536328_modify leavetype model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\IdentityServerDbContext\201807021227284_Change Applicable For Type.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201807021227284_Change Applicable For Type.Designer.cs">
+      <DependentUpon>201807021227284_Change Applicable For Type.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\IdentityServerDbContext\ConfigurationIdentity.cs" />
     <Compile Include="Models\ExternalLoginEmail.cs" />
     <Compile Include="Helpers\DbHelpers\HrDbContext.cs" />
@@ -167,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\IdentityServerDbContext\201807020536328_modify leavetype model.resx">
       <DependentUpon>201807020536328_modify leavetype model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201807021227284_Change Applicable For Type.resx">
+      <DependentUpon>201807021227284_Change Applicable For Type.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

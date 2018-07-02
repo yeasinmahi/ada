@@ -32,7 +32,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                     {
                         Id = leaveType.Id,
                         Name = leaveType.Name,
-                        ApplicationFor = leaveType.ApplicationFor,
+                        ApplicableFor = leaveType.ApplicableFor,
                         CompanyPolicy = leaveType.CompanyPolicy,
                         IsBalanceChecked = leaveType.IsBalanceChecked,
                         IsHalfDayAllowed = leaveType.IsHalfDayAllowed,
@@ -66,7 +66,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                     {
                         Id = leaveType.Id,
                         Name = leaveType.Name,
-                        ApplicationFor = leaveType.ApplicationFor,
+                        ApplicableFor = leaveType.ApplicableFor,
                         CompanyPolicy = leaveType.CompanyPolicy,
                         IsBalanceChecked = leaveType.IsBalanceChecked,
                         IsHalfDayAllowed = leaveType.IsHalfDayAllowed,
@@ -85,7 +85,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             LeaveType leaveType = new LeaveType
             {
-                ApplicationFor = leaveTypeDto.ApplicationFor,
+                ApplicableFor = leaveTypeDto.ApplicableFor,
                 CompanyPolicy = leaveTypeDto.CompanyPolicy,
                 IsBalanceChecked = leaveTypeDto.IsBalanceChecked,
                 IsHalfDayAllowed = leaveTypeDto.IsHalfDayAllowed,
@@ -105,7 +105,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             LeaveType leaveType = new LeaveType
             {
-                ApplicationFor = leaveTypeDto.ApplicationFor,
+                ApplicableFor = leaveTypeDto.ApplicableFor,
                 CompanyPolicy = leaveTypeDto.CompanyPolicy,
                 IsBalanceChecked = leaveTypeDto.IsBalanceChecked,
                 IsHalfDayAllowed = leaveTypeDto.IsHalfDayAllowed,

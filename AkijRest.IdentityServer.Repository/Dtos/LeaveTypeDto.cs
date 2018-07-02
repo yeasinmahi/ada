@@ -9,7 +9,7 @@ namespace AkijRest.IdentityServer.Repository.Dtos
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public char ApplicationFor { get; set; }
+        public string ApplicableFor { get; set; }
         public int CompanyPolicy { get; set; }
         public int MaximumAllowedAtATime { get; set; }
         public bool IsHalfDayAllowed { get; set; }

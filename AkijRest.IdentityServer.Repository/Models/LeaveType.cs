@@ -14,7 +14,8 @@ namespace AkijRest.IdentityServer.Repository.Models
         [Column("LeaveTypeName")]
         public string Name { get; set; }
         [DefaultValue('B')]
-        public char ApplicationFor { get; set; }
+        [MaxLength(1)]
+        public string ApplicableFor { get; set; }
         [DefaultValue(0)]
         [Range(0, 500)]
         public int CompanyPolicy { get; set; }
