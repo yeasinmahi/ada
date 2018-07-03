@@ -9,7 +9,7 @@ $(document).ready(function () {
             return;
         }
         var name = jQuery('#leaveTypeName').val();
-        var applicationFor = jQuery('#applicableFor').val();
+        var applicableFor = jQuery('#applicableFor :selected').val();
         var companyPolicy = jQuery('#companyPolicy').val();
         var maximumAllowedAtATime = jQuery('#maxAllowedAtATime').val();
         var isHalfDayAllowed = jQuery('#maxApplicationAtAMonth').is(":checked");
@@ -26,7 +26,7 @@ $(document).ready(function () {
             data: JSON.stringify({
                 'Id': 0,
                 'Name': name,
-                'ApplicationFor': applicationFor,
+                'ApplicableFor': applicableFor,
                 'CompanyPolicy': companyPolicy,
                 'MaximumAllowedAtATime': maximumAllowedAtATime,
                 'IsHalfDayAllowed': isHalfDayAllowed,
