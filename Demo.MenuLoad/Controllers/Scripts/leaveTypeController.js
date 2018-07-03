@@ -1,8 +1,20 @@
 ﻿var token = url_query('token');
 $(document).ready(function () {
+    var table = $('#example1').DataTable({
+        "columnDefs": [
+            {
+                "targets": [0],
+                className: "hidden"
+            }
+        ]
+    });
+    jQuery('#cancelButton').on('click',
+        function(e) {
 
+        });
     jQuery('#submitButton').on('click', function (e) {
         console.log("Button Click");
+        table.row('.selected').remove().draw(false);
         // No token is in url, so access forbidden
         if (!token) {
             ShowNotification('You are not allowed to perform this action!', 'Leave Notification', 'error');
@@ -19,7 +31,7 @@ $(document).ready(function () {
         var isBalanceChecked = jQuery('#isHalfDayAllowed').is(":checked");
         var isOnlyOneTime = jQuery('#isBalanceCheck').is(":checked");
         var isRestricted = jQuery('#isRestrict').is(":checked");
-        var apiUrl = apiUrlPrefix + "/leavetype/insert";
+        var apiUrl;
         if (leaveTypeId === null) {
             apiUrl = apiUrlPrefix + "/leavetype/insert";
         } else {
@@ -73,23 +85,7 @@ $(document).ready(function () {
     loadTable(token);
 
 
-    var table = $('#example1').DataTable({
-        "columnDefs": [
-            {
-                "targets": [0],
-                className: "hidden"
-            }
-        ]
-        //dom: 'Bfrtip',
-        //buttons: [
-        //    {
-        //        text: 'Edit',
-        //        action: function (e, dt, node, config) {
-        //            alert('Edit Button Click');
-        //        }
-        //    }
-        //]
-    });
+    
     $('#example1 tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -102,7 +98,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#button').click(function () {
+    $('#submitButton').click(function () {
         table.row('.selected').remove().draw(false);
     });
 });
