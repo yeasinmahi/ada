@@ -98,10 +98,61 @@
         <button id="cancelButton" type="submit" class="btn btn-primary">Cancel</button>
     </div>
 </div>
+
+<div class="box box-default">
+    <div class="box box-default">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-list-alt"></i> Leave Entry List</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Leave Type Name</th>
+                        <th>Applicable For</th>
+                        <th>company Policy</th>
+                        <th>max Application At A Month</th>
+                        <th>maximum Allowed At AT ime</th>
+                        <th>is Balance Checked</th>
+                        <th>is HalfDay Allowed</th>
+                        <th>is Only One Time</th>
+                        <th>is Restricted</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Leave Type Name</th>
+                        <th>Applicable For</th>
+                        <th>company Policy</th>
+                        <th>max Application At A Month</th>
+                        <th>maximum Allowed At AT ime</th>
+                        <th>is Balance Checked</th>
+                        <th>is HalfDay Allowed</th>
+                        <th>is Only One Time</th>
+                        <th>is Restricted</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <!-- /.box DataTable -->
+</div>
 <!-- /.box -->
 @section scripts {
+    <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
     <!--Controller-->
     <script src="~/Controllers/Scripts/leaveTypeController.js"></script>
-
 }
 

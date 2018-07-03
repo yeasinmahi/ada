@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using AkijRest.IdentityServer.Repository.Dtos;
@@ -72,6 +73,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             catch (Exception e)
             {
                 Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
                 return Content(HttpStatusCode.BadRequest, e.Message);
             }
         }

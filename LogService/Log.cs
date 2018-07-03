@@ -78,7 +78,7 @@ namespace LogService
                 {
                     lock (LogConfig.Locker)
                     {
-                        File.WriteAllText(LogConfig.DestinationPath, exception.Message);
+                        File.WriteAllText(path, exception.Message);
                     }
                 }
             }
