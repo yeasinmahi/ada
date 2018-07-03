@@ -8,11 +8,11 @@ $(document).ready(function () {
             }
         ]
     });
-    jQuery('#cancelButton').on('click',
+    $('#cancelButton').on('click',
         function(e) {
             clearAll();
         });
-    jQuery('#submitButton').on('click', function (e) {
+    $('#submitButton').on('click', function (e) {
         console.log("Button Click");
         table.row('.selected').remove().draw(false);
         // No token is in url, so access forbidden
@@ -20,25 +20,25 @@ $(document).ready(function () {
             ShowNotification('You are not allowed to perform this action!', 'Leave Notification', 'error');
             return;
         }
-        var leaveTypeId = jQuery('#leaveTypeId').val();
+        var leaveTypeId = $('#leaveTypeId').val();
         console.log("LeaveTypeId:" + leaveTypeId);
-        var name = jQuery('#leaveTypeName').val();
-        var applicableFor = jQuery('#applicableFor :selected').val();
-        var companyPolicy = jQuery('#companyPolicy').val();
-        var maxApplicationAtAMonth = jQuery('#isOnlyOneTime').val();
-        var maximumAllowedAtATime = jQuery('#maxAllowedAtATime').val();
-        var isHalfDayAllowed = jQuery('#maxApplicationAtAMonth').is(":checked");
-        var isBalanceChecked = jQuery('#isHalfDayAllowed').is(":checked");
-        var isOnlyOneTime = jQuery('#isBalanceCheck').is(":checked");
-        var isRestricted = jQuery('#isRestrict').is(":checked");
+        var name = $('#leaveTypeName').val();
+        var applicableFor = $('#applicableFor :selected').val();
+        var companyPolicy = $('#companyPolicy').val();
+        var maxApplicationAtAMonth = $('#isOnlyOneTime').val();
+        var maximumAllowedAtATime = $('#maxAllowedAtATime').val();
+        var isHalfDayAllowed = $('#maxApplicationAtAMonth').is(":checked");
+        var isBalanceChecked = $('#isHalfDayAllowed').is(":checked");
+        var isOnlyOneTime = $('#isBalanceCheck').is(":checked");
+        var isRestricted = $('#isRestrict').is(":checked");
         var apiUrl;
         if (leaveTypeId === null || leaveTypeId ==="") {
             apiUrl = apiUrlPrefix + "/leavetype/insert";
         } else {
             apiUrl = apiUrlPrefix + "/leavetype/update";
         }
-        // start of jQuery.ajax
-        jQuery.ajax({
+        // start of $.ajax
+        $.ajax({
             type: "POST",
             url: apiUrl,
 
@@ -104,21 +104,21 @@ $(document).ready(function () {
 });
 function loadDataForEdit(row) {
     var tds = row.find("td");
-    jQuery('#leaveTypeId').val(tds[0].innerHTML);
-    jQuery('#leaveTypeName').val(tds[1].innerHTML);
-    jQuery('#applicableFor').val(getApplicableForDataRev(tds[2].innerHTML)).change();
-    jQuery('#companyPolicy').val(tds[3].innerHTML);
-    jQuery('#maxAllowedAtATime').val(tds[4].innerHTML);
-    jQuery('#maxApplicationAtAMonth').val(tds[5].innerHTML);
-    jQuery("#isHalfDayAllowed").prop('checked', getBool(tds[6].innerHTML));
-    jQuery('#isBalanceCheck').prop('checked', getBool(tds[7].innerHTML));
-    jQuery('#isOnlyOneTime').prop('checked', getBool(tds[8].innerHTML));
-    jQuery('#isRestrict').prop('checked', getBool(tds[9].innerHTML));
+    $('#leaveTypeId').val(tds[0].innerHTML);
+    $('#leaveTypeName').val(tds[1].innerHTML);
+    $('#applicableFor').val(getApplicableForDataRev(tds[2].innerHTML)).change();
+    $('#companyPolicy').val(tds[3].innerHTML);
+    $('#maxAllowedAtATime').val(tds[4].innerHTML);
+    $('#maxApplicationAtAMonth').val(tds[5].innerHTML);
+    $("#isHalfDayAllowed").prop('checked', getBool(tds[6].innerHTML));
+    $('#isBalanceCheck').prop('checked', getBool(tds[7].innerHTML));
+    $('#isOnlyOneTime').prop('checked', getBool(tds[8].innerHTML));
+    $('#isRestrict').prop('checked', getBool(tds[9].innerHTML));
 
-    jQuery('#submitButton').text("Update");
+    $('#submitButton').text("Update");
 }
 function loadTable(token) {
-    jQuery.ajax({
+    $.ajax({
         type: "GET",
         url: apiUrlPrefix + "/leavetype",
 
@@ -146,7 +146,7 @@ function loadTable(token) {
                 var isOnlyOneTime = leaveTypeArray[i]["isOnlyOneTime"];
                 var isRestricted = leaveTypeArray[i]["isRestricted"];
 
-                jQuery('#example1').dataTable().fnAddData
+                $('#example1').dataTable().fnAddData
                     ([
                         id,
                         name,

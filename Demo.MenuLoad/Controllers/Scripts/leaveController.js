@@ -9,7 +9,7 @@
 }
 var token = getParameterByName('token');
 $(document).ready(function () {
-    jQuery.ajax({
+    $.ajax({
         type: "GET",
         url: apiUrlPrefix + "/leavetype",
         contentType: 'application/json; charset = utf-8',
@@ -18,11 +18,11 @@ $(document).ready(function () {
             console.log("Leave Data" + data);
             //console.log(data.length); // this data response is coming as js object, don't know why
 
-            jQuery('#leaveDropdown').empty();
+            $('#leaveDropdown').empty();
 
             for (var i = 0; i < data.length; i++) {
-                jQuery('#leaveDropdown')
-                    .append(jQuery('<option>',
+                $('#leaveDropdown')
+                    .append($('<option>',
                         {
                             value: data[i]["id"],
                             text: data[i]["name"]
@@ -30,7 +30,7 @@ $(document).ready(function () {
                     );
             }
 
-            //jQuery('#dropdownLeave').selectpicker('refresh');
+            //$('#dropdownLeave').selectpicker('refresh');
         },
 
         failure: function () {
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
     console.log("Token: " + token);
 
-    jQuery('#submitButton').on('click', function (e) {
+    $('#submitButton').on('click', function (e) {
 
         // No token is in url, so access forbidden
         if (!token) {
@@ -77,14 +77,14 @@ $(document).ready(function () {
             toastr.error('You are not allowed to perform this action!', 'Leave Notification');
             return;
         }
-        var leaveTypeId = jQuery('#leaveDropdown').val();
-        var dateStart = jQuery('#fromDate').val();
-        var dateEnd = jQuery('#toDate').val();
-        var leaveCause = jQuery('#leaveCause').val();
-        var leaveAddress = jQuery('#leaveAddress').val();
+        var leaveTypeId = $('#leaveDropdown').val();
+        var dateStart = $('#fromDate').val();
+        var dateEnd = $('#toDate').val();
+        var leaveCause = $('#leaveCause').val();
+        var leaveAddress = $('#leaveAddress').val();
 
-        // start of jQuery.ajax
-        jQuery.ajax({
+        // start of $.ajax
+        $.ajax({
             type: "POST",
             url: apiUrlPrefix + "/leaves/own",
 
@@ -172,7 +172,7 @@ $(document).ready(function () {
             }
         }
         );
-        // end of jQuery ajax
+        // end of $ ajax
 
 
 

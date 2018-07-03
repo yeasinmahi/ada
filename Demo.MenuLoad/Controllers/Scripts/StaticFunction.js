@@ -72,7 +72,7 @@ function clearAll() {
     for (var i = 0; i < selectTags.length; i++) {
         selectTags[i].selectedIndex = 0;
     }
-    jQuery('#submitButton').text("Submit");
+    $('#submitButton').text("Submit");
 }
 function getBool(data) {
     if (data === "true") {

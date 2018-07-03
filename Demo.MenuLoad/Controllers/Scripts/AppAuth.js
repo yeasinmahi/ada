@@ -1,11 +1,11 @@
 ﻿
 var clientId = "099153c2625149bc8ecb3e85e03f0022";
 
-jQuery(document).ready(function (e) {
+$(document).ready(function (e) {
 
 
     function signIn(username, password) {
-        jQuery.ajax({
+        $.ajax({
 
             type: "POST",
             url: tokenUrl,
@@ -66,7 +66,7 @@ jQuery(document).ready(function (e) {
         );
     }
 
-    jQuery("#password").on('keyup', function (e) {
+    $("#password").on('keyup', function (e) {
         if (e.keyCode === 13) {
             var username = $('#userName').val();
             var password = $('#password').val();

@@ -92,7 +92,7 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
     console.log("username is " + facebookUserName);
     console.log("url is " + facebookAuth);
 
-    jQuery.ajax
+    $.ajax
     (
         {
             type: "GET",
@@ -122,7 +122,7 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
 }
 
 function getAccessTokenFacebook(username) {
-    jQuery.ajax
+    $.ajax
     (
         {
             type: "GET",
@@ -151,7 +151,7 @@ function getAccessTokenFacebook(username) {
 function ExternalSignIn(username, accessToken)
 {
     console.log("External Sign Called");
-    jQuery.ajax({
+    $.ajax({
         type: "POST",
         url: externalAuthSignIn,
 

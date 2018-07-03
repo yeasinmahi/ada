@@ -59,7 +59,7 @@ function checkUserExistsByEmai(gmail, accessToken) {
     console.log("username is " + gmailkUserName);
     console.log("url is " + gmailAuth);
 
-    jQuery.ajax
+    $.ajax
     (
         {
             type: "POST",
@@ -89,7 +89,7 @@ function checkUserExistsByEmai(gmail, accessToken) {
     );
 }
 function getAccessTokenGmail(username) {
-    jQuery.ajax
+    $.ajax
     (
         {
             type: "GET",
@@ -118,7 +118,7 @@ function getAccessTokenGmail(username) {
 function extarnalGmailSignIn(username, accessToken) {
 
     console.log("External Sign Called");
-    jQuery.ajax({
+    $.ajax({
         type: "POST",
         url: externalAuthSignIn,
 
