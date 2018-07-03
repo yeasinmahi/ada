@@ -29,7 +29,7 @@
                     <label>Applicable For</label>
                     <div class="input-group">
                         <select class="form-control" id="applicableFor">
-                            <option value="B">Male & Female</option>
+                            <option value="B">All</option>
                             <option value="M">Only Male</option>
                             <option value="F">Only Female</option>
                         </select>
@@ -115,12 +115,12 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th class="hidden">id</th>
                         <th>Leave Type Name</th>
                         <th>Applicable For</th>
                         <th>company Policy</th>
+                        <th>maximum Allowed At AT Time</th>
                         <th>max Application At A Month</th>
-                        <th>maximum Allowed At AT ime</th>
                         <th>is Balance Checked</th>
                         <th>is HalfDay Allowed</th>
                         <th>is Only One Time</th>
@@ -129,12 +129,12 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <th>id</th>
+                        <th class="hidden">id</th>
                         <th>Leave Type Name</th>
                         <th>Applicable For</th>
                         <th>company Policy</th>
+                        <th>maximum Allowed At AT Time</th>
                         <th>max Application At A Month</th>
-                        <th>maximum Allowed At AT ime</th>
                         <th>is Balance Checked</th>
                         <th>is HalfDay Allowed</th>
                         <th>is Only One Time</th>
@@ -150,8 +150,11 @@
 <!-- /.box -->
 @section scripts {
     <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <!--Controller-->
     <script src="~/Controllers/Scripts/leaveTypeController.js"></script>
 }
