@@ -3,6 +3,7 @@ using AkijRest.IdentityServer.Repository.Helpers.DbHelpers;
 using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web;
@@ -105,6 +106,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             LeaveType leaveType = new LeaveType
             {
+                Id = leaveTypeDto.Id,
                 ApplicableFor = leaveTypeDto.ApplicableFor,
                 CompanyPolicy = leaveTypeDto.CompanyPolicy,
                 IsBalanceChecked = leaveTypeDto.IsBalanceChecked,
@@ -116,7 +118,8 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 Name = leaveTypeDto.Name
 
             };
-            _context.LeaveTypes.AddOrUpdate(leaveType);
+            _context.LeaveTypes.Attach(leaveType);
+            _context.Entry(leaveType).State = EntityState.Modified;
             _context.SaveChanges();
 
             return (leaveType.Id);

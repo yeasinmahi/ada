@@ -8,6 +8,8 @@ $(document).ready(function () {
             ShowNotification('You are not allowed to perform this action!', 'Leave Notification', 'error');
             return;
         }
+        var leaveTypeId = jQuery('#leaveTypeId').val();
+        console.log("LeaveTypeId:" + leaveTypeId);
         var name = jQuery('#leaveTypeName').val();
         var applicableFor = jQuery('#applicableFor :selected').val();
         var companyPolicy = jQuery('#companyPolicy').val();
@@ -17,14 +19,19 @@ $(document).ready(function () {
         var isBalanceChecked = jQuery('#isHalfDayAllowed').is(":checked");
         var isOnlyOneTime = jQuery('#isBalanceCheck').is(":checked");
         var isRestricted = jQuery('#isRestrict').is(":checked");
-
+        var apiUrl = apiUrlPrefix + "/leavetype/insert";
+        if (leaveTypeId === null) {
+            apiUrl = apiUrlPrefix + "/leavetype/insert";
+        } else {
+            apiUrl = apiUrlPrefix + "/leavetype/update";
+        }
         // start of jQuery.ajax
         jQuery.ajax({
             type: "POST",
-            url: apiUrlPrefix + "/leavetype/insert",
+            url: apiUrl,
 
             data: JSON.stringify({
-                'Id': 0,
+                'Id': leaveTypeId,
                 'Name': name,
                 'ApplicableFor': applicableFor,
                 'CompanyPolicy': companyPolicy,
@@ -70,7 +77,7 @@ $(document).ready(function () {
         "columnDefs": [
             {
                 "targets": [0],
-                "visible": false
+                className: "hidden"
             }
         ]
         //dom: 'Bfrtip',
@@ -101,17 +108,16 @@ $(document).ready(function () {
 });
 function loadDataForEdit(row) {
     var tds = row.find("td");
-    jQuery('#leaveTypeName').val(tds[0].innerHTML);
-    jQuery('#applicableFor').val(getApplicableForDataRev(tds[1].innerHTML)).change();
-    console.log(tds[1].innerHTML);
-    console.log(getApplicableForDataRev(tds[1].innerHTML));
-    jQuery('#companyPolicy').val(tds[2].innerHTML);
-    jQuery('#maxAllowedAtATime').val(tds[3].innerHTML);
-    jQuery('#maxApplicationAtAMonth').val(tds[4].innerHTML);
-    jQuery("#isHalfDayAllowed").prop('checked', getBool(tds[5].innerHTML));
-    jQuery('#isBalanceCheck').prop('checked', getBool(tds[6].innerHTML));
-    jQuery('#isOnlyOneTime').prop('checked', getBool(tds[7].innerHTML));
-    jQuery('#isRestrict').prop('checked', getBool(tds[8].innerHTML));
+    jQuery('#leaveTypeId').val(tds[0].innerHTML);
+    jQuery('#leaveTypeName').val(tds[1].innerHTML);
+    jQuery('#applicableFor').val(getApplicableForDataRev(tds[2].innerHTML)).change();
+    jQuery('#companyPolicy').val(tds[3].innerHTML);
+    jQuery('#maxAllowedAtATime').val(tds[4].innerHTML);
+    jQuery('#maxApplicationAtAMonth').val(tds[5].innerHTML);
+    jQuery("#isHalfDayAllowed").prop('checked', getBool(tds[6].innerHTML));
+    jQuery('#isBalanceCheck').prop('checked', getBool(tds[7].innerHTML));
+    jQuery('#isOnlyOneTime').prop('checked', getBool(tds[8].innerHTML));
+    jQuery('#isRestrict').prop('checked', getBool(tds[9].innerHTML));
 }
 function loadTable(token) {
     jQuery.ajax({
@@ -128,11 +134,9 @@ function loadTable(token) {
         success: function (data) {
             console.log(data);
             var leaveTypeArray = data;
-            console.log(leaveTypeArray);
             $("#example1").DataTable().clear();
 
             for (var i = 0; i < leaveTypeArray.length; i++) {
-                console.log(leaveTypeArray[i]);
                 var id = leaveTypeArray[i]["id"];
                 var name = leaveTypeArray[i]["name"];
                 var applicableFor = getApplicableForData(leaveTypeArray[i]["applicableFor"]);
