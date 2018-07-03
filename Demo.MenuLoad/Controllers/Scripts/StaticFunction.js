@@ -55,3 +55,30 @@ function ShowNotification(message, title, type) {
         }
     }
 }
+function clearAll() {
+    var elements = document.getElementsByTagName("input");
+    for (var ii = 0; ii < elements.length; ii++) {
+        if (elements[ii].type === "text") {
+            elements[ii].value = "";
+        } else if (elements[ii].type === "hidden") {
+            elements[ii].value = null;
+        } else if (elements[ii].type === "checkbox") {
+            elements[ii].checked = false;
+        } else if (elements[ii].type === "checkbox") {
+            elements[ii].checked = false;
+        }
+    }
+    var selectTags = document.getElementsByTagName("select");
+    for (var i = 0; i < selectTags.length; i++) {
+        selectTags[i].selectedIndex = 0;
+    }
+    jQuery('#submitButton').text("Submit");
+}
+function getBool(data) {
+    if (data === "true") {
+        return true;
+    }
+    else if (data === "false") {
+        return false;
+    }
+}

@@ -10,7 +10,7 @@ $(document).ready(function () {
     });
     jQuery('#cancelButton').on('click',
         function(e) {
-
+            clearAll();
         });
     jQuery('#submitButton').on('click', function (e) {
         console.log("Button Click");
@@ -32,7 +32,7 @@ $(document).ready(function () {
         var isOnlyOneTime = jQuery('#isBalanceCheck').is(":checked");
         var isRestricted = jQuery('#isRestrict').is(":checked");
         var apiUrl;
-        if (leaveTypeId === null) {
+        if (leaveTypeId === null || leaveTypeId ==="") {
             apiUrl = apiUrlPrefix + "/leavetype/insert";
         } else {
             apiUrl = apiUrlPrefix + "/leavetype/update";
@@ -114,6 +114,8 @@ function loadDataForEdit(row) {
     jQuery('#isBalanceCheck').prop('checked', getBool(tds[7].innerHTML));
     jQuery('#isOnlyOneTime').prop('checked', getBool(tds[8].innerHTML));
     jQuery('#isRestrict').prop('checked', getBool(tds[9].innerHTML));
+
+    jQuery('#submitButton').text("Update");
 }
 function loadTable(token) {
     jQuery.ajax({
@@ -192,14 +194,6 @@ function getApplicableForDataRev(data) {
     }
     else {
         return data;
-    }
-}
-function getBool(data) {
-    if (data === "true") {
-        return true;
-    }
-    else if (data === "false") {
-        return false;
     }
 }
 
