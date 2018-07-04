@@ -169,7 +169,6 @@ function loadTable(token) {
     }
     );
 }
-
 function getApplicableForData(data) {
     if (data === "B") {
         return "All";

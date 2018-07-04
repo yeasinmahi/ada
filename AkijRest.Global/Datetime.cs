@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace AkijRest.Global
 {
@@ -36,20 +33,23 @@ namespace AkijRest.Global
         {
             return date.ToString(GetStringFromDateFormat(format));
         }
+        [SuppressMessage("ReSharper", "InconsistentNaming")]
         public enum Format
         {
-            // ReSharper disable once InconsistentNaming
             dd_MM_yyyy,
+            MM_dd_yyyy
         }
 
-        private static string GetStringFromDateFormat(Format format)
+        public static string GetStringFromDateFormat(Format format)
         {
             switch (format)
             {
                 case Format.dd_MM_yyyy:
                     return "dd/MM/yyyy";
+                case Format.MM_dd_yyyy:
+                    return "MM/dd/yyyy";
 
-                    default: return "dd/MM/yyyy";
+                default: return "dd/MM/yyyy";
             }
         }
     }
