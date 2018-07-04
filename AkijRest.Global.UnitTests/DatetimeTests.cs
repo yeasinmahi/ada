@@ -1,12 +1,13 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace AkijRest.Global.UnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class DatetimeTests
     {
-        [TestMethod]
+        [Test]
         public void GetStringFromDateFormat_ddMMyyy_ReturnddMMyyyy()
         {
             // Arrange
@@ -16,7 +17,7 @@ namespace AkijRest.Global.UnitTests
             //Assert
             Assert.AreEqual(format, result);
         }
-        [TestMethod]
+        [Test]
         public void GetStringFromDateFormat_MMddyyyy_ReturnMMddyyyy()
         {
             // Arrange
@@ -27,7 +28,7 @@ namespace AkijRest.Global.UnitTests
             Assert.AreEqual(format, result);
         }
 
-        [TestMethod]
+        [Test]
         public void ToDateTime_StringToDateTime_ReturnDateTime()
         {
             //Arrange
@@ -37,7 +38,7 @@ namespace AkijRest.Global.UnitTests
             //Assert
             Assert.AreEqual(new DateTime(2018,12,31), result);
         }
-        [TestMethod]
+        [Test]
         public void ToDateTime_StringToDateTimeWithFormatddMMyyyy_ReturnDateTime()
         {
             //Arrange
@@ -47,7 +48,7 @@ namespace AkijRest.Global.UnitTests
             //Assert
             Assert.AreEqual(new DateTime(2018, 11, 30), result);
         }
-        [TestMethod]
+        [Test]
         public void ToDateTime_StringToDateTimeWithFormatMMddyyyy_ReturnDateTime()
         {
             //Arrange
@@ -57,7 +58,7 @@ namespace AkijRest.Global.UnitTests
             //Assert
             Assert.AreEqual(new DateTime(2018, 11, 30), result);
         }
-        [TestMethod]
+        [Test]
         public void ToString_DateTimeToString_ReturnString()
         {
             //Arrange
@@ -67,7 +68,7 @@ namespace AkijRest.Global.UnitTests
             //Assert
             Assert.AreEqual("31/12/2018", result);
         }
-        [TestMethod]
+        [Test]
         public void ToString_DateTimeToStringWithFormatddMMyyyy_ReturnString()
         {
             //Arrange
@@ -77,7 +78,7 @@ namespace AkijRest.Global.UnitTests
             //Assert
             Assert.AreEqual("31/12/2018", result);
         }
-        [TestMethod]
+        [Test]
         public void ToString_DateTimeToStringWithFormatMMddyyyy_ReturnString()
         {
             //Arrange
