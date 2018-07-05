@@ -7,27 +7,17 @@ namespace AkijRest.Global.UnitTests
     [TestFixture]
     public class DatetimeTests
     {
-        [Test]
-        public void GetStringFromDateFormat_ddMMyyy_ReturnddMMyyyy()
+        [TestCase(Datetime.Format.dd_MM_yyyy, "dd/MM/yyyy")]
+        [TestCase(Datetime.Format.MM_dd_yyyy, "MM/dd/yyyy")]
+        public void GetStringFromDateFormat_InputEnumFormat_ReturndStringFormat(Datetime.Format format, string expected)
         {
             // Arrange
-            string format = "dd/MM/yyyy";
+            //string format = "dd/MM/yyyy";
             //Act
-            var result = Datetime.GetStringFromDateFormat(Datetime.Format.dd_MM_yyyy);
+            var result = Datetime.GetStringFromDateFormat(format);
             //Assert
-            Assert.AreEqual(format, result);
+            Assert.AreEqual(expected, result);
         }
-        [Test]
-        public void GetStringFromDateFormat_MMddyyyy_ReturnMMddyyyy()
-        {
-            // Arrange
-            string format = "MM/dd/yyyy";
-            //Act
-            var result = Datetime.GetStringFromDateFormat(Datetime.Format.MM_dd_yyyy);
-            //Assert
-            Assert.AreEqual(format, result);
-        }
-
         [Test]
         public void ToDateTime_StringToDateTime_ReturnDateTime()
         {

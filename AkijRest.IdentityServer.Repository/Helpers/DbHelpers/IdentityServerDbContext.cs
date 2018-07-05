@@ -20,7 +20,7 @@ namespace AkijRest.IdentityServer.Repository.Helpers.DbHelpers
         public DbSet<ExternalLoginEmail> ExternalLoginEmails { get; set; }
 
         public IdentityServerDbContext()
-            : base("name=AkijRest.IdentityServer")
+            : base("AkijRest.IdentityServer")
         {
 
         }

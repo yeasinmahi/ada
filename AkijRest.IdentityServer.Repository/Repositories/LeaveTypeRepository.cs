@@ -41,12 +41,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                         IsRestricted = leaveType.IsRestricted,
                         MaxApplicationAtAMonth = leaveType.MaxApplicationAtAMonth,
                         MaximumAllowedAtATime = leaveType.MaximumAllowedAtATime
-
-
-
                     };
-
-
                     listLeaveTypeDto.Add(dto);
                 }
 
@@ -99,7 +94,6 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             };
             _context.LeaveTypes.Add(leaveType);
             _context.SaveChanges();
-
             return (leaveType.Id);
         }
         public int Update(LeaveTypeDto leaveTypeDto)

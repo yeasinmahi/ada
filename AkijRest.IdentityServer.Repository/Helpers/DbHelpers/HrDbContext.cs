@@ -6,7 +6,7 @@ namespace AkijRest.IdentityServer.Repository.Helpers.DbHelpers
     public partial class HrDbContext : DbContext
     {
         public HrDbContext()
-            : base("name=HrDbContext")
+            : base("HrDbContext")
         {
         }
 
