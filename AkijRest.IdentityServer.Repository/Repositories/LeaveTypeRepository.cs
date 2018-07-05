@@ -4,9 +4,7 @@ using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Web;
 using AkijRest.IdentityServer.Repository.Models;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
@@ -16,7 +14,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         private readonly IdentityServerDbContext _context;
         public LeaveTypeRepository()
         {
-            this._context = new IdentityServerDbContext();
+            _context = new IdentityServerDbContext();
         }
 
         public List<LeaveTypeDto> Get()

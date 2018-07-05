@@ -1,7 +1,5 @@
-﻿
-using System;
+﻿using System;
 using AkijRest.IdentityServer.Repository.Dtos;
-using AkijRest.IdentityServer.Repository.Models;
 using AkijRest.IdentityServer.Repository.Repositories;
 using NUnit.Framework;
 
