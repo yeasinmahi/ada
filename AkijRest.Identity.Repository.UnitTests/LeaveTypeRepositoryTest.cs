@@ -8,8 +8,7 @@ namespace AkijRest.Identity.Repository.UnitTests
     [TestFixture]
     public class LeaveTypeRepositoryTest
     {
-        private LeaveTypeRepository _obj;
-        
+
         [Test]
         public void Get_GetAllLeaveType_ReturnListOfLeaveType()
         {
@@ -62,6 +61,9 @@ namespace AkijRest.Identity.Repository.UnitTests
             Assert.That(result,Is.GreaterThan(0));
 
         }
+
+
+        private LeaveTypeRepository _obj;
         [SetUp]
         public void Setup()
         {
