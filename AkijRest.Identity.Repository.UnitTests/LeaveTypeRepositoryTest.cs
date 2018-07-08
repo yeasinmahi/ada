@@ -54,7 +54,7 @@ namespace AkijRest.Identity.Repository.UnitTests
                 IsOnlyOneTime = true,
                 IsRestricted = false
             };
-
+ 
             //Act
             int result = _obj.Create(leaveTypeDto);
             //Asert
