@@ -9,7 +9,7 @@ $(document).ready(function () {
         ]
     });
     $('#cancelButton').on('click',
-        function(e) {
+        function (e) {
             clearAll();
         });
     $('#submitButton').on('click', function (e) {
@@ -25,14 +25,14 @@ $(document).ready(function () {
         var name = $('#leaveTypeName').val();
         var applicableFor = $('#applicableFor :selected').val();
         var companyPolicy = $('#companyPolicy').val();
-        var maxApplicationAtAMonth = $('#isOnlyOneTime').val();
+        var maxApplicationAtAMonth = $('#maxApplicationAtAMonth').val();
         var maximumAllowedAtATime = $('#maxAllowedAtATime').val();
-        var isHalfDayAllowed = $('#maxApplicationAtAMonth').is(":checked");
-        var isBalanceChecked = $('#isHalfDayAllowed').is(":checked");
-        var isOnlyOneTime = $('#isBalanceCheck').is(":checked");
+        var isHalfDayAllowed = $('#isHalfDayAllowed').is(":checked");
+        var isBalanceChecked = $('#isBalanceCheck').is(":checked");
+        var isOnlyOneTime = $('#isOnlyOneTime').is(":checked");
         var isRestricted = $('#isRestrict').is(":checked");
         var apiUrl;
-        if (leaveTypeId === null || leaveTypeId ==="") {
+        if (leaveTypeId === null || leaveTypeId === "") {
             apiUrl = apiUrlPrefix + "/leavetype/insert";
         } else {
             apiUrl = apiUrlPrefix + "/leavetype/update";
@@ -85,7 +85,7 @@ $(document).ready(function () {
     loadTable(token);
 
 
-    
+
     $('#example1 tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -154,8 +154,8 @@ function loadTable(token) {
                         companyPolicy,
                         maximumAllowedAtATime,
                         maxApplicationAtAMonth,
-                        isBalanceChecked,
                         isHalfDayAllowed,
+                        isBalanceChecked,
                         isOnlyOneTime,
                         isRestricted
                     ]);

@@ -95,7 +95,7 @@ function checkUserExistsByFacebook(facebookMail, accessToken) {
     $.ajax
     (
         {
-            type: "GET",
+            type: "POST",
             url: facebookAuth, // + facebookUserName,
 
             contentType: 'application/json; charset = utf-8',

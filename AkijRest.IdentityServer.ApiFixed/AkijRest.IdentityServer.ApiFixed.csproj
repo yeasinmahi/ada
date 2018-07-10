@@ -305,10 +305,6 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AkijRest.Global.UnitTests\AkijRest.Global.UnitTests.csproj">
-      <Project>{1db6b5f8-f691-42e7-9b97-ac33c8041253}</Project>
-      <Name>AkijRest.Global.UnitTests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AkijRest.Global\AkijRest.Global.csproj">
       <Project>{b3695148-df00-4394-ad45-86da5d078773}</Project>
       <Name>AkijRest.Global</Name>
