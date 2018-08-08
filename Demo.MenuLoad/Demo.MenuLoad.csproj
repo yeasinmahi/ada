@@ -205,7 +205,9 @@
     <Content Include="Scripts\bootstrap3-wysihtml5.all.min.js" />
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\dashboard.js" />
+    <Content Include="Scripts\dataTables.altEditor.free.js" />
     <Content Include="Scripts\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\dataTables.buttons.min.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\icheck.min.js" />

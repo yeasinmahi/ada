@@ -3,7 +3,7 @@
     ViewBag.Title = "Leave Type";
 }
 
-<input type="hidden" id="leaveTypeId"/>
+<input type="hidden" id="leaveTypeId" />
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title"><i class="fa fa-tag"></i> Leave Type Entry</h3>
@@ -98,7 +98,7 @@
 <div class="box box-default">
     <div class="box box-default">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-list-alt"></i> Leave Entry List</h3>
+            <h3 class="box-title"><i class="fa fa-list-alt"></i> Leave Type Entry List</h3>
             <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-minus"></i>
@@ -109,7 +109,7 @@
         <!-- /.box-header -->
         <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
-                 <thead>
+                <thead>
                     <tr>
                         <th class="hidden">id</th>
                         <th>Leave Type Name</th>
@@ -145,10 +145,14 @@
 </div>
 <!-- /.box -->
 @section scripts {
-    <link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery.dataTables.min.js"></script>
-    <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <!--dataTables-->
+    @*<link href="~/Content/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <script src="~/Scripts/jquery.dataTables.min.js"></script>
+        <script src="~/Scripts/dataTables.bootstrap.min.js"></script>
+        <script src="~/Scripts/dataTables.buttons.min.js"></script>*@
+
+    @Styles.Render("~/Content/datatables")
+    @Scripts.Render("~/bundles/datatables")
     <!--Controller-->
     <script src="~/Controllers/Scripts/leaveTypeController.js"></script>
 }

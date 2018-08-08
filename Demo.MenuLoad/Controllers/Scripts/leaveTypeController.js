@@ -8,8 +8,7 @@ $(document).ready(function () {
             }
         ]
     });
-    $('#cancelButton').on('click',
-        function (e) {
+    $('#cancelButton').on('click',function (e) {
             clearAll();
         });
     $('#submitButton').on('click', function (e) {
@@ -83,9 +82,6 @@ $(document).ready(function () {
         );
     });
     loadTable(token);
-
-
-
     $('#example1 tbody').on('click', 'tr', function () {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
@@ -120,7 +116,7 @@ function loadDataForEdit(row) {
 function loadTable(token) {
     $.ajax({
         type: "GET",
-        url: apiUrlPrefix + "/leavetype",
+        url: leavetypeUrl,
 
         contentType: 'application/json; charset = utf-8',
         dataType: 'json',

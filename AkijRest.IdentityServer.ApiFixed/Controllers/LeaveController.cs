@@ -20,18 +20,14 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
     {
         string logFilePath = "C:/YeasinPublished/ada.txt";
         [HttpPost]
-        [Route("own")]
+        [Route("insert")]
         public IHttpActionResult PostOwn([FromBody] LeaveDto dto)
         {
             Log.Write(logFilePath, "LeaveOwn", LogUtility.MessageType.MethodeStart);
             var claimsPrincipal = this.User as ClaimsPrincipal;
-
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
-            
             Log.Write(logFilePath, "UserName: " +userName, LogUtility.MessageType.UserMessage);
-
             TokenRepository tokenRepository = new TokenRepository();
-
             var tokenContent = tokenRepository.GetToken(userName);
             Log.Write(logFilePath, "tokenContent: " + tokenContent, LogUtility.MessageType.UserMessage);
             // this status gets the value whether the token is expired or refreshed
@@ -41,29 +37,21 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             {
                 // initializing logout functinality
                 tokenRepository.DeleteToken(tokenContent);
-                //
                 Log.Write(logFilePath, "deleted token content: ", LogUtility.MessageType.UserMessage);
                 return Ok("expired");
             }
-
             RoleRepository roleRepository = new RoleRepository();
-
             var userRoles = roleRepository.GetRoleNamesByUserName(userName);
-
             string a = "";
-
             foreach (var userRole in userRoles)
             {
                 a += userRole + "|";
             }
-
             Log.Write(logFilePath, a, LogUtility.MessageType.UserMessage);
-
             if (!userRoles.Contains("UpdateOwnLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
             }
-
             try
             {
                 LeaveRepository repository = new LeaveRepository();
@@ -71,10 +59,8 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 // Now as token is passed to the api, not username, 
                 // for this own method, username will be null,
                 // for this all method, username will be there
-
                 dto.UserName = userName;
                 LeaveDto leaveDto = repository.Create(dto);
-
                 if (leaveDto!=null)
                 {
                     Log.Write(logFilePath, "leaveDto: object " + leaveDto, LogUtility.MessageType.UserMessage);
@@ -82,7 +68,6 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                     string htmlEnd = "</div></body></html>";
                     UserRepository userRepository = new UserRepository();
                     UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
-
                     if (userDto !=null)
                     {
                         Log.Write(logFilePath, "userDto: object " + leaveDto, LogUtility.MessageType.UserMessage);
@@ -100,14 +85,12 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                     {
                         //todo: UserDto null
                     }
-                    
                 }
                 Log.Write(logFilePath, "leaveDto: " + leaveDto, LogUtility.MessageType.UserMessage);
                 var result = Created<LeaveDto>(Request.RequestUri
                     , dto);
                 Log.Write(logFilePath, "result: " + result, LogUtility.MessageType.UserMessage);
                 return result;
-
             }
             catch (Exception ex)
             {
@@ -119,30 +102,21 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         [Route("all")]
         public IHttpActionResult PostAll([FromBody] LeaveDto dto)
         {
-            var claimsPrincipal = this.User as ClaimsPrincipal;
-
+            var claimsPrincipal = User as ClaimsPrincipal;
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
-
             RoleRepository roleRepository = new RoleRepository();
-
             var userRoles = roleRepository.GetRoleNamesByUserName(userName);
-
-
             if (!userRoles.Contains("UpdateAllLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
             }
-
             try
             {
                 LeaveRepository repository = new LeaveRepository();
-
                 dto.UserName = userName;
                 LeaveDto leaveDto = repository.Create(dto);
-
                 var result = Created<LeaveDto>(Request.RequestUri
                     , dto);
-
                 return result;
 
             }
@@ -158,14 +132,11 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         public IHttpActionResult GetOwn()
         {
             var claimsPrincipal = this.User as ClaimsPrincipal;
-
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
-
             RoleRepository roleRepository = new RoleRepository();
-
+            string name = this.User.Identity.Name;
+            
             var userRoles = roleRepository.GetRoleNamesByUserName(userName);
-
-
             if (!userRoles.Contains("ViewOwnLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
@@ -174,14 +145,8 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             try
             {
                 LeaveRepository repository = new LeaveRepository();
-                var leaves = repository.GetLeaveByUserName(userName);
-
-                var leaveDict = new Dictionary<string, List<LeaveEveryDayDto>>();
-
-                leaveDict.Add("data", leaves);
-
-                return Ok(leaveDict);
-
+                var leaves = repository.GetLeaveByUserName(name);
+                return Ok(leaves);
             }
             catch(Exception ex)
             {
@@ -212,12 +177,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             {
                 LeaveRepository repository = new LeaveRepository();
                 var leaves = repository.GetLeaveByUserName(userName);
-
-                var leaveDict = new Dictionary<string, List<LeaveEveryDayDto>>();
-
-                leaveDict.Add("data", leaves);
-
-                return Ok(leaveDict);
+                return Ok(leaves);
 
             }
             catch (Exception ex)
@@ -226,6 +186,30 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             }
         }
 
+        [Route("update")]
+        [HttpPost]
+        public IHttpActionResult Update([FromBody] LeaveDto leaveDto)
+        {
+            try
+            {
+                leaveDto.UserName = this.User.Identity.Name;
+                LeaveRepository repository = new LeaveRepository();
+                int result = repository.Update(leaveDto);
+                if (result > 0)
+                {
+                    return Ok("Successfully Updated");
+                }
+                else
+                {
+                    return Ok("Update failed");
+                }
+            }
+            catch (Exception e)
+            {
+                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                return InternalServerError();
+            }
+        }
 
     }
 }

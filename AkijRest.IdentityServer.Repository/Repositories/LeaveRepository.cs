@@ -4,93 +4,194 @@ using AkijRest.IdentityServer.Repository.Models;
 using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
-using System.Web;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
     public class LeaveRepository: ILeaveRepository
     {
-        private IdentityServerDbContext context;
+        private readonly IdentityServerDbContext _context;
 
         public LeaveRepository()
         {
-            context = new IdentityServerDbContext();
+            _context = new IdentityServerDbContext();
         }
 
-
-        public List<LeaveEveryDayDto> GetLeaveByUserName(string userName)
+        public List<LeaveDto> Get()
         {
-            User user = context.Users.SingleOrDefault(u => u.UserName.Equals(userName));
+            List<LeaveDto> leaveDtos = new List<LeaveDto>();
 
-            var listLeave = context
+            if (_context != null)
+            {
+                var leaves = _context.Leaves.ToList();
+
+                foreach (var leave in leaves)
+                {
+                    LeaveDto dto = new LeaveDto
+                    {
+                        Id = leave.Id,
+                        DateStart = Global.Datetime.ToString(leave.Date),
+                        LeaveTypeName = leave.LeaveType.Name,
+                        LeaveCause = leave.LeaveCause,
+                        LeaveAddress = leave.LeaveAddress,
+                        LeaveTypeId = leave.LeaveTypeId,
+                        UserName = leave.User.UserName,
+                        UserId = leave.UserId
+                    };
+                    leaveDtos.Add(dto);
+                }
+
+                return leaveDtos;
+            }
+
+            throw new Exception();
+        }
+        public LeaveDto Get(int id)
+        {
+            if (_context != null)
+            {
+                Leave leave = _context.Leaves.FirstOrDefault(x => x.Id.Equals(id));
+                LeaveDto dto = null;
+                if (leave != null)
+                {
+                    dto = new LeaveDto
+                    {
+                        Id = leave.Id,
+                        DateStart = Global.Datetime.ToString(leave.Date),
+                        LeaveTypeName = leave.LeaveType.Name,
+                        LeaveCause = leave.LeaveCause,
+                        LeaveAddress = leave.LeaveAddress,
+                        LeaveTypeId = leave.LeaveTypeId,
+                        UserName = leave.User.UserName,
+                        UserId = leave.UserId
+                    };
+
+                }
+                return dto;
+            }
+            throw new Exception();
+        }
+        public List<LeaveDto> GetLeaveByUserId(int userId)
+        {
+            List<LeaveDto> leaveDtos = new List<LeaveDto>();
+
+            if (_context != null)
+            {
+                var leaves = _context.Leaves.ToList().Where(x=>x.UserId.Equals(userId));
+
+                foreach (var leave in leaves)
+                {
+                    LeaveDto dto = new LeaveDto
+                    {
+                        Id = leave.Id,
+                        DateStart = Global.Datetime.ToString(leave.Date),
+                        LeaveTypeName = leave.LeaveType.Name,
+                        LeaveCause = leave.LeaveCause,
+                        LeaveAddress = leave.LeaveAddress,
+                        LeaveTypeId = leave.LeaveTypeId,
+                        UserName = leave.User.UserName,
+                        UserId = leave.UserId
+                    };
+                    leaveDtos.Add(dto);
+                }
+
+                return leaveDtos;
+            }
+            throw new Exception();
+        }
+        public List<LeaveDto> GetLeaveByUserName(string userName)
+        {
+            User user = _context.Users.SingleOrDefault(u => u.UserName.Equals(userName));
+
+            var listLeave = _context
                 .Leaves
                 .ToList()
                 .Where
-                (
-                    l => l.UserId == user.Id
-                )
+                (l => user != null && l.UserId == user.Id)
                 .OrderByDescending(l => l.Date);
 
-            List<LeaveEveryDayDto> listLeaveDto = new List<LeaveEveryDayDto>();
+            List<LeaveDto> dtos = new List<LeaveDto>();
 
             foreach (var leave in listLeave)
             {
-                LeaveEveryDayDto dto = new LeaveEveryDayDto();
-
-                dto.LeaveTypeName = context.LeaveTypes.SingleOrDefault(l => l.Id == leave.LeaveTypeId).Name;
-                dto.Date = leave.Date.ToString("dd/MM/yyyy");
+                LeaveDto dto = new LeaveDto();
+                dto.Id = leave.Id;
+                dto.UserName = leave.User.UserName;
+                dto.LeaveTypeName = _context.LeaveTypes.SingleOrDefault(l => l.Id == leave.LeaveTypeId)?.Name;
+                dto.DateStart = Global.Datetime.ToString(leave.Date);
                 dto.LeaveCause = leave.LeaveCause;
                 dto.LeaveAddress = leave.LeaveAddress;
 
-                listLeaveDto.Add(dto);
+                dtos.Add(dto);
             }
 
-            return listLeaveDto;
+            return dtos;
         }
-
         public LeaveDto Create(LeaveDto leaveDto)
         {
-            DateTime dateTime
+            DateTime dateTimeFrom
                 = Global.Datetime.ToDateTime(leaveDto.DateStart);
 
-            DateTime dateTimeEnd
+            DateTime dateTimeTo
                 = Global.Datetime.ToDateTime(leaveDto.DateEnd);
-
-
-            for (;;)
-            {
-                var leave = new Leave
-                {
-                    LeaveTypeId = leaveDto.LeaveTypeId,
-
-                    UserId = context
-                            .Users
-                            .SingleOrDefault
-                            (
-                                u =>
-                                    u.UserName.Equals(leaveDto.UserName)
-                            ).Id,
-
-                    Date = dateTime ,
-
-                    LeaveCause = leaveDto.LeaveCause,
-                    LeaveAddress = leaveDto.LeaveAddress
-                };
-
-                context.Leaves.Add(leave);
-
-                dateTime = dateTime.AddDays(1);
-
-                if (dateTime > dateTimeEnd)
-                {
-                    break;
-                }
-            }
             
-            context.SaveChanges();
+                for (; ; )
+                {
+                    if (_context != null)
+                    {
+                        var leave = new Leave
+                        {
+                            LeaveTypeId = leaveDto.LeaveTypeId,
 
+                            UserId = _context
+                                .Users
+                                .SingleOrDefault
+                                (
+                                    u =>u.UserName.Equals(leaveDto.UserName)
+                                ).Id,
+
+                            Date = dateTimeFrom,
+
+                            LeaveCause = leaveDto.LeaveCause,
+                            LeaveAddress = leaveDto.LeaveAddress
+                        };
+
+                        _context.Leaves.Add(leave);
+                    }
+
+                    dateTimeFrom = dateTimeFrom.AddDays(1);
+
+                    if (dateTimeFrom > dateTimeTo)
+                    {
+                        break;
+                    }
+                }
+            _context?.SaveChanges();
             return (leaveDto);
+        }
+        public int Update(LeaveDto leaveDto)
+        {
+            Leave leave = new Leave
+            {
+                Id = leaveDto.Id,
+                Date = Global.Datetime.ToDateTime(leaveDto.DateStart),
+                LeaveAddress = leaveDto.LeaveAddress,
+                LeaveCause = leaveDto.LeaveCause,
+                LeaveTypeId = leaveDto.LeaveTypeId,
+                UserId = _context
+                    .Users
+                    .SingleOrDefault
+                    (
+                        u => u.UserName.Equals(leaveDto.UserName)
+                    ).Id
+
+            };
+            _context.Leaves.Attach(leave);
+            _context.Entry(leave).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return leave.Id;
         }
     }
 }
