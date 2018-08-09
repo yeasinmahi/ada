@@ -181,15 +181,15 @@ function loadTable(token) {
 
             for (var i = 0; i < leaveArray.length; i++) {
                 var id = leaveArray[i]["id"];
-                var userName = leaveArray[i]["userName"];
                 var leaveTypeName = leaveArray[i]["leaveTypeName"];
+                var leaveTypeId = leaveArray[i]["leaveTypeId"];
                 var dateStart = leaveArray[i]["dateStart"];
                 var leaveCause = leaveArray[i]["leaveCause"];
                 var leaveAddress = leaveArray[i]["leaveAddress"];
                 $('#example1').dataTable().fnAddData([
                     id,
-                    userName,
                     leaveTypeName,
+                    leaveTypeId,
                     dateStart,
                     leaveCause,
                     leaveAddress

@@ -142,11 +142,12 @@ function loadDataForEdit(row) {
     var tds = row.find("td");
     $('#userAutoComplete').val(tds[1].innerHTML);
     $('#leaveId').val(tds[0].innerHTML);
-    $('#leaveDropdown').val(tds[2].innerHTML);
-    $('#fromDate').val(tds[3].innerHTML);
-    $('#toDate').val(tds[3].innerHTML);
-    $('#leaveCause').val(tds[4].innerHTML);
-    $('#leaveAddress').val(tds[5].innerHTML);
+    $('#leaveDropdown').val(tds[3].innerHTML);
+    //$("#leaveDropdown").find("option[text='" + tds[2].innerHTML + "']").attr("selected", true);
+    $('#fromDate').val(tds[4].innerHTML);
+    $('#toDate').val(tds[4].innerHTML);
+    $('#leaveCause').val(tds[5].innerHTML);
+    $('#leaveAddress').val(tds[6].innerHTML);
 
     $('#submitButton').text("Update");
 }
@@ -171,6 +172,7 @@ function loadTable(token) {
                 var id = leaveArray[i]["id"];
                 var userName = leaveArray[i]["userName"];
                 var leaveTypeName = leaveArray[i]["leaveTypeName"];
+                var leaveTypeId = leaveArray[i]["leaveTypeId"];
                 var dateStart = leaveArray[i]["dateStart"];
                 var leaveCause = leaveArray[i]["leaveCause"];
                 var leaveAddress = leaveArray[i]["leaveAddress"];
@@ -178,6 +180,7 @@ function loadTable(token) {
                     id,
                     userName,
                     leaveTypeName,
+                    leaveTypeId,
                     dateStart,
                     leaveCause,
                     leaveAddress

@@ -140,7 +140,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             string name = User.Identity.Name;
             
             var userRoles = roleRepository.GetRoleNamesByUserName(userName);
-            if (!userRoles.Contains("ViewOwnLeave"))
+            if (!userRoles.Contains("ViewAllLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
             }
