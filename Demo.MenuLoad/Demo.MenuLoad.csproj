@@ -155,6 +155,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveTypeController.cs" />
     <Compile Include="Controllers\WoodPurchaseController.cs" />
     <Compile Include="Global.asax.cs">
@@ -173,12 +174,14 @@
     <Content Include="Content\iCommonstyle.css" />
     <Content Include="Content\ionicons.min.css" />
     <Content Include="Content\jquery-jvectormap-1.2.2.css" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\myCss.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Content\_all-skins.min.css" />
     <Content Include="Controllers\Scripts\AppAuth.js" />
     <Content Include="Controllers\Scripts\facebookAuth.js" />
     <Content Include="Controllers\Scripts\gmailAuth.js" />
+    <Content Include="Controllers\Scripts\adminLeaveController.js" />
     <Content Include="Controllers\Scripts\leaveTypeController.js" />
     <Content Include="Controllers\Scripts\leaveController.js" />
     <Content Include="Controllers\Scripts\mealController.js" />
@@ -284,6 +287,8 @@
     <Content Include="Views\Home\GoogleAuthTest.cshtml" />
     <Content Include="Views\Home\GoogleAuthTest2.cshtml" />
     <Content Include="Views\LeaveType\Index.cshtml" />
+    <Content Include="Views\Leave\Index.cshtml" />
+    <Content Include="Views\Leave\AdminLeave.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

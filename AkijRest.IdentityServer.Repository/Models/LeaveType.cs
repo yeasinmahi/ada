@@ -8,7 +8,7 @@ namespace AkijRest.IdentityServer.Repository.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public byte Id { get; set; }
         [Required]
         [MaxLength(50, ErrorMessage = "{0} can have a max of {1} characters"),MinLength(3, ErrorMessage = "{0} can have a min of {2} characters")]
         [Column("LeaveTypeName")]

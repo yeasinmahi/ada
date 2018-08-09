@@ -7,6 +7,7 @@
     <link rel=icon href=~/Image/favicon.ico sizes="16x16" type="image/png">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="~/Content/bootstrap.min.css">
     <!-- Font Awesome -->
@@ -37,10 +38,10 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     <!-- Site wrapper -->
-@*<div class="myModal">
-    <div class="loader centered">Boo</div>
-</div>*@
-<div class="loader centered"></div>
+    @*<div class="myModal">
+            <div class="loader centered">Boo</div>
+        </div>*@
+    <div class="loader centered"></div>
     <div class="wrapper">
         @Html.Partial("~/Views/Shared/_Header.cshtml")
         <!-- =============================================== -->
@@ -74,6 +75,7 @@
     <!-- ./wrapper -->
     <!-- jQuery 3 -->
     <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
     <!-- Bootstrap 3.3.7 -->
     <script src="~/Scripts/bootstrap.min.js"></script>
     <!-- SlimScroll -->

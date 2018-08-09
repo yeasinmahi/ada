@@ -24,7 +24,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             if (_context != null)
             {
-                var leaves = _context.Leaves.ToList();
+                var leaves = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList();
 
                 foreach (var leave in leaves)
                 {
@@ -104,12 +104,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             User user = _context.Users.SingleOrDefault(u => u.UserName.Equals(userName));
 
-            var listLeave = _context
-                .Leaves
-                .ToList()
-                .Where
-                (l => user != null && l.UserId == user.Id)
-                .OrderByDescending(l => l.Date);
+            var listLeave = _context.Leaves.Include(x=>x.LeaveType).ToList().Where(l => user != null && l.UserId == user.Id).OrderByDescending(l => l.Date);
 
             List<LeaveDto> dtos = new List<LeaveDto>();
 
@@ -118,7 +113,9 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 LeaveDto dto = new LeaveDto();
                 dto.Id = leave.Id;
                 dto.UserName = leave.User.UserName;
-                dto.LeaveTypeName = _context.LeaveTypes.SingleOrDefault(l => l.Id == leave.LeaveTypeId)?.Name;
+                dto.UserId = leave.UserId;
+                dto.LeaveTypeName = leave.LeaveType.Name;
+                dto.LeaveTypeId = leave.LeaveTypeId;
                 dto.DateStart = Global.Datetime.ToString(leave.Date);
                 dto.LeaveCause = leave.LeaveCause;
                 dto.LeaveAddress = leave.LeaveAddress;
@@ -140,22 +137,13 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 {
                     if (_context != null)
                     {
-                        var leave = new Leave
-                        {
-                            LeaveTypeId = leaveDto.LeaveTypeId,
-
-                            UserId = _context
-                                .Users
-                                .SingleOrDefault
-                                (
-                                    u =>u.UserName.Equals(leaveDto.UserName)
-                                ).Id,
-
-                            Date = dateTimeFrom,
-
-                            LeaveCause = leaveDto.LeaveCause,
-                            LeaveAddress = leaveDto.LeaveAddress
-                        };
+                        Leave leave = new Leave();
+                        leave.LeaveTypeId = leaveDto.LeaveTypeId;
+                        leave.UserId = leaveDto.UserId > 0 ? leaveDto.UserId : _context.Users.SingleOrDefault(u =>u.UserName.Equals(leaveDto.UserName)).Id;
+                        
+                        leave.Date = dateTimeFrom;
+                        leave.LeaveCause = leaveDto.LeaveCause;
+                        leave.LeaveAddress = leaveDto.LeaveAddress;
 
                         _context.Leaves.Add(leave);
                     }

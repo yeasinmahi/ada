@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Web.Http;
@@ -24,8 +23,9 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         public IHttpActionResult PostOwn([FromBody] LeaveDto dto)
         {
             Log.Write(logFilePath, "LeaveOwn", LogUtility.MessageType.MethodeStart);
-            var claimsPrincipal = this.User as ClaimsPrincipal;
+            var claimsPrincipal = User as ClaimsPrincipal;
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
+            
             Log.Write(logFilePath, "UserName: " +userName, LogUtility.MessageType.UserMessage);
             TokenRepository tokenRepository = new TokenRepository();
             var tokenContent = tokenRepository.GetToken(userName);
@@ -59,7 +59,10 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 // Now as token is passed to the api, not username, 
                 // for this own method, username will be null,
                 // for this all method, username will be there
-                dto.UserName = userName;
+                if (String.IsNullOrWhiteSpace(dto.UserName))
+                {
+                    dto.UserName = userName;
+                }
                 LeaveDto leaveDto = repository.Create(dto);
                 if (leaveDto!=null)
                 {
@@ -131,10 +134,10 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         [Route("own")]
         public IHttpActionResult GetOwn()
         {
-            var claimsPrincipal = this.User as ClaimsPrincipal;
+            var claimsPrincipal = User as ClaimsPrincipal;
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
             RoleRepository roleRepository = new RoleRepository();
-            string name = this.User.Identity.Name;
+            string name = User.Identity.Name;
             
             var userRoles = roleRepository.GetRoleNamesByUserName(userName);
             if (!userRoles.Contains("ViewOwnLeave"))
@@ -154,20 +157,39 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("all")]
+        public IHttpActionResult GetAll()
+        {
+            var claimsPrincipal = User as ClaimsPrincipal;
+            var userNameApiCaller = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
+            RoleRepository roleRepository = new RoleRepository();
+            var userRoles = roleRepository.GetRoleNamesByUserName(userNameApiCaller);
+            if (!userRoles.Contains("ViewAllLeave"))
+            {
+                return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
+            }
 
+            try
+            {
+                LeaveRepository repository = new LeaveRepository();
+                var leaves = repository.Get();
+                return Ok(leaves);
+
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
         [HttpGet]
         [Route("all/{userName}")]
         public IHttpActionResult GetAll(string userName)
         {
-            var claimsPrincipal = this.User as ClaimsPrincipal;
-
+            var claimsPrincipal = User as ClaimsPrincipal;
             var userNameApiCaller = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
-
             RoleRepository roleRepository = new RoleRepository();
-
             var userRoles = roleRepository.GetRoleNamesByUserName(userNameApiCaller);
-
-
             if (!userRoles.Contains("ViewAllLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
@@ -192,7 +214,10 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                leaveDto.UserName = this.User.Identity.Name;
+                if (String.IsNullOrWhiteSpace(leaveDto.UserName))
+                {
+                    leaveDto.UserName = User.Identity.Name;
+                }
                 LeaveRepository repository = new LeaveRepository();
                 int result = repository.Update(leaveDto);
                 if (result > 0)

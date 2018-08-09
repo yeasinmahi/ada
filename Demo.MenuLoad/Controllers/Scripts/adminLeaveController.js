@@ -1,5 +1,6 @@
 ﻿var token = url_query('token');
 $(document).ready(function () {
+    loadAutoComplete();
     var table = $('#example1').DataTable({
         "columnDefs": [
             {
@@ -29,26 +30,11 @@ $(document).ready(function () {
 
         // No token is in url, so access forbidden
         if (!token) {
-            toastr.options =
-                {
-                    "closeButton": true,
-                    "debug": false,
-                    "positionClass": "toast-bottom-right",
-                    "onclick": null,
-                    "showDuration": "1000",
-                    "hideDuration": "1000",
-                    "timeOut": "5000",
-                    "extendedTimeOut": "1000",
-                    "showEasing": "swing",
-                    "hideEasing": "linear",
-                    "showMethod": "fadeIn",
-                    "hideMethod": "fadeOut"
-                };
-
-            toastr.error('You are not allowed to perform this action!', 'Leave Notification');
+            ShowNotification('You are not allowed to perform this action!', 'Session Notification', 'warning');
             return;
         }
         var leaveId = $('#leaveId').val();
+        var userNmae = $('#userAutoComplete').val();
         var leaveTypeId = $('#leaveDropdown').val();
         var dateStart = $('#fromDate').val();
         var dateEnd = $('#toDate').val();
@@ -69,6 +55,7 @@ $(document).ready(function () {
             data: JSON.stringify({
                 // leave parameter starts
                 'Id': leaveId,
+                'UserName': userNmae,
                 'LeaveTypeId': leaveTypeId,
                 //'UserName': userName, // userName is skipped now, we shall extract it from the token
                 'DateStart': dateStart,
@@ -153,6 +140,7 @@ function loadLeaveTypeDropDown() {
 }
 function loadDataForEdit(row) {
     var tds = row.find("td");
+    $('#userAutoComplete').val(tds[1].innerHTML);
     $('#leaveId').val(tds[0].innerHTML);
     $('#leaveDropdown').val(tds[2].innerHTML);
     $('#fromDate').val(tds[3].innerHTML);
@@ -165,7 +153,7 @@ function loadDataForEdit(row) {
 function loadTable(token) {
     $.ajax({
         type: "GET",
-        url: leaveUrl + "/own",
+        url: leaveUrl + "/all",
 
         contentType: "application/json; charset = utf-8",
         dataType: "json",
@@ -195,6 +183,42 @@ function loadTable(token) {
                     leaveAddress
                 ]);
             }
+        },
+
+        failure: function () {
+            console.log("Users Get Failed!");
+        }
+    }
+    );
+}
+function loadAutoComplete() {
+    $("#userAutoComplete").autocomplete({
+        source: function(request, response) { getUsers(request, response) }
+    });
+}
+function getUsers(request,response) {
+    $.ajax({
+        type: "GET",
+        url: userUrl,
+        contentType: "application/json; charset = utf-8",
+        dataType: "json",
+        data: {
+            q: request.term
+        },
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("Authorization", "Bearer " + token);
+        },
+
+        success: function (data) {
+            console.log("Users : ");
+            console.log(data);
+            response($.map(data, function (item) {
+                console.log(item);
+                return {
+                    label: item.userName + "  "+ item.id,
+                    value: item.userName
+                };
+            }));
         },
 
         failure: function () {

@@ -20,14 +20,9 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             try
             {
                 UserRepository repository = new UserRepository();
-
                 User user = repository.Create(userDto);
-
-                var result = Created<UserDto>(Request.RequestUri
-                    + "/" + user.Id.ToString(), userDto);
-
+                var result = Created(Request.RequestUri+ "/" + user.Id, userDto);
                 return result;
-
             }
             catch (Exception ex)
             {
@@ -35,22 +30,15 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             }
         }
 
-
         [Route("")]
         [HttpGet]
         public IHttpActionResult Get()
         {
-            //var claimsPrincipal = this.User as ClaimsPrincipal;
-
-            //var username = claimsPrincipal?.FindFirst("http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier").Value;
-
             try
             {
                 UserRepository userRepository = new UserRepository();
-
-                List<UserDto> listUserDTO = userRepository.Get();
-
-                return Ok(listUserDTO);
+                List<UserDto> listUserDto = userRepository.Get();
+                return Ok(listUserDto);
             }
             catch (Exception ex)
             {
@@ -86,8 +74,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return InternalServerError();
             }
         }
-
-
+        
         [Route("gmail/{gmail}")]
         [HttpGet]
         public IHttpActionResult GetUserNameByGoogleEmail(string gmail)
@@ -107,8 +94,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return InternalServerError();
             }
         }
-
-
+        
         [Route("facebook/{facebookMail}")]
         [HttpGet]
         public IHttpActionResult GetUserNameByFacebookEmail(string facebookMail)
@@ -128,7 +114,6 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return InternalServerError();
             }
         }
-
     }
 
     
