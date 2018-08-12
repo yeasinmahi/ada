@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Repositories;
 using NUnit.Framework;
@@ -85,15 +86,20 @@ namespace AkijRest.Identity.Repository.UnitTests
             };
 
             //Act
-            int createResult = _obj.Create(leaveDto);
-            leaveDto.Id = createResult;
-            leaveDto.LeaveCause = "Update Test";
-            int updateResult = _obj.Update(leaveDto);
-            int deleteResult = _obj.Delete(createResult);
+            List<int> createResults = _obj.Create(leaveDto);
+            foreach (int result in createResults)
+            {
+                leaveDto.Id = result;
+                leaveDto.LeaveCause = "Update Test";
+                int updateResult = _obj.Update(leaveDto);
+                int deleteResult = _obj.Delete(result);
+                Assert.That(result, Is.GreaterThan(0));
+                Assert.That(updateResult, Is.GreaterThan(0));
+                Assert.That(deleteResult, Is.GreaterThan(0));
+            }
+            
             //Asert
-            Assert.That(createResult, Is.GreaterThan(0));
-            Assert.That(updateResult, Is.GreaterThan(0));
-            Assert.That(deleteResult, Is.GreaterThan(0));
+            
 
         }
         [SetUp]

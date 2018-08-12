@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Security.Claims;
 using System.Web.Http;
@@ -63,35 +64,38 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 {
                     dto.UserName = userName;
                 }
-                int leaveId = repository.Create(dto);
-                if (leaveId>0)
+                List<int> leaveIds = repository.Create(dto);
+                if (leaveIds.Count > 0)
                 {
-                    Log.Write(logFilePath, "leaveDto: object " + leaveId, LogUtility.MessageType.UserMessage);
-                    string htmlInit = "<html><body><div>";
-                    string htmlEnd = "</div></body></html>";
-                    UserRepository userRepository = new UserRepository();
-                    UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
-                    if (userDto !=null)
+                    foreach (int leaveId in leaveIds)
                     {
-                        Log.Write(logFilePath, "userDto: object " + leaveId, LogUtility.MessageType.UserMessage);
-                        EmailOptions emailOptions = new EmailOptions
+                        Log.Write(logFilePath, "leaveDto: object " + leaveId, LogUtility.MessageType.UserMessage);
+                        string htmlInit = "<html><body><div>";
+                        string htmlEnd = "</div></body></html>";
+                        UserRepository userRepository = new UserRepository();
+                        UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
+                        if (userDto != null)
                         {
-                            ToAddressDisplayName = "Yeasin",
-                            ToAddress = userDto.Email,
-                            Body = htmlInit+ "Please Clik the link : <a href='"+ UrlConstant.WebClient + "/Home/signIn?redirectUrl="+ UrlConstant.WebClient + "/Home/Test'>Test Page</a></div>" + htmlEnd,
-                            Subject = "Test"
-                        };
-                        Email.Send(emailOptions);
-                        Log.Write(logFilePath, "Mail sent in LeaveController " + leaveId, LogUtility.MessageType.UserMessage);
+                            Log.Write(logFilePath, "userDto: object " + leaveId, LogUtility.MessageType.UserMessage);
+                            EmailOptions emailOptions = new EmailOptions
+                            {
+                                ToAddressDisplayName = "Yeasin",
+                                ToAddress = userDto.Email,
+                                Body = htmlInit + "Please Clik the link : <a href='" + UrlConstant.WebClient + "/Home/signIn?redirectUrl=" + UrlConstant.WebClient + "/Home/Test'>Test Page</a></div>" + htmlEnd,
+                                Subject = "Test"
+                            };
+                            Email.Send(emailOptions);
+                            Log.Write(logFilePath, "Mail sent in LeaveController " + leaveId, LogUtility.MessageType.UserMessage);
+                        }
+                        else
+                        {
+                            //todo: UserDto null
+                        }
                     }
-                    else
-                    {
-                        //todo: UserDto null
-                    }
+                    
                 }
-                Log.Write(logFilePath, "leaveDto: " + leaveId, LogUtility.MessageType.UserMessage);
-                var result = Created<LeaveDto>(Request.RequestUri
-                    , dto);
+                //Log.Write(logFilePath, "leaveDto: " + leaveId, LogUtility.MessageType.UserMessage);
+                var result = Created<LeaveDto>(Request.RequestUri, dto);
                 Log.Write(logFilePath, "result: " + result, LogUtility.MessageType.UserMessage);
                 return result;
             }

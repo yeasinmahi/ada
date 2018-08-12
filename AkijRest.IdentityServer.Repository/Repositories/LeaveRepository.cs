@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
-    public class LeaveRepository: ILeaveRepository
+    public class LeaveRepository : ILeaveRepository
     {
         private readonly IdentityServerDbContext _context;
 
@@ -78,7 +78,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             if (_context != null)
             {
-                var leaves = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList().Where(x=>x.UserId.Equals(userId));
+                var leaves = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList().Where(x => x.UserId.Equals(userId));
 
                 foreach (var leave in leaves)
                 {
@@ -125,58 +125,39 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             return dtos;
         }
-        public int Create(LeaveDto leaveDto)
+        public List<int> Create(LeaveDto leaveDto)
         {
             DateTime dateTimeFrom
                 = Global.Datetime.ToDateTime(leaveDto.DateStart);
 
             DateTime dateTimeTo
                 = Global.Datetime.ToDateTime(leaveDto.DateEnd);
-            
-                for (; ; )
-                {
-                    if (_context != null)
-                    {
-                        if (!Create(leaveDto, dateTimeFrom))
-                        {
-                            return 0;
-                        }
-                    }
+            List<int> insertedIds = new List<int>();
 
-                    dateTimeFrom = dateTimeFrom.AddDays(1);
-
-                    if (dateTimeFrom > dateTimeTo)
-                    {
-                        break;
-                    }
-                }
             if (_context != null)
             {
-                int result = _context.SaveChanges();
-                return result;
+                return  Create(leaveDto, dateTimeFrom, dateTimeTo);
             }
-            return 0;
+            return insertedIds;
         }
-        private bool Create(LeaveDto leaveDto,DateTime date)
+        private List<int> Create(LeaveDto leaveDto, DateTime fromDate, DateTime toDate)
         {
-            try
+            List<int> insertedIds = new List<int>();
+            for (DateTime day = fromDate.Date; day.Date <= toDate.Date; day = day.AddDays(1))
             {
                 Leave leave = new Leave();
                 leave.LeaveTypeId = leaveDto.LeaveTypeId;
                 leave.UserId = leaveDto.UserId > 0 ? leaveDto.UserId : _context.Users.SingleOrDefault(u => u.UserName.Equals(leaveDto.UserName)).Id;
 
-                leave.Date = date;
+                leave.Date = day;
                 leave.LeaveCause = leaveDto.LeaveCause;
                 leave.LeaveAddress = leaveDto.LeaveAddress;
 
                 _context.Leaves.Add(leave);
-                return true;
+                _context.SaveChanges();
+                insertedIds.Add(leave.Id);
             }
-            catch (Exception e)
-            {
-                return false;
-            }
-            
+            return insertedIds;
         }
         public int Update(LeaveDto leaveDto)
         {
