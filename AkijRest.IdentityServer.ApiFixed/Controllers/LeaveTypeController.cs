@@ -36,7 +36,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         }
         [Route("{id}")]
         [HttpGet]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(byte id)
         {
             try
             {

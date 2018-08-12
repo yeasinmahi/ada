@@ -107,6 +107,7 @@
     <Compile Include="Dtos\RoleUpdateDto.cs" />
     <Compile Include="Dtos\TokenDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
+    <Compile Include="Helpers\DbHelpers\DbSetExtension.cs" />
     <Compile Include="Helpers\DbHelpers\IdentityServerDbContext.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Migrations\HrDbContext\201806261043130_Init.cs" />

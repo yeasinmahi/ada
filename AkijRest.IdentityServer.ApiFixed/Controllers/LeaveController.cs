@@ -63,17 +63,17 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 {
                     dto.UserName = userName;
                 }
-                LeaveDto leaveDto = repository.Create(dto);
-                if (leaveDto!=null)
+                int leaveId = repository.Create(dto);
+                if (leaveId>0)
                 {
-                    Log.Write(logFilePath, "leaveDto: object " + leaveDto, LogUtility.MessageType.UserMessage);
+                    Log.Write(logFilePath, "leaveDto: object " + leaveId, LogUtility.MessageType.UserMessage);
                     string htmlInit = "<html><body><div>";
                     string htmlEnd = "</div></body></html>";
                     UserRepository userRepository = new UserRepository();
                     UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
                     if (userDto !=null)
                     {
-                        Log.Write(logFilePath, "userDto: object " + leaveDto, LogUtility.MessageType.UserMessage);
+                        Log.Write(logFilePath, "userDto: object " + leaveId, LogUtility.MessageType.UserMessage);
                         EmailOptions emailOptions = new EmailOptions
                         {
                             ToAddressDisplayName = "Yeasin",
@@ -82,14 +82,14 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                             Subject = "Test"
                         };
                         Email.Send(emailOptions);
-                        Log.Write(logFilePath, "Mail sent in LeaveController " + leaveDto, LogUtility.MessageType.UserMessage);
+                        Log.Write(logFilePath, "Mail sent in LeaveController " + leaveId, LogUtility.MessageType.UserMessage);
                     }
                     else
                     {
                         //todo: UserDto null
                     }
                 }
-                Log.Write(logFilePath, "leaveDto: " + leaveDto, LogUtility.MessageType.UserMessage);
+                Log.Write(logFilePath, "leaveDto: " + leaveId, LogUtility.MessageType.UserMessage);
                 var result = Created<LeaveDto>(Request.RequestUri
                     , dto);
                 Log.Write(logFilePath, "result: " + result, LogUtility.MessageType.UserMessage);
@@ -117,9 +117,8 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             {
                 LeaveRepository repository = new LeaveRepository();
                 dto.UserName = userName;
-                LeaveDto leaveDto = repository.Create(dto);
-                var result = Created<LeaveDto>(Request.RequestUri
-                    , dto);
+                repository.Create(dto);
+                var result = Created(Request.RequestUri, dto);
                 return result;
 
             }

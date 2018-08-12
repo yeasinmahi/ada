@@ -25,7 +25,7 @@ namespace AkijRest.Identity.Repository.UnitTests
         [TestCase(1)]
         [TestCase(2)]
         [TestCase(3)]
-        public void Get_GetLeaveTypeById_ReturnListOfLeaveType(int id)
+        public void Get_GetLeaveTypeById_ReturnLeaveType(byte id)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace AkijRest.Identity.Repository.UnitTests
             LeaveTypeDto leaveTypeDto = new LeaveTypeDto
             {
                 Id = 100,
-                Name = "Test",
+                Name = "Unit Test",
                 ApplicableFor = "B",
                 CompanyPolicy = 20,
                 MaxApplicationAtAMonth = 3,
@@ -56,10 +56,15 @@ namespace AkijRest.Identity.Repository.UnitTests
             };
  
             //Act
-            int result = _obj.Create(leaveTypeDto);
+            int createResult = _obj.Create(leaveTypeDto);
+            leaveTypeDto.Id = (byte) createResult;
+            leaveTypeDto.Name = "Update Test";
+            int updateResult = _obj.Update(leaveTypeDto);
+            int deleteResult = _obj.Delete((byte)createResult);
             //Asert
-            Assert.That(result,Is.GreaterThan(0));
-
+            Assert.That(createResult, Is.GreaterThan(0));
+            Assert.That(updateResult, Is.GreaterThan(0));
+            Assert.That(deleteResult, Is.GreaterThan(0));
         }
 
 

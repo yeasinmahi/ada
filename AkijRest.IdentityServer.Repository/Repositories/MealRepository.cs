@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Helpers.DbHelpers;
-using AkijRest.IdentityServer.Repository.Models;
 using AkijRest.IdentityServer.Repository.Models.Hr;
 using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 
@@ -43,7 +41,6 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             throw new Exception();
         }
-
         public MealDto Get(int id)
         {
             //TODO: Have To implements

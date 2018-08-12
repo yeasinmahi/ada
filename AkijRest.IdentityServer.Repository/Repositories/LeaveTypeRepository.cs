@@ -16,7 +16,6 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             _context = new IdentityServerDbContext();
         }
-
         public List<LeaveTypeDto> Get()
         {
             List<LeaveTypeDto> listLeaveTypeDto = new List<LeaveTypeDto>();
@@ -48,7 +47,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             throw new Exception();
         }
-        public LeaveTypeDto Get(int id)
+        public LeaveTypeDto Get(byte id)
         {
             if (_context != null)
             {
@@ -110,11 +109,20 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 Name = leaveTypeDto.Name
 
             };
-            _context.LeaveTypes.Attach(leaveType);
+            //_context.LeaveTypes.Attach(leaveType);
+            _context.SafeAttach(leaveType,x=>x.Id);
             _context.Entry(leaveType).State = EntityState.Modified;
             _context.SaveChanges();
 
             return (leaveType.Id);
+        }
+        public int Delete(byte id)
+        {
+            LeaveType leaveType = new LeaveType() { Id = id };
+            //_context.LeaveTypes.Attach(leaveType);
+            _context.SafeAttach(leaveType, x => x.Id);
+            _context.LeaveTypes.Remove(leaveType);
+            return _context.SaveChanges();
         }
     }
 }

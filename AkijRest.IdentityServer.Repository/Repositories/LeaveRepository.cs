@@ -51,7 +51,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             if (_context != null)
             {
-                Leave leave = _context.Leaves.FirstOrDefault(x => x.Id.Equals(id));
+                Leave leave = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).FirstOrDefault(x => x.Id.Equals(id));
                 LeaveDto dto = null;
                 if (leave != null)
                 {
@@ -78,7 +78,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             if (_context != null)
             {
-                var leaves = _context.Leaves.ToList().Where(x=>x.UserId.Equals(userId));
+                var leaves = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList().Where(x=>x.UserId.Equals(userId));
 
                 foreach (var leave in leaves)
                 {
@@ -104,7 +104,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             User user = _context.Users.SingleOrDefault(u => u.UserName.Equals(userName));
 
-            var listLeave = _context.Leaves.Include(x=>x.LeaveType).ToList().Where(l => user != null && l.UserId == user.Id).OrderByDescending(l => l.Date);
+            var listLeave = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList().Where(l => user != null && l.UserId == user.Id).OrderByDescending(l => l.Date);
 
             List<LeaveDto> dtos = new List<LeaveDto>();
 
@@ -125,7 +125,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             return dtos;
         }
-        public LeaveDto Create(LeaveDto leaveDto)
+        public int Create(LeaveDto leaveDto)
         {
             DateTime dateTimeFrom
                 = Global.Datetime.ToDateTime(leaveDto.DateStart);
@@ -137,15 +137,10 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 {
                     if (_context != null)
                     {
-                        Leave leave = new Leave();
-                        leave.LeaveTypeId = leaveDto.LeaveTypeId;
-                        leave.UserId = leaveDto.UserId > 0 ? leaveDto.UserId : _context.Users.SingleOrDefault(u =>u.UserName.Equals(leaveDto.UserName)).Id;
-                        
-                        leave.Date = dateTimeFrom;
-                        leave.LeaveCause = leaveDto.LeaveCause;
-                        leave.LeaveAddress = leaveDto.LeaveAddress;
-
-                        _context.Leaves.Add(leave);
+                        if (!Create(leaveDto, dateTimeFrom))
+                        {
+                            return 0;
+                        }
                     }
 
                     dateTimeFrom = dateTimeFrom.AddDays(1);
@@ -155,31 +150,57 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                         break;
                     }
                 }
-            _context?.SaveChanges();
-            return (leaveDto);
+            if (_context != null)
+            {
+                int result = _context.SaveChanges();
+                return result;
+            }
+            return 0;
+        }
+        private bool Create(LeaveDto leaveDto,DateTime date)
+        {
+            try
+            {
+                Leave leave = new Leave();
+                leave.LeaveTypeId = leaveDto.LeaveTypeId;
+                leave.UserId = leaveDto.UserId > 0 ? leaveDto.UserId : _context.Users.SingleOrDefault(u => u.UserName.Equals(leaveDto.UserName)).Id;
+
+                leave.Date = date;
+                leave.LeaveCause = leaveDto.LeaveCause;
+                leave.LeaveAddress = leaveDto.LeaveAddress;
+
+                _context.Leaves.Add(leave);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
         }
         public int Update(LeaveDto leaveDto)
         {
-            Leave leave = new Leave
-            {
-                Id = leaveDto.Id,
-                Date = Global.Datetime.ToDateTime(leaveDto.DateStart),
-                LeaveAddress = leaveDto.LeaveAddress,
-                LeaveCause = leaveDto.LeaveCause,
-                LeaveTypeId = leaveDto.LeaveTypeId,
-                UserId = _context
-                    .Users
-                    .SingleOrDefault
-                    (
-                        u => u.UserName.Equals(leaveDto.UserName)
-                    ).Id
+            Leave leave = new Leave();
+            leave.Id = leaveDto.Id;
+            leave.Date = Global.Datetime.ToDateTime(leaveDto.DateStart);
+            leave.LeaveAddress = leaveDto.LeaveAddress;
+            leave.LeaveCause = leaveDto.LeaveCause;
+            leave.LeaveTypeId = leaveDto.LeaveTypeId;
+            leave.UserId = leaveDto.UserId > 0 ? leaveDto.UserId : _context.Users.SingleOrDefault(u => u.UserName.Equals(leaveDto.UserName)).Id;
 
-            };
-            _context.Leaves.Attach(leave);
+            _context.SafeAttach(leave, x => x.Id);
             _context.Entry(leave).State = EntityState.Modified;
             _context.SaveChanges();
 
             return leave.Id;
+        }
+        public int Delete(int id)
+        {
+            Leave leave = new Leave() { Id = id };
+            //_context.LeaveTypes.Attach(leaveType);
+            _context.SafeAttach(leave, x => x.Id);
+            _context.Leaves.Remove(leave);
+            return _context.SaveChanges();
         }
     }
 }
