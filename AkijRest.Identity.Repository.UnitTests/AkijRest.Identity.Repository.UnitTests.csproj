@@ -69,6 +69,8 @@
     <Compile Include="LeaveRepositoryTest.cs" />
     <Compile Include="LeaveTypeRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MealRepositoryTest.cs" />
+    <Compile Include="TokenRepositoryTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

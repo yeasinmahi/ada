@@ -150,7 +150,7 @@ namespace AkijRest.IdentityServer.Controllers
                 Log.Write(logFilePath, "roles", LogUtility.MessageType.MethodeStart);
                 Log.Write(logFilePath, "tokenContent: "+ tokenContent, LogUtility.MessageType.UserMessage);
                 TokenRepository tokenRepository = new TokenRepository();
-                string userName = tokenRepository.GetUsernameByToken(tokenContent);
+                string userName = tokenRepository.GetUserNameByToken(tokenContent);
                 RoleRepository roleRepository = new RoleRepository();
                 var roles = roleRepository.GetRolesByUserName(userName);
                 Log.Write(logFilePath, "roles", LogUtility.MessageType.MethodeEnd);

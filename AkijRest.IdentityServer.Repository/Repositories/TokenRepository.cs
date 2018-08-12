@@ -3,21 +3,18 @@ using AkijRest.IdentityServer.Repository.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
     public class TokenRepository
     {
-        private readonly IdentityServerDbContext context;
+        private readonly IdentityServerDbContext _context;
         private const int ExpireTime = 2; // in minutes
-
         public TokenRepository()
         {
-            this.context = new IdentityServerDbContext();
+            _context = new IdentityServerDbContext();
         }
-
-        public void InsertToken(string userName, string tokenContent)
+        public int InsertToken(string userName, string tokenContent)
         {
             /*
             if(TokenExists(userName))
@@ -32,85 +29,62 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 token.TokenContent = tokenContent;
                 token.UserName = userName;
                 token.TimeExpiry = DateTime.Now.AddMinutes(ExpireTime);
-
-                context.Tokens.Add(token);
-
-                context.SaveChanges();
+                _context.Tokens.Add(token);
+                _context.SaveChanges();
+                return token.Id;
             }
         }
-
-
-        private bool TokenExists(string userName)
+        public bool TokenExists(string userName)
         {
-            var token = context
+            var token = _context
                 .Tokens
                 .SingleOrDefault(
                     t => t.UserName.Equals(userName)
                 );
-
-            return !(token == null);
+            return token != null;
         }
-
         public string UpdateToken(string tokenContent)
         {
-            Token token = context.Tokens.SingleOrDefault(t => t.TokenContent.Equals(tokenContent));
-
+            Token token = _context.Tokens.SingleOrDefault(t => t.TokenContent.Equals(tokenContent));
             // token time already expired
             // so don't update the token
-            if ( token.TimeExpiry < DateTime.Now )
+            if ( token != null && token.TimeExpiry < DateTime.Now )
             {
                 return "expired";
             }
-
-            token.TimeExpiry = DateTime.Now.AddMinutes(ExpireTime);
-
-            context.SaveChanges();
-
+            if (token != null) token.TimeExpiry = DateTime.Now.AddMinutes(ExpireTime);
+            _context.SaveChanges();
             return "refreshed";
         }
-
         public void DeleteToken(string tokenContent)
         {
-            Token token = context.Tokens.SingleOrDefault(t => t.TokenContent.Equals(tokenContent));
-
-            context.Tokens.Remove(token);
-
-            context.SaveChanges();
+            Token token = _context.Tokens.SingleOrDefault(t => t.TokenContent.Equals(tokenContent));
+            if (token != null) _context.Tokens.Remove(token);
+            _context.SaveChanges();
         }
-
         public void DeleteTokenByUserName(string userName)
         {
-            IEnumerable<Token> tokens = context
+            IEnumerable<Token> tokens = _context
                 .Tokens
                 .ToList()
                 .Where( t => t.UserName.Equals(userName));
 
             foreach( var token in tokens)
             {
-                context.Tokens.Remove(token);
+                _context.Tokens.Remove(token);
             }
-
-            context.SaveChanges();
+            _context.SaveChanges();
         }
-
-
-
-
         public string GetToken(string userName)
         {
-            Token token = context.Tokens.SingleOrDefault(t => t.UserName.Equals(userName));
+            Token token = _context.Tokens.SingleOrDefault(t => t.UserName.Equals(userName));
             return token.TokenContent;
         }
-
-
-        public string GetUsernameByToken(string tokenContent)
+        public string GetUserNameByToken(string tokenContent)
         {
-            Token token = context.Tokens.SingleOrDefault(t => t.TokenContent.Equals(tokenContent));
+            Token token = _context.Tokens.SingleOrDefault(t => t.TokenContent.Equals(tokenContent));
             return token.UserName;
         }
-
-
-
     }
     
 }

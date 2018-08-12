@@ -46,7 +46,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             {
                 TokenRepository tokenRepository = new TokenRepository();
 
-                string userName = tokenRepository.GetUsernameByToken(TokenContent);
+                string userName = tokenRepository.GetUserNameByToken(TokenContent);
 
                 RoleRepository roleRepository = new RoleRepository();
 
