@@ -80,7 +80,7 @@ namespace AkijRest.Identity.Repository.UnitTests
                 LeaveTypeId = 1,
                 UserId = 1,
                 DateStart = "01/01/2018",
-                DateEnd = "01/01/2018",
+                DateEnd = "02/01/2018",
                 LeaveAddress = "Unit Test",
                 LeaveCause = "Unit Test"
             };
@@ -93,12 +93,14 @@ namespace AkijRest.Identity.Repository.UnitTests
                 leaveDto.LeaveCause = "Update Test";
                 int updateResult = _obj.Update(leaveDto);
                 int deleteResult = _obj.Delete(result);
+
+                //Asert
                 Assert.That(result, Is.GreaterThan(0));
                 Assert.That(updateResult, Is.GreaterThan(0));
                 Assert.That(deleteResult, Is.GreaterThan(0));
             }
             
-            //Asert
+            
             
 
         }
