@@ -60,7 +60,8 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 // Now as token is passed to the api, not username, 
                 // for this own method, username will be null,
                 // for this all method, username will be there
-                if (String.IsNullOrWhiteSpace(dto.UserName))
+                bool isAdmin = !String.IsNullOrWhiteSpace(dto.UserName);
+                if (!isAdmin)
                 {
                     dto.UserName = userName;
                 }
@@ -73,14 +74,14 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                         string htmlInit = "<html><body><div>";
                         string htmlEnd = "</div></body></html>";
                         UserRepository userRepository = new UserRepository();
-                        UserDto userDto = userRepository.GetSuppervisorEmailByUserName(userName);
-                        if (userDto != null)
+                        UserDto supervisorDto = userRepository.GetSuppervisorEmailByUserName(userName);
+                        if (supervisorDto != null)
                         {
                             Log.Write(logFilePath, "userDto: object " + leaveId, LogUtility.MessageType.UserMessage);
                             EmailOptions emailOptions = new EmailOptions
                             {
                                 ToAddressDisplayName = "Yeasin",
-                                ToAddress = userDto.Email,
+                                ToAddress = supervisorDto.Email,
                                 Body = htmlInit + "Please Clik the link : <a href='" + UrlConstant.WebClient + "/Home/signIn?redirectUrl=" + UrlConstant.WebClient + "/Home/Test'>Test Page</a></div>" + htmlEnd,
                                 Subject = "Test"
                             };
@@ -90,6 +91,21 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                         else
                         {
                             //todo: UserDto null
+                        }
+                        if (isAdmin)
+                        {
+                            UserDto userDto = userRepository.GetByUserName(dto.UserName);
+                            if (userDto!=null)
+                            {
+                                EmailOptions emailOptions = new EmailOptions
+                                {
+                                    ToAddressDisplayName = "Yeasin",
+                                    ToAddress = userDto.Email,
+                                    Body = htmlInit + "Your leave is assigned by "+User.Identity.Name+" \\nPlease Clik the link : <a href='" + UrlConstant.WebClient + "/Home/signIn?redirectUrl=" + UrlConstant.WebClient + "/Home/Test'>Test Page</a> to see your leave</div>" + htmlEnd,
+                                    Subject = "Test"
+                                };
+                                Email.Send(emailOptions);
+                            }
                         }
                     }
                     

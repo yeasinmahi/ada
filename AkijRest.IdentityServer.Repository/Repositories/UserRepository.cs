@@ -130,9 +130,29 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             if (_context != null)
             {
                 User user = _context.Users.FirstOrDefault(x => x.Id.Equals(userId));
-                UserDto dto = new UserDto();
+                UserDto dto = null;
                 if (user != null)
                 {
+                    dto = new UserDto();
+                    dto.Id = user.Id;
+                    dto.UserName = user.UserName;
+                    dto.FullName = user.FullName;
+                    dto.Email = user.Email;
+                    dto.Approved = user.Approved;
+                }
+                return dto;
+            }
+            throw new Exception();
+        }
+        public UserDto GetByUserName(string userName)
+        {
+            if (_context != null)
+            {
+                User user = _context.Users.FirstOrDefault(x => x.UserName.Equals(userName));
+                UserDto dto = null;
+                if (user != null)
+                {
+                    dto = new UserDto();
                     dto.Id = user.Id;
                     dto.UserName = user.UserName;
                     dto.FullName = user.FullName;
