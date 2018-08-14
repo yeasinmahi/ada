@@ -36,11 +36,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         }
         public bool TokenExists(string userName)
         {
-            var token = _context
-                .Tokens
-                .SingleOrDefault(
-                    t => t.UserName.Equals(userName)
-                );
+            var token = _context.Tokens.FirstOrDefault(t => t.UserName.Equals(userName));
             return token != null;
         }
         public string UpdateToken(string tokenContent)

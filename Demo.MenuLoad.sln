@@ -25,6 +25,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkijRest.Identity.Repositor
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "AkijRest.Database", "AkijRest.Database\AkijRest.Database.sqlproj", "{C7F11594-37F1-4854-9408-85150430F7FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogTest", "SerilogTest\SerilogTest.csproj", "{847C3675-1559-4257-A4FC-1F960AB15C1D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerilogTestForDesktop", "WindowsFormsApp1\SerilogTestForDesktop.csproj", "{5441E84E-E90A-4F3A-BF06-FCC36CBB2729}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +81,14 @@ Global
 		{C7F11594-37F1-4854-9408-85150430F7FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C7F11594-37F1-4854-9408-85150430F7FC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C7F11594-37F1-4854-9408-85150430F7FC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{847C3675-1559-4257-A4FC-1F960AB15C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{847C3675-1559-4257-A4FC-1F960AB15C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{847C3675-1559-4257-A4FC-1F960AB15C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{847C3675-1559-4257-A4FC-1F960AB15C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5441E84E-E90A-4F3A-BF06-FCC36CBB2729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5441E84E-E90A-4F3A-BF06-FCC36CBB2729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5441E84E-E90A-4F3A-BF06-FCC36CBB2729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5441E84E-E90A-4F3A-BF06-FCC36CBB2729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

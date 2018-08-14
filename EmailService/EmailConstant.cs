@@ -10,6 +10,6 @@ namespace EmailService
     {
         public static string EmailFromAddress = "arafat.corp@akij.net";
         public static string EmailFromDisplayName = "Akij Provider";
-        public static string EmailFromAddressPassword = "As369116";
+        public static string EmailFromAddressPassword = "Aa123456";
     }
 }
