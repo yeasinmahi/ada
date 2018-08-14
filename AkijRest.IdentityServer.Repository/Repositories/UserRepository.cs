@@ -101,6 +101,30 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             throw new Exception();
         }
+        public List<UserDto> Get(string serachKey)
+        {
+            List<UserDto> listUserDto = new List<UserDto>();
+
+            if (_context != null)
+            {
+                List<User> listUser= _context.Users.Where(x=>x.UserName.Contains(serachKey) || x.Id.ToString().Contains(serachKey)).ToList();
+
+                foreach (User user in listUser)
+                {
+                    UserDto dto = new UserDto();
+                    dto.Id = user.Id;
+                    dto.UserName = user.UserName;
+                    dto.FullName = user.FullName;
+                    dto.Email = user.Email;
+                    dto.Approved = user.Approved;
+                    listUserDto.Add(dto);
+                }
+
+                return listUserDto;
+            }
+
+            throw new Exception();
+        }
         public UserDto Get(int userId)
         {
             if (_context != null)

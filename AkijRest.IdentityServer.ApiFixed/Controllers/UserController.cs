@@ -45,7 +45,21 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return InternalServerError();
             }
         }
-
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult Get(string searchKey)
+        {
+            try
+            {
+                UserRepository userRepository = new UserRepository();
+                List<UserDto> listUserDto = userRepository.Get(searchKey);
+                return Ok(listUserDto);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError();
+            }
+        }
         [Route("names")]
         [HttpGet]
         public IHttpActionResult GetOnlyUserNames()

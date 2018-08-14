@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
-using System.Net.Security;
 using System.Runtime.Remoting.Messaging;
-using System.Security.Cryptography.X509Certificates;
 using LogService;
 
 namespace EmailService
@@ -35,14 +33,7 @@ namespace EmailService
                     {
                         Log.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeStart);
                         ServicePointManager.ServerCertificateValidationCallback =
-                            delegate(object s, X509Certificate certificate,
-                                X509Chain chain, SslPolicyErrors sslPolicyErrors)
-                            {
-                                return true;
-                            };
-
-
-
+                            (s, certificate, chain, sslPolicyErrors) => true;
                         smtpClient.Send(message);
                         Log.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeEnd);
                     }

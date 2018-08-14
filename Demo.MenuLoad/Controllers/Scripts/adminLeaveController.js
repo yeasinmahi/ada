@@ -196,7 +196,8 @@ function loadTable(token) {
 }
 function loadAutoComplete() {
     $("#userAutoComplete").autocomplete({
-        source: function(request, response) { getUsers(request, response) }
+        source: function (request, response) { getUsers(request, response) },
+        minLength: 1
     });
 }
 function getUsers(request,response) {
@@ -206,7 +207,7 @@ function getUsers(request,response) {
         contentType: "application/json; charset = utf-8",
         dataType: "json",
         data: {
-            q: request.term
+            searchKey: request.term
         },
         beforeSend: function (xhr) {
             xhr.setRequestHeader("Authorization", "Bearer " + token);
