@@ -279,13 +279,12 @@
 
 
             jQuery("body").on('mousemove keypress click', function (event) {
-                if (counter > 100) {
+                if (counter > 60) {
                     console.log("Calling Refresh Token");
                     tokenRefresh();
                     counter = 0;
                 }
                 else {
-                    counter = 0;
                     console.log("Not Calling Refresh Token, it's too early!");
                 }
             });
