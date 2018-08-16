@@ -203,7 +203,7 @@ function loadAutoComplete() {
 function getUsers(request,response) {
     $.ajax({
         type: "GET",
-        url: userUrl,
+        url: usersUrl,
         contentType: "application/json; charset = utf-8",
         dataType: "json",
         data: {

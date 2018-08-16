@@ -166,6 +166,27 @@ namespace AkijRest.IdentityServer.Controllers
                 return InternalServerError();
             }
         }
+        [HttpGet]
+        [Route("user")]
+        public IHttpActionResult GetUserByToken(string tokenContent)
+        {
+            try
+            {
+                Log.Write(logFilePath, "User", LogUtility.MessageType.MethodeStart);
+                Log.Write(logFilePath, "tokenContent: " + tokenContent, LogUtility.MessageType.UserMessage);
+                TokenRepository tokenRepository = new TokenRepository();
+                string userName = tokenRepository.GetUserNameByToken(tokenContent);
+                UserRepository userRepository = new UserRepository();
+                var user = userRepository.GetByUserName(userName);
+                Log.Write(logFilePath, "User", LogUtility.MessageType.MethodeEnd);
+                return Json(user);
+            }
+            catch (Exception ex)
+            {
+                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                return InternalServerError();
+            }
+        }
 
         [HttpGet]
         [Route("externalToken")]

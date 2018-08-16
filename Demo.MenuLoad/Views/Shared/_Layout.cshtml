@@ -99,7 +99,8 @@
 
         var token = getParameterByName('token');
         console.log(token);
-
+        var userName;
+        var fullName;
         var counter = 0;
 
         setInterval(function () {
@@ -207,7 +208,42 @@
             // end of jQuery ajax
         }
 
+        function getUserName() {
+            console.log("Get User");
 
+            jQuery.ajax(
+                {
+                    type: "GET",
+                    url: userUrl,
+
+                    data: {
+                        'TokenContent': token
+                    },
+
+                    contentType: 'application/json; charset = utf-8',
+                    dataType: 'json',
+
+                    /*
+                    beforeSend: function (xhr)
+                    {
+                        xhr.setRequestHeader("Authorization", "Bearer " + token);
+                    },
+                    */
+
+                    success: function (data) {
+                        fullName = data.FullName;
+                        userName = data.UserName;
+                        $("#userFullName").text(fullName);
+                        $("#userFullName2").text(fullName);
+                    },
+
+                    failure: function () {
+
+                    }
+                }
+            );
+            // end of jQuery ajax
+        }
         function PupulateLeftNavItemsWithRoles() {
             var token = getParameterByName('token');
             console.log("Start Populate");
@@ -276,7 +312,7 @@
             PupulateLeftNavItemsWithRoles(token);
             // start of mousemove
             tokenRefresh();
-
+            getUserName();
 
             jQuery("body").on('mousemove keypress click', function (event) {
                 if (counter > 60) {

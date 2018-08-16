@@ -159,6 +159,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                     dto.FullName = user.FullName;
                     dto.Email = user.Email;
                     dto.Approved = user.Approved;
+                    dto.Password = String.Empty;
                 }
                 return dto;
             }
@@ -212,7 +213,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             }
             return null;
         }
-        public bool IsAdAuthentication(string email, string password)
+        private bool IsAdAuthentication(string email, string password)
         {
             try
             {
