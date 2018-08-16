@@ -22,6 +22,10 @@ namespace AkijRest.IdentityServer.Controllers
         {
             try
             {
+                if (!userDto.UserName.EndsWith("@akij.net"))
+                {
+                    userDto.UserName += "@akij.net";
+                }
                 // Getting the token from the identity server
                 Log.Write(logFilePath,"CustomToken", LogUtility.MessageType.MethodeStart);
                 var client = new RestClient(UrlConstant.IdentityServer);

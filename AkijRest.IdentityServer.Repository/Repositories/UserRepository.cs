@@ -6,6 +6,7 @@ using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.DirectoryServices;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -18,9 +19,8 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
         public UserRepository()
         {
-            this._context = new IdentityServerDbContext();
+            _context = new IdentityServerDbContext();
         }
-
         public Task<User> GetAsync(string userName, string password)
         {
             var user = _context
@@ -34,14 +34,17 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
         public User Get(string userName, string password)
         {
-            var encryptedPassword = HashHelper.Sha512(password + userName);
-            var user = _context
-                .Users
-                .SingleOrDefault(
-                    u => u.UserName.Equals(userName)
-                    && u.Password.Equals(encryptedPassword)
-                );
-
+            User user = null;
+            if (!userName.EndsWith("@akij.net"))
+            {
+                userName += "@akij.net";
+            }
+            if (IsAdAuthentication(userName,password))
+            {
+                user = _context.Users.SingleOrDefault(u => u.Email.ToLower().Equals(userName) && u.Approved.Equals(true));
+            }
+            //var encryptedPassword = HashHelper.Sha512(password + userName);
+            
             // HashHelper.Sha512(userDTO.Password + userDTO.UserName)
             return user;
         }
@@ -57,8 +60,6 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             return user;
         }
-
-
         public User Create(UserDto userDto)
         {
             var user = new User
@@ -177,8 +178,6 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             }
             return null;
         }
-
-
         public string GetUserNameByFacebookEmail(string facebookMail)
         {
             var user = _context.Users
@@ -194,7 +193,6 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             return null;
 
         }
-
         public UserDto GetSuppervisorEmailByUserName(string userName)
         {
             var user = _context.Users.FirstOrDefault(x => x.UserName.Equals(userName));
@@ -214,6 +212,19 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             }
             return null;
         }
-
+        public bool IsAdAuthentication(string email, string password)
+        {
+            try
+            {
+                DirectoryEntry entry = new DirectoryEntry("LDAP://akij.net", email, password);
+                object nativeObject = entry.NativeObject;
+               return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+            
+        }
     }
 }

@@ -11,11 +11,11 @@ namespace AkijRest.IdentityServer.Providers
 {
     public class CustomOAuthProvider : OAuthAuthorizationServerProvider
     {
-        private UserRepository repository;
+        private readonly UserRepository _repository;
 
         public CustomOAuthProvider()
         {
-            repository = new UserRepository();
+            _repository = new UserRepository();
         }
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -61,7 +61,7 @@ namespace AkijRest.IdentityServer.Providers
             );
 
             // Db Check Started
-            User user = repository.Get(context.UserName, context.Password);
+            User user = _repository.Get(context.UserName, context.Password);
 
             if (user == null)
             {
@@ -101,7 +101,7 @@ namespace AkijRest.IdentityServer.Providers
                     new Dictionary<string, string>
                     {
                     {
-                        "audience", (context.ClientId == null) ? string.Empty : context.ClientId
+                        "audience", context.ClientId ?? string.Empty
                     }
                     }
                 );

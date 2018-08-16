@@ -40,18 +40,14 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
 
         [HttpGet]
         [Route("roles")]
-        public IHttpActionResult GetRolesByToken(string TokenContent)
+        public IHttpActionResult GetRolesByToken(string tokenContent)
         {
             try
             {
                 TokenRepository tokenRepository = new TokenRepository();
-
-                string userName = tokenRepository.GetUserNameByToken(TokenContent);
-
+                string userName = tokenRepository.GetUserNameByToken(tokenContent);
                 RoleRepository roleRepository = new RoleRepository();
-
                 var roles = roleRepository.GetRolesByUserName(userName);
-
                 return Ok(roles);
             }
             catch(Exception ex)

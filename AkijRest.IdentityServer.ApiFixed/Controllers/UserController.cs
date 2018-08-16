@@ -60,9 +60,9 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 return InternalServerError();
             }
         }
-        [Route("names")]
+        [Route("email")]
         [HttpGet]
-        public IHttpActionResult GetOnlyUserNames()
+        public IHttpActionResult GetEmails()
         {
             //var claimsPrincipal = this.User as ClaimsPrincipal;
 
@@ -71,17 +71,13 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             try
             {
                 UserRepository userRepository = new UserRepository();
-
-                List<UserDto> listUserDTO = userRepository.Get();
-
-                string[] userNames = new string[listUserDTO.Count];
-
-                for (int i = 0; i < userNames.Length; i++)
+                List<UserDto> listUserDto = userRepository.Get();
+                string[] emails = new string[listUserDto.Count];
+                for (int i = 0; i < emails.Length; i++)
                 {
-                    userNames[i] = listUserDTO[i].UserName;
+                    emails[i] = listUserDto[i].Email;
                 }
-
-                return Ok(userNames);
+                return Ok(emails);
             }
             catch (Exception ex)
             {
