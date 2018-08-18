@@ -1,5 +1,6 @@
 ﻿var token = url_query('token');
 $(document).ready(function () {
+    getProfile();
     var table = $('#example1').DataTable({
         "columnDefs": [
             {
@@ -202,4 +203,40 @@ function loadTable(token) {
         }
     }
     );
+}
+function getProfile() {
+    console.log("Get Profile");
+
+    jQuery.ajax(
+        {
+            type: "GET",
+            url: userUrl,
+
+            data: {
+                'TokenContent': token
+            },
+            contentType: 'application/json; charset = utf-8',
+            dataType: 'json',
+
+            /*
+            beforeSend: function (xhr)
+            {
+                xhr.setRequestHeader("Authorization", "Bearer " + token);
+            },
+            */
+            success: function (data) {
+                console.log(data);
+                $("#profileUserName").text(data.FullName);
+                $("#profileDesignation").text(data.Designation);
+                $("#profileEducation").text(data.Education);
+                $("#profileCurrentLocation").text(data.CurrentAddress);
+                $("#profileNote").text(data.Note);
+            },
+
+            failure: function () {
+
+            }
+        }
+    );
+    // end of jQuery ajax
 }

@@ -233,8 +233,11 @@
                     success: function (data) {
                         fullName = data.FullName;
                         userName = data.UserName;
+                        var dateOfJoining = new Date(data.DateOfJoining);
                         $("#userFullName").text(fullName);
                         $("#userFullName2").text(fullName);
+                        $("#userDesignation").text(data.Designation);
+                        $("#userDateOfJoining").text("Mamber since " + monthNames[dateOfJoining.getMonth()]+", "+dateOfJoining.getFullYear());
                     },
 
                     failure: function () {
@@ -325,6 +328,9 @@
                 }
             });
             // end of mousemove
+            $('#profileButton').click(function () {
+                window.location.href = "../Profile/Index?token=" + token;
+            });
 
         });
     </script>

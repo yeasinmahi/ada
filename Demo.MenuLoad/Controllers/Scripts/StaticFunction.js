@@ -13,33 +13,34 @@ function url_query(query) {
         return false;
     }
 }
+
 function GetSignedPage(token, redirect) {
-    if (redirect === '' || redirect ===false) {
+    if (redirect === '' || redirect === false) {
         console.log("Redirect Page:" + redirect);
         var url = GetDashboardUrl(token);
         return url;
     } else {
         console.log("Redirect Page:" + redirect);
         return redirect;
-        
+
     }
 }
 function ShowNotification(message, title, type) {
     toastr.options =
-    {
-        "closeButton": true,
-        "debug": false,
-        "positionClass": "toast-bottom-right",
-        "onclick": null,
-        "showDuration": "1000",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-    };
+        {
+            "closeButton": true,
+            "debug": false,
+            "positionClass": "toast-bottom-right",
+            "onclick": null,
+            "showDuration": "1000",
+            "hideDuration": "1000",
+            "timeOut": "5000",
+            "extendedTimeOut": "1000",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut"
+        };
     if (type === null) {
         toastr.warning('Notification type should not be null', 'Notification Format Error');
     } else {
@@ -82,3 +83,6 @@ function getBool(data) {
         return false;
     }
 }
+var monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"];
+var dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
