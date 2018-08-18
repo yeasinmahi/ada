@@ -186,7 +186,7 @@ function loadTable(token) {
                 var dateStart = leaveArray[i]["dateStart"];
                 var leaveCause = leaveArray[i]["leaveCause"];
                 var leaveAddress = leaveArray[i]["leaveAddress"];
-                $("#example1").dataTable().fnAddData([
+                $('#example1').dataTable().fnAddData([
                     id,
                     leaveTypeName,
                     leaveTypeId,
