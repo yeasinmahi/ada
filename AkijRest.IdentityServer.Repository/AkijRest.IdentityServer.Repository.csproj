@@ -102,6 +102,7 @@
     <Compile Include="Dtos\LeaveEveryDayDto.cs" />
     <Compile Include="Dtos\LeaveTypeDto.cs" />
     <Compile Include="Dtos\MealDto.cs" />
+    <Compile Include="Dtos\ProfileDto.cs" />
     <Compile Include="Dtos\RoleAssignedDto.cs" />
     <Compile Include="Dtos\RoleDto.cs" />
     <Compile Include="Dtos\RoleGroupDto.cs" />
@@ -158,12 +159,14 @@
     <Compile Include="Repositories\Interfaces\ILeaveRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILeaveTypeRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMealRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProfileRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleGroupRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\LeaveRepository.cs" />
     <Compile Include="Repositories\LeaveTypeRepository.cs" />
     <Compile Include="Repositories\MealRepository.cs" />
+    <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RoleGroupRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
     <Compile Include="Repositories\TokenRepository.cs" />

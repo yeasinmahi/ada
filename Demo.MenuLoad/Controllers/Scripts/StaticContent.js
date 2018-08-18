@@ -17,4 +17,5 @@ var usersUrl = apiUrlPrefix + "/users";
 var leavetypeUrl = apiUrlPrefix + "/leavetype";
 var leaveUrl = apiUrlPrefix + "/leaves";
 var mealUrl = apiUrlPrefix + "/meal";
+var profileUrl = apiUrlPrefix + "/profile";
 
