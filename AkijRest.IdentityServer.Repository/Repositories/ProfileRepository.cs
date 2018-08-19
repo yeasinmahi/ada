@@ -58,31 +58,31 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             }
             return 0;
         }
-        public ProfileDto Get(string userName)
-        {
-            User user = _context.Users.SingleOrDefault(u => u.UserName.Equals(userName));
+        //public ProfileDto Get(string userName)
+        //{
+        //    User user = _context.Users.SingleOrDefault(u => u.UserName.Equals(userName));
 
-            var listLeave = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList().Where(l => user != null && l.UserId == user.Id).OrderByDescending(l => l.Date);
+        //    var listLeave = _context.Leaves.Include(x => x.LeaveType).Include(x => x.User).ToList().Where(l => user != null && l.UserId == user.Id).OrderByDescending(l => l.Date);
 
-            List<LeaveDto> dtos = new List<LeaveDto>();
+        //    List<LeaveDto> dtos = new List<LeaveDto>();
 
-            foreach (var leave in listLeave)
-            {
-                LeaveDto dto = new LeaveDto();
-                dto.Id = leave.Id;
-                dto.UserName = leave.User.UserName;
-                dto.UserId = leave.UserId;
-                dto.LeaveTypeName = leave.LeaveType.Name;
-                dto.LeaveTypeId = leave.LeaveTypeId;
-                dto.DateStart = Global.Datetime.ToString(leave.Date);
-                dto.LeaveCause = leave.LeaveCause;
-                dto.LeaveAddress = leave.LeaveAddress;
+        //    foreach (var leave in listLeave)
+        //    {
+        //        LeaveDto dto = new LeaveDto();
+        //        dto.Id = leave.Id;
+        //        dto.UserName = leave.User.UserName;
+        //        dto.UserId = leave.UserId;
+        //        dto.LeaveTypeName = leave.LeaveType.Name;
+        //        dto.LeaveTypeId = leave.LeaveTypeId;
+        //        dto.DateStart = Global.Datetime.ToString(leave.Date);
+        //        dto.LeaveCause = leave.LeaveCause;
+        //        dto.LeaveAddress = leave.LeaveAddress;
 
-                dtos.Add(dto);
-            }
+        //        dtos.Add(dto);
+        //    }
 
-            return dtos;
-        }
+        //    return dtos;
+        //}
         private ProfileDto GetDto(User user)
         {
             ProfileDto dto = new ProfileDto();
