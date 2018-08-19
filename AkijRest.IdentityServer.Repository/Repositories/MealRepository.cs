@@ -3,35 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using AkijRest.IdentityServer.Repository.Dtos;
 using AkijRest.IdentityServer.Repository.Helpers.DbHelpers;
-using AkijRest.IdentityServer.Repository.Models.Hr;
+using AkijRest.IdentityServer.Repository.Models;
 using AkijRest.IdentityServer.Repository.Repositories.Interfaces;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
     public class MealRepository : IMealRepository
     {
-        private readonly HrDbContext _hrDbContext;
+        private readonly IdentityServerDbContext _context;
 
         public MealRepository()
         {
-            _hrDbContext = new HrDbContext();
+            _context = new IdentityServerDbContext();
         }
         public List<MealDto> Get()
         {
             List<MealDto> mealDtos = new List<MealDto>();
 
-            if (_hrDbContext != null)
+            if (_context != null)
             {
-                List<tblDay> tblDays
-                    = _hrDbContext.tblDays.ToList();
+                List<Meal> meals = _context.Meals.ToList();
 
-                foreach (tblDay tblDay in tblDays)
+                foreach (Meal meal in meals)
                 {
                     MealDto dto = new MealDto();
 
-                    dto.Id = tblDay.intDayOffId;
-                    dto.DayName = tblDay.strDayName;
-                    dto.MenuList = tblDay.strMenuList;
+                    dto.Id = meal.Id;
+                    dto.DayName = meal.DayName;
+                    dto.MenuList = meal.MenuList;
+                    dto.AltMenuList = meal.AltMenuList;
 
                     mealDtos.Add(dto);
                 }
@@ -48,18 +48,19 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         }
         public MealDto GetByDay(string day)
         {
-            if (_hrDbContext != null)
+            if (_context != null)
             {
                 if (!String.IsNullOrWhiteSpace(day))
                 {
-                    tblDay tblDay = _hrDbContext.tblDays.FirstOrDefault(x => x.strDayName.Equals(day));
-                    if (tblDay != null)
+                    Meal meal = _context.Meals.FirstOrDefault(x => x.DayName.Equals(day));
+                    if (meal != null)
                     {
                         MealDto dto = new MealDto
                         {
-                            Id = tblDay.intDayOffId,
-                            DayName = tblDay.strDayName,
-                            MenuList = tblDay.strMenuList
+                            Id = meal.Id,
+                            DayName = meal.DayName,
+                            MenuList = meal.MenuList,
+                            AltMenuList = meal.AltMenuList
 
                         };
                         return dto;

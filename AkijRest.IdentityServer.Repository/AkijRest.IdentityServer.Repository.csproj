@@ -141,6 +141,10 @@
     <Compile Include="Migrations\IdentityServerDbContext\201808161211599_Update user table.Designer.cs">
       <DependentUpon>201808161211599_Update user table.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\IdentityServerDbContext\201808190337345_Add Meal table.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201808190337345_Add Meal table.Designer.cs">
+      <DependentUpon>201808190337345_Add Meal table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\IdentityServerDbContext\ConfigurationIdentity.cs" />
     <Compile Include="Models\ExternalLoginEmail.cs" />
     <Compile Include="Helpers\DbHelpers\HrDbContext.cs" />
@@ -150,6 +154,7 @@
     <Compile Include="Models\Hr\tblDay.cs" />
     <Compile Include="Models\Leave.cs" />
     <Compile Include="Models\LeaveType.cs" />
+    <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RoleGroup.cs" />
     <Compile Include="Models\SessionExpiry.cs" />
@@ -193,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\IdentityServerDbContext\201808161211599_Update user table.resx">
       <DependentUpon>201808161211599_Update user table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201808190337345_Add Meal table.resx">
+      <DependentUpon>201808190337345_Add Meal table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

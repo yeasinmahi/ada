@@ -15,6 +15,7 @@ namespace AkijRest.IdentityServer.Repository.Helpers.DbHelpers
         public DbSet<LeaveType> LeaveTypes { get; set; }
         public DbSet<Leave> Leaves { get; set; }
         public DbSet<Token> Tokens { get; set; }
+        public DbSet<Meal> Meals { get; set; }
         //public DbSet<SessionExpiry> SessionExpiry { get; set; }
         
         public DbSet<ExternalLoginEmail> ExternalLoginEmails { get; set; }
@@ -31,6 +32,11 @@ namespace AkijRest.IdentityServer.Repository.Helpers.DbHelpers
 
             modelBuilder.Entity<ExternalLoginEmail>()
                 .HasRequired(elm => elm.User);
+        }
+
+        public static implicit operator IdentityServerDbContext(HrDbContext v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
