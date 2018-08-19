@@ -12,13 +12,10 @@ function getTodayMeal() {
         dataType: 'json',
         data: { day},
         success: function (data) {
-            
-            console.log("Meal object " + JSON.stringify(data));
-            data = JSON.stringify(data);
-            data = JSON.parse(data);
-            console.log("MenuList " + data.menuList);
+            console.log("Menu " + data);
             //$('#mealSpan').html = data.menuList;
             $("#mealSpan").html(data.menuList);
+            $("#altMealSpan").html(data.altMenuList);
             //for (var i = 0; i < data.length; i++) {
             //    $('#leaveDropdown')
             //        .append($('<option>',
