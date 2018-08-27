@@ -113,6 +113,7 @@
     <Compile Include="Helpers\DbHelpers\DbSetExtension.cs" />
     <Compile Include="Helpers\DbHelpers\GlobalDbContext.cs" />
     <Compile Include="Helpers\DbHelpers\IdentityServerDbContext.cs" />
+    <Compile Include="Models\Hr\tblEmployeeAttendance.cs" />
     <Compile Include="Migrations\GlobalDbContext\201808270637481_Init.cs" />
     <Compile Include="Migrations\GlobalDbContext\201808270637481_Init.Designer.cs">
       <DependentUpon>201808270637481_Init.cs</DependentUpon>
