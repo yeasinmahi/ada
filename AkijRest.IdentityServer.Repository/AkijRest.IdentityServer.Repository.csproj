@@ -107,10 +107,18 @@
     <Compile Include="Dtos\RoleDto.cs" />
     <Compile Include="Dtos\RoleGroupDto.cs" />
     <Compile Include="Dtos\RoleUpdateDto.cs" />
+    <Compile Include="Dtos\TaskDto.cs" />
     <Compile Include="Dtos\TokenDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Helpers\DbHelpers\DbSetExtension.cs" />
+    <Compile Include="Helpers\DbHelpers\GlobalDbContext.cs" />
     <Compile Include="Helpers\DbHelpers\IdentityServerDbContext.cs" />
+    <Compile Include="Migrations\GlobalDbContext\201808270637481_Init.cs" />
+    <Compile Include="Migrations\GlobalDbContext\201808270637481_Init.Designer.cs">
+      <DependentUpon>201808270637481_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\GlobalDbContext\ConfigurationGlobal.cs" />
+    <Compile Include="Models\Global\tblTaskRecord.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Migrations\HrDbContext\201806261043130_Init.cs" />
     <Compile Include="Migrations\HrDbContext\201806261043130_Init.Designer.cs">
@@ -167,6 +175,7 @@
     <Compile Include="Repositories\Interfaces\IProfileRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleGroupRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITaskRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\LeaveRepository.cs" />
     <Compile Include="Repositories\LeaveTypeRepository.cs" />
@@ -174,10 +183,14 @@
     <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RoleGroupRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\TaskRepository.cs" />
     <Compile Include="Repositories\TokenRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\GlobalDbContext\201808270637481_Init.resx">
+      <DependentUpon>201808270637481_Init.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\HrDbContext\201806261043130_Init.resx">
       <DependentUpon>201806261043130_Init.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,6 +228,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
