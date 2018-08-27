@@ -26,16 +26,10 @@ function getTasks() {
 
 function populateTask(task) {
     console.log("task: " + task.keyPoint);
-    var doneClass = "";
-    if (task.status === "Complete") {
-        doneClass = "done";
-    } else {
-        doneClass = "";
-    }
     var li = 
         
-        '<li class=' + doneClass+'>' +
-        '<span class="handle">' +
+        '<li class=' + (task.status === "Complete"? "done":"")+'>' +
+        '<span class="handle ui-sortable-handle">' +
         '<i class="fa fa-ellipsis-v"></i>' +
         '<i class="fa fa-ellipsis-v"></i>' +
         '</span>' +
