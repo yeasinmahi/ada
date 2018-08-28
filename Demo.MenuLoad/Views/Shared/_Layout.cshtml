@@ -233,6 +233,7 @@
                     success: function (data) {
                         fullName = data.FullName;
                         userName = data.UserName;
+                        window.FullName = fullName;
                         var dateOfJoining = new Date(data.DateOfJoining);
                         $("#userFullName").text(fullName);
                         $("#userFullName2").text(fullName);

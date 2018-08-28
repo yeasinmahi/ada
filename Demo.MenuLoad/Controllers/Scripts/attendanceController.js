@@ -1,4 +1,7 @@
 ﻿$(document).ready(function () {
+    //console.log("Name is " + fullName);
+
+    //$("#attendanceName").text(window.FullName);
     getOwnMonthlyAttendance();
 });
 function getOwnMonthlyAttendance() {

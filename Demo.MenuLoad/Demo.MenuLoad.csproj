@@ -185,6 +185,7 @@
     <Content Include="Controllers\Scripts\gmailAuth.js" />
     <Content Include="Controllers\Scripts\adminLeaveController.js" />
     <Content Include="Controllers\Scripts\attendanceController.js" />
+    <Content Include="Controllers\Scripts\homeController.js" />
     <Content Include="Controllers\Scripts\taskController.js" />
     <Content Include="Controllers\Scripts\profileController.js" />
     <Content Include="Controllers\Scripts\leaveTypeController.js" />
