@@ -154,6 +154,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveTypeController.cs" />
@@ -183,6 +184,7 @@
     <Content Include="Controllers\Scripts\facebookAuth.js" />
     <Content Include="Controllers\Scripts\gmailAuth.js" />
     <Content Include="Controllers\Scripts\adminLeaveController.js" />
+    <Content Include="Controllers\Scripts\attendanceController.js" />
     <Content Include="Controllers\Scripts\taskController.js" />
     <Content Include="Controllers\Scripts\profileController.js" />
     <Content Include="Controllers\Scripts\leaveTypeController.js" />
@@ -293,6 +295,7 @@
     <Content Include="Views\Leave\Index.cshtml" />
     <Content Include="Views\Leave\AdminLeave.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Attendance\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

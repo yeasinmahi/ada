@@ -220,6 +220,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LeaveController.cs" />
     <Compile Include="Controllers\LeaveTypeController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />

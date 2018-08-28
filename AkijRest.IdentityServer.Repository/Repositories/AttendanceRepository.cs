@@ -51,7 +51,10 @@ namespace AkijRest.IdentityServer.Repository.Repositories
         {
             return GetDtos(x => x.dteAttendanceDate.Equals(date));
         }
-
+        public List<AttendanceDto> GetByEnrollAndDateRange(int enroll, DateTime fromDate, DateTime toDate)
+        {
+            return GetDtos(x =>x.intEmployeeID==enroll && x.dteAttendanceDate>fromDate && x.dteAttendanceDate<toDate );
+        }
         private List<AttendanceDto> GetDtos(System.Linq.Expressions.Expression<Func<tblEmployeeAttendance, bool>> predicate)
         {
             List<AttendanceDto> attendanceDtos = new List<AttendanceDto>();

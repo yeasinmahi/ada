@@ -18,5 +18,6 @@ var leavetypeUrl = apiUrlPrefix + "/leavetype";
 var leaveUrl = apiUrlPrefix + "/leaves";
 var mealUrl = apiUrlPrefix + "/meal";
 var taskUrl = apiUrlPrefix + "/task";
+var attendanceUrl = apiUrlPrefix + "/attendance";
 var profileUrl = apiUrlPrefix + "/profile";
 
