@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Net.Http.Formatting;
-using System.Web.Configuration;
 using System.Web.Http;
-using AkijRest.SolutionConstant;
-using Microsoft.Owin.Security.DataHandler.Encoder;
-using Microsoft.Owin.Security.Jwt;
+using System.Web.Http.ExceptionHandling;
 using Newtonsoft.Json.Serialization;
-using Owin;
 
 namespace AkijRest.IdentityServer.ApiFixed
 {
@@ -31,6 +25,10 @@ namespace AkijRest.IdentityServer.ApiFixed
 
             jsonFormatter.SerializerSettings.ContractResolver
                 = new CamelCasePropertyNamesContractResolver();
+
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            //config.MessageHandlers.Add(new CustomLogHandler());
+
         }
     }
 }

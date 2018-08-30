@@ -15,6 +15,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
     public class AttendanceController : ApiController
     {
         string logFilePath = "C:/YeasinPublished/ada.txt";
+        
         [Route("")]
         [HttpGet]
         public IHttpActionResult Get()
@@ -98,7 +99,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             try
             {
                 Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
-
+                Lof.Instance.Write("C:/YeasinPublished/adaTest.txt", "Test", LogUtility.MessageType.MethodeStart);
                 DateTime date = DateTime.Now;
                 var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
                 var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);

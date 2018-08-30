@@ -22,6 +22,7 @@ namespace AkijRest.IdentityServer.Controllers
         {
             try
             {
+                
                 if (!userDto.UserName.EndsWith("@akij.net"))
                 {
                     userDto.UserName += "@akij.net";
@@ -50,7 +51,7 @@ namespace AkijRest.IdentityServer.Controllers
                     return Ok("invalid_grant");
                 }
 
-
+                Lof.Instance.User = userDto.UserName;
                 // fetched token is inserted in the token table, with user name and expiry time
 
                 JObject json = JObject.Parse(content);
