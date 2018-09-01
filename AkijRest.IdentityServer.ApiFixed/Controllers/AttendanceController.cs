@@ -22,16 +22,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
                 AttendanceRepository repository = new AttendanceRepository();
                 List<AttendanceDto> dtos = repository.Get();
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
                 return Ok(dtos);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }
@@ -41,16 +41,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
                 AttendanceRepository repository = new AttendanceRepository();
                 AttendanceDto dto = repository.Get(id);
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
                 return Ok(dto);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }
@@ -60,16 +60,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
                 AttendanceRepository repository = new AttendanceRepository();
                 List<AttendanceDto> dtos = repository.GetByEnroll(enroll);
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
                 //return Ok(mealDto);
                 return Ok(dtos);
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return null;
             }
         }
@@ -79,16 +79,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
                 AttendanceRepository repository = new AttendanceRepository();
                 List<AttendanceDto> dtos = repository.GetByDate(date);
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
                 //return Ok(mealDto);
                 return Ok(dtos);
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return null;
             }
         }
@@ -96,25 +96,24 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         [HttpGet]
         public IHttpActionResult GetMonthlyAttendance(int enroll)
         {
-            int x = (5 /-1);
-            var a = Convert.ToInt16("as");
+            
             try
             {
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
-                Lof.Instance.Write("C:/YeasinPublished/adaTest.txt", "Test", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write("C:/YeasinPublished/adaTest.txt", "Test", LogUtility.MessageType.MethodeStart);
                 DateTime date = DateTime.Now;
                 var firstDayOfMonth = new DateTime(date.Year, date.Month, 1);
                 var lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
 
                 AttendanceRepository repository = new AttendanceRepository();
                 List<AttendanceDto> dtos = repository.GetByEnrollAndDateRange(enroll, firstDayOfMonth, lastDayOfMonth);
-                Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeEnd);
                 //return Ok(mealDto);
                 return Ok(dtos);
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return null;
             }
         }

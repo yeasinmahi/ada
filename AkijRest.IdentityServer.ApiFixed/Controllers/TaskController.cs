@@ -21,16 +21,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Task", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Task", LogUtility.MessageType.MethodeStart);
                 TaskRepository repository = new TaskRepository();
                 List<TaskDto> taskDtos = repository.Get();
-                Log.Write(logFilePath, "Task", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Task", LogUtility.MessageType.MethodeEnd);
                 return Ok(taskDtos);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }
@@ -40,16 +40,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Task", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Task", LogUtility.MessageType.MethodeStart);
                 TaskRepository repository = new TaskRepository();
                 TaskDto taskDto = repository.Get(id);
-                Log.Write(logFilePath, "Task", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Task", LogUtility.MessageType.MethodeEnd);
                 return Ok(taskDto);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }
@@ -59,16 +59,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Task", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Task", LogUtility.MessageType.MethodeStart);
                 TaskRepository repository = new TaskRepository();
                 List<TaskDto> taskDtos = repository.GetByEnroll(enroll);
-                Log.Write(logFilePath, "Task", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Task", LogUtility.MessageType.MethodeEnd);
                 return Ok(taskDtos);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }

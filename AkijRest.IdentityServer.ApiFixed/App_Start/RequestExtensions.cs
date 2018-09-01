@@ -10,6 +10,7 @@ namespace AkijRest.IdentityServer.ApiFixed
                 return request.Headers["CF-CONNECTING-IP"];
 
             var ipAddress = request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            
 
             if (!string.IsNullOrEmpty(ipAddress))
             {
@@ -18,6 +19,11 @@ namespace AkijRest.IdentityServer.ApiFixed
                     return addresses[0];
             }
 
+            ipAddress = request.ServerVariables["REMOTE_ADDR"];
+            if (!string.IsNullOrWhiteSpace(ipAddress))
+            {
+                return ipAddress;
+            }
             return request.UserHostAddress;
         }
     }

@@ -38,7 +38,7 @@ namespace AkijRest.IdentityServer.ApiFixed
         private async Task<bool> SendToLog(LogMetadata logMetadata)
         {
 
-            Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
+            Log.Instance.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);
             return true;
         }
     }
