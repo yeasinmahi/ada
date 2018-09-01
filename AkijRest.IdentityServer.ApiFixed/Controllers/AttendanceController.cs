@@ -96,6 +96,8 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         [HttpGet]
         public IHttpActionResult GetMonthlyAttendance(int enroll)
         {
+            int x = (5 /-1);
+            var a = Convert.ToInt16("as");
             try
             {
                 Log.Write(logFilePath, "Attendance", LogUtility.MessageType.MethodeStart);

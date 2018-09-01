@@ -4,7 +4,7 @@ namespace AkijRest.IdentityServer.ApiFixed
 {
     public static class RequestExtensions
     {
-        public static string GetIpAddress(this HttpRequestBase request)
+        public static string GetIpAddress(this HttpRequest request)
         {
             if (request.Headers["CF-CONNECTING-IP"] != null)
                 return request.Headers["CF-CONNECTING-IP"];

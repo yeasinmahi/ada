@@ -102,6 +102,8 @@ namespace LogService
 
     public class Lof
     {
+        public static string EventLogPath = "C:/YeasinPublished/adaEvents.txt";
+        public static string ErrorLogPath = "C:/YeasinPublished/adaErrors.txt";
         private static readonly object Lock = new object();
         private static Lof _instance;
 
@@ -148,6 +150,7 @@ namespace LogService
             WriteAsyncCaller(path, message, prefix);
             return true;
         }
+        
         public void Read(string path)
         {
             lock (LogConfig.GetLocker())
@@ -213,5 +216,162 @@ namespace LogService
                 //Todo: 
             }
         }
+
+
+
+        public bool Event(string path, RequestMetaData requestMetaData, LogUtility.MessageType prefix)
+        {
+            EventAsyncCaller(path, requestMetaData, prefix);
+            return true;
+        }
+
+        private void EventAsyncCaller(string path, RequestMetaData requestMetaData, LogUtility.MessageType prefix)
+        {
+            LogUtility.AsyncEventMethodCaller caller = EventAsync;
+            caller.BeginInvoke(path, requestMetaData, prefix, AsyncEventCallback, null);
+        }
+
+        private void EventAsync(string path, RequestMetaData requestMetaData, LogUtility.MessageType prefix)
+        {
+            var message = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " " + LogUtility.GetString(prefix) + " " + requestMetaData.BrowserName + " " + requestMetaData.BrowserVersion + " " + requestMetaData.MachineName + " " + requestMetaData.MachineUser + " " + requestMetaData.OperatingSystem + " " + requestMetaData.IpAddress + " " + requestMetaData.UrlScheme + " " + requestMetaData.UrlHost + " " + requestMetaData.UrlPort + " " + requestMetaData.UrlQueryString + " " + requestMetaData.UrlSegments[2].Remove(requestMetaData.UrlSegments[2].Length-1) + " ";
+            if (LogConfig.BuildMode.Equals(LogUtility.BuildMode.Debug))
+            {
+                try
+                {
+                    lock (LogConfig.GetLocker())
+                    {
+                        if (!File.Exists(path))
+                        {
+                            // Create a file to write to.
+                            using (StreamWriter sw = File.CreateText(path))
+                            {
+                                sw.WriteLine(message);
+                            }
+                        }
+                        // append a file with existing.
+                        using (StreamWriter sw = File.AppendText(path))
+                        {
+                            sw.WriteLine(message);
+                        }
+
+                    }
+
+                }
+                catch (Exception exception)
+                {
+                    lock (LogConfig.GetLocker())
+                    {
+                        File.WriteAllText(path, exception.Message);
+                    }
+                }
+            }
+        }
+
+        private void AsyncEventCallback(IAsyncResult ar)
+        {
+            try
+            {
+                AsyncResult result = (AsyncResult)ar;
+                LogUtility.AsyncEventMethodCaller caller = (LogUtility.AsyncEventMethodCaller)result.AsyncDelegate;
+                caller.EndInvoke(ar);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.InnerException);
+                //Todo: 
+            }
+        }
+
+
+
+
+        public bool Error(string path, RequestMetaData requestMetaData, ErrorMetaData errorMetaData, LogUtility.MessageType prefix)
+        {
+            ErrorAsyncCaller(path, requestMetaData, errorMetaData, prefix);
+            return true;
+        }
+
+        private void ErrorAsyncCaller(string path, RequestMetaData requestMetaData, ErrorMetaData errorMetaData, LogUtility.MessageType prefix)
+        {
+            LogUtility.AsyncErrorMethodCaller caller = ErrorAsync;
+            caller.BeginInvoke(path, requestMetaData, errorMetaData, prefix, AsyncErrorCallback, null);
+        }
+
+        private void ErrorAsync(string path, RequestMetaData requestMetaData, ErrorMetaData errorMetaData, LogUtility.MessageType prefix)
+        {
+            var message = DateTime.Now.ToShortDateString() + " " + DateTime.Now.ToShortTimeString() + " " + LogUtility.GetString(prefix) + " " + requestMetaData.BrowserName + " " + requestMetaData.BrowserVersion + " " + requestMetaData.MachineName + " " + requestMetaData.MachineUser + " " + requestMetaData.OperatingSystem + " " + requestMetaData.IpAddress + " " + requestMetaData.UrlScheme + " " + requestMetaData.UrlHost + " " + requestMetaData.UrlPort + " " + requestMetaData.UrlQueryString + " " + requestMetaData.UrlSegments[2].Remove(requestMetaData.UrlSegments[2].Length - 1) + " "+errorMetaData.ErrorMessage;
+            if (LogConfig.BuildMode.Equals(LogUtility.BuildMode.Debug))
+            {
+                try
+                {
+                    lock (LogConfig.GetLocker())
+                    {
+                        if (!File.Exists(path))
+                        {
+                            // Create a file to write to.
+                            using (StreamWriter sw = File.CreateText(path))
+                            {
+                                sw.WriteLine(message);
+                            }
+                        }
+                        // append a file with existing.
+                        using (StreamWriter sw = File.AppendText(path))
+                        {
+                            sw.WriteLine(message);
+                        }
+
+                    }
+
+                }
+                catch (Exception exception)
+                {
+                    lock (LogConfig.GetLocker())
+                    {
+                        File.WriteAllText(path, exception.Message);
+                    }
+                }
+            }
+        }
+
+        private void AsyncErrorCallback(IAsyncResult ar)
+        {
+            try
+            {
+                AsyncResult result = (AsyncResult)ar;
+                LogUtility.AsyncErrorMethodCaller caller = (LogUtility.AsyncErrorMethodCaller)result.AsyncDelegate;
+                caller.EndInvoke(ar);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception: " + e.InnerException);
+                //Todo: 
+            }
+        }
+
+        public RequestMetaData RequestMetaData { get; set; }
+    }
+
+    public class RequestMetaData
+    {
+        public string MachineName { get; set; }
+        public string MachineUser { get; set; }
+        public string OperatingSystem { get; set; }
+        public string IpAddress { get; set; }
+        public string BrowserName { get; set; }
+        public string BrowserVersion { get; set; }
+        public string AbsulateUri { get; set; }
+        public string UrlScheme { get; set; }
+        public string UrlHost { get; set; }
+        public string UrlPort { get; set; }
+        public string UrlQueryString { get; set; }
+        public string[] UrlSegments { get; set; }
+        public string ErrorMessage { get; set; }
+    }
+
+    public class ErrorMetaData
+    {
+        public string ErrorMessage { get; set; }
+        public string ErrorInnerMessage { get; set; }
+        public string ErrorCode { get; set; }
     }
 }

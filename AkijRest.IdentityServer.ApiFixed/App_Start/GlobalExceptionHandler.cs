@@ -1,10 +1,12 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.ExceptionHandling;
+using LogService;
 
 namespace AkijRest.IdentityServer.ApiFixed
 {
@@ -21,7 +23,11 @@ namespace AkijRest.IdentityServer.ApiFixed
                     httpException.Message);
                 return;
             }
-
+            RequestMetaData requestMetaData = new RequestMetaData
+            {
+                ErrorMessage = context.Exception.Message
+            };
+            Lof.Instance.Event(Lof.ErrorLogPath, requestMetaData, LogUtility.MessageType.RequestEnd);
             // Return HttpStatusCode for other types of exception.
 
             context.Result = new CustomErrorResult(context.Request,
@@ -48,6 +54,19 @@ namespace AkijRest.IdentityServer.ApiFixed
         {
             return Task.FromResult(_requestMessage.CreateErrorResponse(
                 _statusCode, _errorMessage));
+        }
+    }
+
+    public class UnhandledExceptionLogger : ExceptionLogger
+    {
+        public override void Log(ExceptionLoggerContext context)
+        {
+            var log = context.Exception.Message;
+            ErrorMetaData errorMetaData = new ErrorMetaData();
+            errorMetaData.ErrorMessage = context.Exception.Message;
+            //Write the exception to your logs
+            RequestMetaData requestMetaData = Lof.Instance.RequestMetaData;
+            Lof.Instance.Error(Lof.EventLogPath, requestMetaData, errorMetaData,  LogUtility.MessageType.Exception);
         }
     }
 }
