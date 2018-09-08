@@ -24,9 +24,6 @@ namespace AkijRest.IdentityServer.ApiFixed
             
             RequestMetaData requestMetaData = new RequestMetaData
             {
-                MachineName = Environment.MachineName,
-                MachineUser = Environment.UserName,
-                OperatingSystem = Environment.OSVersion.VersionString,
                 IpAddress = Request.GetIpAddress(),
                 BrowserName = Request.Browser.Browser,
                 BrowserVersion = Request.Browser.Version,
@@ -45,9 +42,6 @@ namespace AkijRest.IdentityServer.ApiFixed
         {
             RequestMetaData requestMetaData = new RequestMetaData
             {
-                MachineName = Environment.MachineName,
-                MachineUser = Environment.UserName,
-                OperatingSystem = Environment.OSVersion.VersionString,
                 IpAddress = Request.GetIpAddress(),
                 BrowserName = Request.Browser.Browser,
                 BrowserVersion = Request.Browser.Version,

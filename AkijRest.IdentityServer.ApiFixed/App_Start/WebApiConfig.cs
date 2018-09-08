@@ -25,8 +25,7 @@ namespace AkijRest.IdentityServer.ApiFixed
 
             jsonFormatter.SerializerSettings.ContractResolver
                 = new CamelCasePropertyNamesContractResolver();
-
-            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
+            
             config.Services.Replace(typeof(IExceptionLogger), new UnhandledExceptionLogger());
             //config.MessageHandlers.Add(new CustomLogHandler());
 

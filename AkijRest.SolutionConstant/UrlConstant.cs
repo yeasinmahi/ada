@@ -19,7 +19,8 @@
         //public const string WebClient = "https://agvdi4.akij.net:44328";
 
         //******WebClient Address for Development. Comment out to active link*******
-        public const string WebClient = "https://localhost:44328";
+        //public const string WebClient = "https://localhost:44328";
+        public const string WebClient = "https://localhost:44367";
         
     }
 }

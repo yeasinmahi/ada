@@ -1,0 +1,85 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WebClientWebForm.View.Login" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <div class="login-box">
+        <div class="login-logo">
+            <a href="#"><b>ADA-ERP</b>(V2)</a>
+        </div>
+        <!-- /.login-logo -->
+        <div class="login-box-body">
+            <p class="login-box-msg">Sign in to start your session</p>
+
+            <div class="form-group has-feedback">
+                <input id="userName" type="text" class="form-control" placeholder="User Name/Email">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input id="password" type="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox">
+                            Remember Me
+                        </label>
+                    </div>
+                </div>
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button id="buttonSignIn" type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <div class="social-auth-links text-center">
+                <p>- OR -</p>
+                <a href="#" id="buttonLogin" onclick="Login()" class="btn btn-block btn-social btn-facebook btn-flat">
+                    <i class="fa fa-facebook"></i>Sign in using
+                Facebook
+                </a>
+                <a href="#" id="sign-in-or-out-button" onclick="googlesignin()" class="btn btn-block btn-social btn-google btn-flat">
+                    <i class="fa fa-google-plus"></i>Sign in using
+                Google+
+                </a>
+            </div>
+            <!-- /.social-auth-links -->
+
+            <a href="#">I forgot my password</a><br>
+            <a href="register.html" class="text-center">Register a new membership</a>
+
+        </div>
+        <!-- /.login-box-body -->
+    </div>
+    <!-- /.login-box -->
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ScriptsContentPlaceHolder" runat="server">
+    <script type="text/javascript">
+        function GetDashboardUrl(token) {
+            var url = 'DashBoard.aspx?token=' + token;
+            return url;
+        }
+        function url_query(query) {
+            query = query.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+            var expr = "[\\?&]" + query + "=([^&#]*)";
+            var regex = new RegExp(expr);
+            var results = regex.exec(window.location.href);
+            if (results !== null) {
+                return results[1];
+            } else {
+                return false;
+            }
+        }
+        function RedirectPage() {
+            var redirect = url_query('page');
+            if (redirect === 'LeaveApproval') {
+                console.log("Redirect Page:" + redirect);
+
+            } else {
+                console.log("Redirect Page:" + redirect);
+            }
+        }
+        
+    </script>
+</asp:Content>
