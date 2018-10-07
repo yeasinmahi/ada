@@ -218,7 +218,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             {
                 DirectoryEntry entry = new DirectoryEntry("LDAP://akij.net", email, password);
                 object nativeObject = entry.NativeObject;
-               return true;
+                return true;
             }
             catch (Exception e)
             {

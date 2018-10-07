@@ -27,8 +27,6 @@ namespace AkijRest.Identity.Repository.UnitTests
             {
                 Assert.That(false);
             }
-            
-            
         }
         [SetUp]
         public void Setup()
