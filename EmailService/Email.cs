@@ -13,7 +13,7 @@ namespace EmailService
         {
             try
             {
-                Log.Write(logFilePath, "Email", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Email", LogUtility.MessageType.MethodeStart);
                 MailAddress fromAddress = new MailAddress(EmailConstant.EmailFromAddress, EmailConstant.EmailFromDisplayName);
                 MailAddress toAddress = new MailAddress(emailOptions.ToAddress, emailOptions.ToAddressDisplayName);
                 string fromPassword = EmailConstant.EmailFromAddressPassword;
@@ -31,11 +31,11 @@ namespace EmailService
                     })
 
                     {
-                        Log.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeStart);
+                        Log.Instance.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeStart);
                         ServicePointManager.ServerCertificateValidationCallback =
                             (s, certificate, chain, sslPolicyErrors) => true;
                         smtpClient.Send(message);
-                        Log.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeEnd);
+                        Log.Instance.Write(logFilePath, "Email Sent", LogUtility.MessageType.MethodeEnd);
                     }
                 }
                 else
@@ -46,11 +46,11 @@ namespace EmailService
             }
             catch (Exception e)
             {
-                Log.Write(logFilePath,e.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath,e.Message, LogUtility.MessageType.Exception);
 
                 if (e.InnerException != null)
                 {
-                    Log.Write(logFilePath, e.InnerException.ToString(), LogUtility.MessageType.Exception);
+                    Log.Instance.Write(logFilePath, e.InnerException.ToString(), LogUtility.MessageType.Exception);
                 }
 
                 //todo

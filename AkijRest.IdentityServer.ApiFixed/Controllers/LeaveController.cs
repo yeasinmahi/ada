@@ -23,22 +23,22 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         [Route("insert")]
         public IHttpActionResult PostOwn([FromBody] LeaveDto dto)
         {
-            Log.Write(logFilePath, "LeaveOwn", LogUtility.MessageType.MethodeStart);
+            Log.Instance.Write(logFilePath, "LeaveOwn", LogUtility.MessageType.MethodeStart);
             var claimsPrincipal = User as ClaimsPrincipal;
             var userName = ClaimsPrincipalHelper.ExtractUserName(claimsPrincipal);
             
-            Log.Write(logFilePath, "UserName: " +userName, LogUtility.MessageType.UserMessage);
+            Log.Instance.Write(logFilePath, "UserName: " +userName, LogUtility.MessageType.UserMessage);
             TokenRepository tokenRepository = new TokenRepository();
             var tokenContent = tokenRepository.GetToken(userName);
-            Log.Write(logFilePath, "tokenContent: " + tokenContent, LogUtility.MessageType.UserMessage);
+            Log.Instance.Write(logFilePath, "tokenContent: " + tokenContent, LogUtility.MessageType.UserMessage);
             // this status gets the value whether the token is expired or refreshed
             string tokenRefeshStatus = tokenRepository.UpdateToken(tokenContent);
-            Log.Write(logFilePath, "tokenRefeshStatus: " + tokenRefeshStatus, LogUtility.MessageType.UserMessage);
+            Log.Instance.Write(logFilePath, "tokenRefeshStatus: " + tokenRefeshStatus, LogUtility.MessageType.UserMessage);
             if (tokenRefeshStatus.Equals("expired"))
             {
                 // initializing logout functinality
                 tokenRepository.DeleteToken(tokenContent);
-                Log.Write(logFilePath, "deleted token content: ", LogUtility.MessageType.UserMessage);
+                Log.Instance.Write(logFilePath, "deleted token content: ", LogUtility.MessageType.UserMessage);
                 return Ok("expired");
             }
             RoleRepository roleRepository = new RoleRepository();
@@ -48,7 +48,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             {
                 a += userRole + "|";
             }
-            Log.Write(logFilePath, a, LogUtility.MessageType.UserMessage);
+            Log.Instance.Write(logFilePath, a, LogUtility.MessageType.UserMessage);
             if (!userRoles.Contains("UpdateOwnLeave"))
             {
                 return Content(HttpStatusCode.Forbidden, "Sorry, you are not allowed to perform this action");
@@ -70,14 +70,14 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                 {
                     foreach (int leaveId in leaveIds)
                     {
-                        Log.Write(logFilePath, "leaveDto: object " + leaveId, LogUtility.MessageType.UserMessage);
+                        Log.Instance.Write(logFilePath, "leaveDto: object " + leaveId, LogUtility.MessageType.UserMessage);
                         string htmlInit = "<html><body><div>";
                         string htmlEnd = "</div></body></html>";
                         UserRepository userRepository = new UserRepository();
                         UserDto supervisorDto = userRepository.GetSuppervisorEmailByUserName(userName);
                         if (supervisorDto != null)
                         {
-                            Log.Write(logFilePath, "userDto: object " + leaveId, LogUtility.MessageType.UserMessage);
+                            Log.Instance.Write(logFilePath, "userDto: object " + leaveId, LogUtility.MessageType.UserMessage);
                             EmailOptions emailOptions = new EmailOptions
                             {
                                 ToAddressDisplayName = "Yeasin",
@@ -86,7 +86,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                                 Subject = "Test"
                             };
                             Email.Send(emailOptions);
-                            Log.Write(logFilePath, "Mail sent in LeaveController " + leaveId, LogUtility.MessageType.UserMessage);
+                            Log.Instance.Write(logFilePath, "Mail sent in LeaveController " + leaveId, LogUtility.MessageType.UserMessage);
                         }
                         else
                         {
@@ -110,9 +110,9 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
                     }
                     
                 }
-                //Log.Write(logFilePath, "leaveDto: " + leaveId, LogUtility.MessageType.UserMessage);
+                //Log.Instance.Write(logFilePath, "leaveDto: " + leaveId, LogUtility.MessageType.UserMessage);
                 var result = Created<LeaveDto>(Request.RequestUri, dto);
-                Log.Write(logFilePath, "result: " + result, LogUtility.MessageType.UserMessage);
+                Log.Instance.Write(logFilePath, "result: " + result, LogUtility.MessageType.UserMessage);
                 return result;
             }
             catch (Exception ex)
@@ -250,7 +250,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             }
             catch (Exception e)
             {
-                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
             }
         }

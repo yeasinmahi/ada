@@ -15,7 +15,9 @@ namespace LogService
             Exception,
             UserMessage,
             MethodeStart,
-            MethodeEnd
+            MethodeEnd,
+            RequestStart,
+            RequestEnd
         }
 
         public static string GetString(MessageType prefix)
@@ -30,10 +32,16 @@ namespace LogService
                     return "Method Start: ";
                 case MessageType.MethodeEnd:
                     return "Method End: ";
+                case MessageType.RequestStart:
+                    return "Request Start: ";
+                case MessageType.RequestEnd:
+                    return "Request End: ";
 
             }
             return String.Empty;
         }
         public delegate void AsyncMethodCaller(string path, string message, MessageType prefix);
+        public delegate void AsyncEventMethodCaller(string path, RequestMetaData requestMetaData, MessageType prefix);
+        public delegate void AsyncErrorMethodCaller(string path, RequestMetaData requestMetaData, ErrorMetaData errorMetaData, MessageType prefix);
     }
 }

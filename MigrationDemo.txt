@@ -12,8 +12,11 @@ Enable-Migrations -MigrationsDirectory "Migrations\HrDbContext" -ContextTypeName
 
 Enable-Migrations -MigrationsDirectory "Migrations\IdentityServerDbContext" -ContextTypeName AkijRest.IdentityServer.Repository.Helpers.DbHelpers.IdentityServerDbContext
 
-Add-Migration -ConfigurationTypeName ConfigurationHr
-Update-Database -ConfigurationTypeName ConfigurationHr
+Add-Migration -ConfigurationTypeName ConfigurationHr -StartupProjectName AkijRest.IdentityServer.Repository
+Update-Database -ConfigurationTypeName ConfigurationHr -StartupProjectName AkijRest.IdentityServer.Repository
 
-Add-Migration -ConfigurationTypeName ConfigurationIdentity
-Update-Database -ConfigurationTypeName ConfigurationIdentity
+Add-Migration -ConfigurationTypeName ConfigurationIdentity -StartupProjectName AkijRest.IdentityServer.Repository
+Update-Database -ConfigurationTypeName ConfigurationIdentity -StartupProjectName AkijRest.IdentityServer.Repository
+
+Add-Migration -ConfigurationTypeName ConfigurationGlobal -StartupProjectName AkijRest.IdentityServer.Repository
+Update-Database -ConfigurationTypeName ConfigurationGlobal -StartupProjectName AkijRest.IdentityServer.Repository

@@ -21,16 +21,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeStart);
                 LeaveTypeRepository repository = new LeaveTypeRepository();
                 var leaveTypeDtos = repository.Get();
-                Log.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeEnd);
                 return Ok(leaveTypeDtos);
 
             }
             catch(Exception e)
             {
-                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
             }
         }
@@ -40,16 +40,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeStart);
                 LeaveTypeRepository repository = new LeaveTypeRepository();
                 var leaveTypeDtos = repository.Get(id);
-                Log.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "LeaveType", LogUtility.MessageType.MethodeEnd);
                 return Ok(leaveTypeDtos);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
             }
         }
@@ -72,7 +72,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             }
             catch (Exception e)
             {
-                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
                 Request.CreateResponse(HttpStatusCode.BadRequest, e.Message);
                 return Content(HttpStatusCode.BadRequest, e.Message);
             }
@@ -96,7 +96,7 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
             }
             catch (Exception e)
             {
-                Log.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, e.Message, LogUtility.MessageType.Exception);
                 return InternalServerError();
             }
         }

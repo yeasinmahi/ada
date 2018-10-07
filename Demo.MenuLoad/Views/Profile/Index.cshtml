@@ -1,0 +1,197 @@
+﻿@{
+    ViewBag.Title = "My Profile";
+    Layout = "../Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <!-- Profile Image -->
+        <div class="box box-primary">
+            <div class="box-body box-profile">
+                <img class="profile-user-img img-responsive img-circle" src="~/Image/avatar.png" alt="User profile picture">
+                <h3 class="profile-username text-center" id="profileUserName"></h3>
+                <p class="text-muted text-center" id="profileDesignation"></p>
+                @*<ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b>Followers</b> <a class="pull-right">1,322</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Following</b> <a class="pull-right">543</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>Friends</b> <a class="pull-right">13,287</a>
+                        </li>
+                    </ul>
+                    <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>*@
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <!-- About Me Box -->
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
+                <p class="text-muted" id="profileEducation"></p>
+                <hr>
+                <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+                <p class="text-muted" id="profileCurrentLocation"></p>
+                <hr>
+                <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+                <p>
+                    <span class="label label-danger">UI Design</span>
+                    <span class="label label-success">Coding</span>
+                    <span class="label label-info">Javascript</span>
+                    <span class="label label-warning">PHP</span>
+                    <span class="label label-primary">Node.js</span>
+                </p>
+                <hr>
+                <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+                <p id="profileNote"></p>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-md-9">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#information" data-toggle="tab">Information</a></li>
+                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="active tab-pane" id="information">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name</label>
+                            <label class="col-sm-9 control-label" id="nameLabel" style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email</label>
+                            <label class="col-sm-9 control-label" id="emailLabel" style="text-align: left"></label>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-sm-3 control-label">Facebook</label>
+                            <label class="col-sm-9 control-label" id="facebookAddressLabel" style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Google</label>
+                            <label class="col-sm-9 control-label" id="googleAddressLabel" style="text-align: left"></label>
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Designation</label>
+                            <label class="col-sm-9 control-label" id="designationLabel" style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Date of Joining</label>
+                            <label class="col-sm-9 control-label" id="dateOfJoiningLabel"style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Current Address</label>
+                            <label class="col-sm-9 control-label" id="currentAddressLabel" style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Parmanent Address</label>
+                            <label class="col-sm-9 control-label" id="parmanentAddressLabel"style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Education</label>
+                            <label class="col-sm-9 control-label" id="educationLabel" style="text-align: left"></label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Note</label>
+                            <label class="col-sm-9 control-label" id="noteLabel" style="text-align: left"></label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="settings">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="nameTextBox" placeholder="Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email</label>
+                            <div class="col-sm-9">
+                                <input type="email" class="form-control" id="emailTextBox" placeholder="Email">
+                            </div>
+                        </div>
+                        @*<div class="form-group">
+                            <label class="col-sm-3 control-label">Facebook Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="facebookAddressTextBox" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Google Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="googleAddressTextBox" placeholder="Email">
+                            </div>
+                        </div>*@
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Designation</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="designationTextBox" placeholder="Designation">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Date of Joining</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="dateOfJoiningTextBox" placeholder="Date of Joining">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Current Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="currentAddressTextBox" placeholder="Current Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Parmanent Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="parmanentAddressTextBox" placeholder="Parmanent Address">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Education</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="educationTextBox" placeholder="Education">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Note</label>
+                            <div class="col-sm-9">
+                                <textarea type="text" class="form-control" id="noteTextBox" placeholder="Note"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-9">
+                                <button type="submit" class="btn btn-danger" id="submitButton">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+</div>
+
+@section scripts {
+    <!--DatePicker-->
+    <link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/Controllers/Scripts/profileController.js"></script>
+
+}

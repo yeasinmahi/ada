@@ -1,0 +1,135 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="WebClientWebForm.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - ERP</title>
+    <link rel="icon" href="Image/favicon.ico" sizes="16x16" type="image/png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="Content/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="Content/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="Content/ionicons.min.css">
+    <!-- Ionicons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600" rel="stylesheet">
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="Content/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+    folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="Content/blue.css">
+    <link rel="stylesheet" href="Content/toastr.min.css">
+
+    <link rel="stylesheet" href="Content/Site.css">
+
+    <link rel="stylesheet" href="Content/myCss.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <asp:PlaceHolder runat="server">
+        <%--<%: Scripts.Render("bundles/modernizr") %>--%>
+    </asp:PlaceHolder>
+
+    <webopt:BundleReference runat="server" Path="../Content/css" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body class="hold-transition login-page">
+    <div class="loader centered"></div>
+    <div id="myContainer" style="display: none">
+        <asp:ContentPlaceHolder ID="MainContent" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    <!-- jQuery 3 -->
+    <script src="../Scripts/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="../Scripts/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="../Scripts/icheck.min.js"></script>
+    <!-- Toaster -->
+    <script src="../Scripts/toastr.min.js"></script>
+    <!-- Ui - Toaster -->
+    <script src="../Scripts/ui-toastr.min.js"></script>
+    <!-- Static URL for whole project -->
+    <script src="../Controllers/Scripts/staticContent.js"></script>
+    <!-- Static Function for whole project -->
+    <script src="../Controllers/Scripts/StaticFunction.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.loader').fadeOut();
+            $('#myContainer').fadeIn();
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' /* optional */
+            });
+        })
+    </script>
+
+    <asp:ContentPlaceHolder ID="ScriptsContentPlaceHolder" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
+    <meta name="google-signin-client_id" content="527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com">
+    <script>
+        window.onLoadCallback = function () {
+            gapi.load('client:auth2', initClient);
+        }
+    </script>
+    <script src="https://apis.google.com/js/client:platform.js?onload=startApp" async defer></script>
+    <script>
+        function startApp() {
+            gapi.load('auth2', function () {
+                gapi.client.load('plus', 'v1').then(function () {
+                    gapi.signin2.render('signin-button', {
+                        scope: 'profile',
+                        fetch_basic_profile: false
+                    });
+                    gapi.auth2.init({
+                        fetch_basic_profile: false,
+                        client_id: '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
+                        //client_id: '714920092958-58f7ojkp45rf1v8lf7g1g988nm931a7b.apps.googleusercontent.com',
+                        scope: 'profile'
+                    }).then(function () {
+                        console.log('init');
+                        auth2 = gapi.auth2.getAuthInstance();
+                        auth2.isSignedIn.listen(function () {
+                            var user = auth2.currentUser.get();
+                            console.log("Listen");
+                            console.log(user);
+                            var isAuthorized = user.hasGrantedScopes(SCOPE);
+                            console.log("isAuthorized: " + isAuthorized);
+                            if (isAuthorized) {
+                                checkUserExistsByEmai(user["w3"]["U3"], user["Zi"]["access_token"]);
+                            }
+                        });
+                        auth2.then(function (resp) {
+                            console.log("Non Listen");
+                            console.log(auth2.currentUser.get());
+                        });
+                    });
+                });
+            });
+        }
+    </script>
+    <script src="../Controllers/Scripts/AppAuth.js"></script>
+    <script async defer src="https://apis.google.com/js/api.js"></script>
+    <script src="../Controllers/Scripts/gmailAuth.js"></script>
+    <script src="../Controllers/Scripts/facebookAuth.js"></script>
+
+
+
+</body>
+</html>

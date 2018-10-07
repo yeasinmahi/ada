@@ -1,0 +1,36 @@
+﻿.logo {
+    text-align: left;
+    float: left;
+    vertical-align:middle;
+}
+.logo-image {
+    width: 40px;
+    height: 40px;
+}
+.logo-text {
+    padding-left: 12px;
+    padding-top: 5px;
+    font-size: 14px;
+    line-height: 1.5;
+    width: 160px;
+    height: 50px;
+    float: right;
+}
+.box-content-center {
+    height: 90px;
+    display: block;
+    padding-top: 30px;
+}
+.box-content-center2 {
+    float: left;
+    text-align: center;
+    line-height: 90px;
+    margin-left: 5px;
+    width: 65%;
+}
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    /* display:         flex; */
+}

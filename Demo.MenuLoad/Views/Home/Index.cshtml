@@ -30,6 +30,7 @@
             <div class="info-box-content box-content-center">
                 <span class="info-box-number">Todays Meal</span>
                 <span class="info-box-text"><small id="mealSpan">Meal</small></span>
+                <span class="info-box-text"><small id="altMealSpan">AltMeal</small></span>
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -40,8 +41,11 @@
         <div class="info-box">
             <span class="info-box-icon bg-blue"><i class="fa fa-address-card"></i></span>
             <div class="info-box-content box-content-center">
-                <span class="info-box-number">Attendance Details</span>
-                <span class="info-box-text"><small>Daily Attendance (Calender View)</small></span>
+                <span class="info-box-number">Attendance Details 
+                    <input class="btn btn-primary btn-sm pull-right" id="attendanceViewButton" type="button" value="Show" />
+                </span>
+                <span class="info-box-text"><small>Daily Attendance (Details View)</small></span>
+                
             </div>
             <!-- /.info-box-content -->
         </div>
@@ -335,5 +339,7 @@
     <script src="~/Scripts/dashboard.js"></script>
 
     <script src="~/Controllers/Scripts/mealController.js"></script>
+    <script src="~/Controllers/Scripts/taskController.js"></script>
+    <script src="~/Controllers/Scripts/homeController.js"></script>
 
 }

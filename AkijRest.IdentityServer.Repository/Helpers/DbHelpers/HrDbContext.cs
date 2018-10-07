@@ -14,6 +14,7 @@ namespace AkijRest.IdentityServer.Repository.Helpers.DbHelpers
         public virtual DbSet<tblCafeteriaDetail> tblCafeteriaDetails { get; set; }
         public virtual DbSet<tblCafeteriaRate> tblCafeteriaRates { get; set; }
         public virtual DbSet<tblDay> tblDays { get; set; }
+        public virtual DbSet<tblEmployeeAttendance> tblEmployeeAttendances { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -43,6 +44,17 @@ namespace AkijRest.IdentityServer.Repository.Helpers.DbHelpers
 
             modelBuilder.Entity<tblDay>()
                 .Property(e => e.strMenuList0)
+                .IsUnicode(false);
+            modelBuilder.Entity<tblEmployeeAttendance>()
+                .Property(e => e.strEmployeeBarcode)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tblEmployeeAttendance>()
+                .Property(e => e.strUserIP)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<tblEmployeeAttendance>()
+                .Property(e => e.strRemark)
                 .IsUnicode(false);
         }
     }

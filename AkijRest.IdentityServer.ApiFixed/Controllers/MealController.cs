@@ -2,9 +2,6 @@
 using LogService;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Results;
@@ -24,16 +21,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeStart);
                 MealRepository repository = new MealRepository();
                 List<MealDto> mealDtos = repository.Get();
-                Log.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeEnd);
                 return Ok(mealDtos);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }
@@ -43,16 +40,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeStart);
                 MealRepository repository = new MealRepository();
                 MealDto mealDto = repository.Get(id);
-                Log.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeEnd);
                 return Ok(mealDto);
 
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return new ExceptionResult(ex.InnerException, this);
             }
         }
@@ -62,16 +59,16 @@ namespace AkijRest.IdentityServer.ApiFixed.Controllers
         {
             try
             {
-                Log.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeStart);
+                Log.Instance.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeStart);
                 MealRepository repository = new MealRepository();
                 MealDto mealDto = repository.GetByDay(day);
-                Log.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeEnd);
+                Log.Instance.Write(logFilePath, "Meal", LogUtility.MessageType.MethodeEnd);
                 //return Ok(mealDto);
                 return mealDto;
             }
             catch (Exception ex)
             {
-                Log.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
+                Log.Instance.Write(logFilePath, ex.Message, LogUtility.MessageType.Exception);
                 return null;
             }
         }

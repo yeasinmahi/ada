@@ -1,6 +1,6 @@
 ﻿<header class="main-header">
     <!-- Logo -->
-    <a href="@Url.Action("Index", "home")" class="logo">
+    <a href="#" class="logo home" >
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <div class="logo-mini logo-image-mini">
             <img class="logo-image" src="~/Image/logo.png" alt="logo">
@@ -115,15 +115,16 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="~/Image/avatar.png" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Md. Yeasin Arafat</span>
+                        <span class="hidden-xs" id="userFullName"></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="~/Image/avatar.png" class="img-circle" alt="User Image">
                             <p>
-                                Md. Yeasin Arafat - Software Developer
-                                <small>Member since April. 2018</small>
+                                <span id="userFullName2"></span> -
+                                <span id="userDesignation"></span>
+                                <small id="userDateOfJoining"></small>
                             </p>
                         </li>
                         <!-- Menu Body -->
@@ -144,7 +145,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="#" class="btn btn-default btn-flat" id="profileButton">Profile</a>
                             </div>
                             <div class="pull-right">
                                 <a href="#" class="btn btn-default btn-flat"  onclick="SignOut()">Sign out</a>

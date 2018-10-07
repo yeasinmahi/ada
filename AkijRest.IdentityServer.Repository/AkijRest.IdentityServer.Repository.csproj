@@ -97,19 +97,30 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dtos\AttendanceDto.cs" />
     <Compile Include="Dtos\ExternalUserDto.cs" />
     <Compile Include="Dtos\LeaveDto.cs" />
     <Compile Include="Dtos\LeaveEveryDayDto.cs" />
     <Compile Include="Dtos\LeaveTypeDto.cs" />
     <Compile Include="Dtos\MealDto.cs" />
+    <Compile Include="Dtos\ProfileDto.cs" />
     <Compile Include="Dtos\RoleAssignedDto.cs" />
     <Compile Include="Dtos\RoleDto.cs" />
     <Compile Include="Dtos\RoleGroupDto.cs" />
     <Compile Include="Dtos\RoleUpdateDto.cs" />
+    <Compile Include="Dtos\TaskDto.cs" />
     <Compile Include="Dtos\TokenDto.cs" />
     <Compile Include="Dtos\UserDto.cs" />
     <Compile Include="Helpers\DbHelpers\DbSetExtension.cs" />
+    <Compile Include="Helpers\DbHelpers\GlobalDbContext.cs" />
     <Compile Include="Helpers\DbHelpers\IdentityServerDbContext.cs" />
+    <Compile Include="Models\Hr\tblEmployeeAttendance.cs" />
+    <Compile Include="Migrations\GlobalDbContext\201808270637481_Init.cs" />
+    <Compile Include="Migrations\GlobalDbContext\201808270637481_Init.Designer.cs">
+      <DependentUpon>201808270637481_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\GlobalDbContext\ConfigurationGlobal.cs" />
+    <Compile Include="Models\Global\tblTaskRecord.cs" />
     <Compile Include="Helpers\HashHelper.cs" />
     <Compile Include="Migrations\HrDbContext\201806261043130_Init.cs" />
     <Compile Include="Migrations\HrDbContext\201806261043130_Init.Designer.cs">
@@ -136,6 +147,14 @@
     <Compile Include="Migrations\IdentityServerDbContext\201808090639454_Modify Leave Type Id.Designer.cs">
       <DependentUpon>201808090639454_Modify Leave Type Id.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\IdentityServerDbContext\201808161211599_Update user table.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201808161211599_Update user table.Designer.cs">
+      <DependentUpon>201808161211599_Update user table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\IdentityServerDbContext\201808190337345_Add Meal table.cs" />
+    <Compile Include="Migrations\IdentityServerDbContext\201808190337345_Add Meal table.Designer.cs">
+      <DependentUpon>201808190337345_Add Meal table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\IdentityServerDbContext\ConfigurationIdentity.cs" />
     <Compile Include="Models\ExternalLoginEmail.cs" />
     <Compile Include="Helpers\DbHelpers\HrDbContext.cs" />
@@ -145,27 +164,37 @@
     <Compile Include="Models\Hr\tblDay.cs" />
     <Compile Include="Models\Leave.cs" />
     <Compile Include="Models\LeaveType.cs" />
+    <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RoleGroup.cs" />
     <Compile Include="Models\SessionExpiry.cs" />
     <Compile Include="Models\Token.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AttendanceRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILeaveRepository.cs" />
     <Compile Include="Repositories\Interfaces\ILeaveTypeRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAttendanceRepository.cs" />
     <Compile Include="Repositories\Interfaces\IMealRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProfileRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleGroupRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRoleRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITaskRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\LeaveRepository.cs" />
     <Compile Include="Repositories\LeaveTypeRepository.cs" />
     <Compile Include="Repositories\MealRepository.cs" />
+    <Compile Include="Repositories\ProfileRepository.cs" />
     <Compile Include="Repositories\RoleGroupRepository.cs" />
     <Compile Include="Repositories\RoleRepository.cs" />
+    <Compile Include="Repositories\TaskRepository.cs" />
     <Compile Include="Repositories\TokenRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\GlobalDbContext\201808270637481_Init.resx">
+      <DependentUpon>201808270637481_Init.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\HrDbContext\201806261043130_Init.resx">
       <DependentUpon>201806261043130_Init.cs</DependentUpon>
     </EmbeddedResource>
@@ -184,6 +213,12 @@
     <EmbeddedResource Include="Migrations\IdentityServerDbContext\201808090639454_Modify Leave Type Id.resx">
       <DependentUpon>201808090639454_Modify Leave Type Id.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201808161211599_Update user table.resx">
+      <DependentUpon>201808161211599_Update user table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\IdentityServerDbContext\201808190337345_Add Meal table.resx">
+      <DependentUpon>201808190337345_Add Meal table.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AkijRest.Global.UnitTests\AkijRest.Global.UnitTests.csproj">
@@ -197,6 +232,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

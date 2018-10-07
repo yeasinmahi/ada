@@ -9,7 +9,6 @@ using System.Data.Entity;
 using System.DirectoryServices;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace AkijRest.IdentityServer.Repository.Repositories
 {
@@ -39,12 +38,12 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             {
                 userName += "@akij.net";
             }
-            if (IsAdAuthentication(userName,password))
+            if (IsAdAuthentication(userName, password))
             {
                 user = _context.Users.SingleOrDefault(u => u.Email.ToLower().Equals(userName) && u.Approved.Equals(true));
             }
             //var encryptedPassword = HashHelper.Sha512(password + userName);
-            
+
             // HashHelper.Sha512(userDTO.Password + userDTO.UserName)
             return user;
         }
@@ -68,6 +67,11 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 UserName = userDto.UserName,
                 FullName = userDto.FullName,
                 Password = HashHelper.Sha512(userDto.Password + userDto.UserName),
+                Designation = userDto.Designation,
+                CurrentAddress = userDto.CurrentAddress,
+                ParmanentAddress = userDto.ParmanentAddress,
+                DateOfJoining = userDto.DateOfJoining,
+                Note = userDto.Note,
                 Approved = false
             };
 
@@ -88,12 +92,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
                 foreach (User user in listUser)
                 {
-                    UserDto dto = new UserDto();
-                    dto.Id = user.Id;
-                    dto.UserName = user.UserName;
-                    dto.FullName = user.FullName;
-                    dto.Email = user.Email;
-                    dto.Approved = user.Approved;
+                    UserDto dto = GetDto(user);
                     listUserDto.Add(dto);
                 }
 
@@ -108,16 +107,11 @@ namespace AkijRest.IdentityServer.Repository.Repositories
 
             if (_context != null)
             {
-                List<User> listUser= _context.Users.Where(x=>x.UserName.Contains(serachKey) || x.Id.ToString().Contains(serachKey)).ToList();
+                List<User> listUser = _context.Users.Where(x => x.UserName.Contains(serachKey) || x.Id.ToString().Contains(serachKey)).ToList();
 
                 foreach (User user in listUser)
                 {
-                    UserDto dto = new UserDto();
-                    dto.Id = user.Id;
-                    dto.UserName = user.UserName;
-                    dto.FullName = user.FullName;
-                    dto.Email = user.Email;
-                    dto.Approved = user.Approved;
+                    UserDto dto = GetDto(user);
                     listUserDto.Add(dto);
                 }
 
@@ -134,12 +128,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 UserDto dto = null;
                 if (user != null)
                 {
-                    dto = new UserDto();
-                    dto.Id = user.Id;
-                    dto.UserName = user.UserName;
-                    dto.FullName = user.FullName;
-                    dto.Email = user.Email;
-                    dto.Approved = user.Approved;
+                    dto = GetDto(user);
                 }
                 return dto;
             }
@@ -153,12 +142,7 @@ namespace AkijRest.IdentityServer.Repository.Repositories
                 UserDto dto = null;
                 if (user != null)
                 {
-                    dto = new UserDto();
-                    dto.Id = user.Id;
-                    dto.UserName = user.UserName;
-                    dto.FullName = user.FullName;
-                    dto.Email = user.Email;
-                    dto.Approved = user.Approved;
+                    dto = GetDto(user);
                 }
                 return dto;
             }
@@ -212,19 +196,36 @@ namespace AkijRest.IdentityServer.Repository.Repositories
             }
             return null;
         }
-        public bool IsAdAuthentication(string email, string password)
+        private bool IsAdAuthentication(string email, string password)
         {
             try
             {
                 DirectoryEntry entry = new DirectoryEntry("LDAP://akij.net", email, password);
-                object nativeObject = entry.NativeObject;
+                object unused = entry.NativeObject;
                 return true;
             }
             catch (Exception e)
             {
                 return false;
             }
-            
+
+        }
+
+        private UserDto GetDto(User user)
+        {
+            UserDto dto = new UserDto();
+            dto.Id = user.Id;
+            dto.UserName = user.UserName;
+            dto.FullName = user.FullName;
+            dto.Email = user.Email;
+            dto.Designation = user.Designation;
+            dto.Education = user.Education;
+            dto.CurrentAddress = user.CurrentAddress;
+            dto.ParmanentAddress = user.ParmanentAddress;
+            dto.DateOfJoining = user.DateOfJoining;
+            dto.Note = user.Note;
+            dto.Approved = user.Approved;
+            return dto;
         }
     }
 }
