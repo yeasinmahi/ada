@@ -82,7 +82,7 @@
     <asp:ContentPlaceHolder ID="ScriptsContentPlaceHolder" runat="server">
     </asp:ContentPlaceHolder>
     <script src="https://apis.google.com/js/platform.js?onload=onLoadCallback" async defer></script>
-    <meta name="google-signin-client_id" content="527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="829651188662-5c3aimup0glid2kub9fo7655hp8dnair.apps.googleusercontent.com">
     <script>
         window.onLoadCallback = function () {
             gapi.load('client:auth2', initClient);
@@ -99,8 +99,8 @@
                     });
                     gapi.auth2.init({
                         fetch_basic_profile: false,
-                        client_id: '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
-                        //client_id: '714920092958-58f7ojkp45rf1v8lf7g1g988nm931a7b.apps.googleusercontent.com',
+                        //client_id: '527506972274-etnt0ndgdelr2t372eofmoqhvum12abn.apps.googleusercontent.com',
+                        client_id: '829651188662-5c3aimup0glid2kub9fo7655hp8dnair.apps.googleusercontent.com',
                         scope: 'profile'
                     }).then(function () {
                         console.log('init');
