@@ -585,7 +585,7 @@
                             toastr.warning('Sorry, session expired, you\'ve to sign in again', 'Session Notification');
 
                             setTimeout(function () {
-                                window.location = "../home/SignIn";
+                                window.location = "../View/Login.aspx";
                             }, 5000
                             );
 

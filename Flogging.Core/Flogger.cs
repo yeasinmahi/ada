@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Serilog;
+﻿using Serilog;
 using Serilog.Events;
 
 namespace Flogging.Core
@@ -18,23 +13,23 @@ namespace Flogging.Core
         static Flogger()
         {
             _perfLogger = new LoggerConfiguration()
-                //.WriteTo.File(path: @"c:\LogFiles\perf.txt")
-                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.File(path: @"c:\LogFiles\perf.txt")
+                .WriteTo.Seq("http://agvdi4.akij.net:5341")
                 .CreateLogger();
 
             _usageLogger = new LoggerConfiguration()
-                //.WriteTo.File(path: @"c:\LogFiles\usage.txt")
-                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.File(path: @"c:\LogFiles\usage.txt")
+                .WriteTo.Seq("http://agvdi4.akij.net:5341")
                 .CreateLogger();
 
             _errorLogger = new LoggerConfiguration()
-                //.WriteTo.File(path: @"c:\LogFiles\error.txt")
-                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.File(path: @"c:\LogFiles\error.txt")
+                .WriteTo.Seq("http://agvdi4.akij.net:5341")
                 .CreateLogger();
 
             _diagnosticLogger = new LoggerConfiguration()
-                //.WriteTo.File(path: @"c:\LogFiles\diagnostic.txt")
-                .WriteTo.Seq("http://localhost:5341")
+                .WriteTo.File(path: @"c:\LogFiles\diagnostic.txt")
+                .WriteTo.Seq("http://agvdi4.akij.net:5341")
                 .CreateLogger();
         }
 
